@@ -19,7 +19,7 @@ import DownloadIcon from "@mui/icons-material/Download";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import Conformation from "../Conformation";
+import Conformation from "../Confirmation";
 
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
@@ -113,7 +113,7 @@ const Step2 = () => {
   };
 
   const handledeleteAttachment = (id) => {
-    const filterAttachment = attachments.filter((e) => e.id !== id);
+    const filterAttachment = attachments.filter((e) => e.id !== deleteAttachmentRef.current);
     setAttachments(filterAttachment);
   };
 
@@ -266,7 +266,7 @@ const Step2 = () => {
                           setdeleteAttachmentModal(true);
                         }}
                       >
-                        <deleteeIcon sx={{ fontSize: 18 }} />
+                        <DeleteIcon sx={{ fontSize: 18 }} />
                       </IconButton>
                     </Box>
                   </Box>

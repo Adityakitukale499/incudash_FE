@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { baseUrl } from "../servises/constPath";
 
-const Login = ({ setSignup, setLogin }) => {
+const Login = () => {
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -17,12 +18,12 @@ const Login = ({ setSignup, setLogin }) => {
       password: password,
     };
     axios
-      .post("http://localhost:1337/auth/local", body)
+      .post(`${baseUrl}/auth/local`, body)
       .then(function (response) {
         console.log(response.data.jwt);
         localStorage.setItem("jwt", response.data.jwt);
         setError(false);
-        setLogin(false);
+        navigate('/dashboard')
       })
       .catch(function (error) {
         console.log(error);
@@ -68,8 +69,7 @@ const Login = ({ setSignup, setLogin }) => {
               variant="outlined"
               sx={{ height: 45 }}
               onClick={() => {
-                setSignup(true);
-                setLogin(false);
+                navigate('/signup')
               }}
             >
               Sign-Up
@@ -109,7 +109,7 @@ const Login = ({ setSignup, setLogin }) => {
               See your growth and get funding support.
             </Typography>
             <form action="" onSubmit={handleSubmit}>
-              {error ? <p>invalid username or password</p> : null}
+              {error ? <p style={{color:'red'}}>invalid username or password</p> : null}
               <input
                 type="text"
                 required

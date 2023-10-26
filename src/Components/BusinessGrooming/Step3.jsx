@@ -13,7 +13,7 @@ import { Grid } from "@mui/joy";
 import { ideaContext } from "../../contextApi/context";
 import NavigateBtn from "../NavigateBtn";
 import { putData } from "../../servises/apicofig";
-import Conformation from "../Conformation";
+import Conformation from "../Confirmation";
 
 const Step3 = () => {
   const { idea, setIdea, loader, setLoader, successMgs, faildMgs, stepNum, setstepNum } = useContext(ideaContext);
@@ -46,10 +46,12 @@ const Step3 = () => {
   }, [data]);
 
   useEffect(() => {
-    console.log("step3", idea);
+    // console.log("step3", idea);
     if (idea) {
       setData([...idea?.productRoadmap.roadMapCollection]);
       setSortData([...idea?.productRoadmap.roadMapCollection]);
+      setFromDate(idea?.productRoadmap.roadMapCollection[0].timestampFrom)
+      setToDate(idea?.productRoadmap.roadMapCollection[idea?.productRoadmap.roadMapCollection.length-1].timestampTo)
     }
   }, [idea]);
 
@@ -90,8 +92,9 @@ const Step3 = () => {
   };
 
   function ApplyFilter() {
-    let filterData = data.filter((e) => fromDate <= e.timestampFrom && toDate >= e.timestampTo);
-    console.log(filterData);
+    console.log(data);
+    let filterData = data.filter((e) => new Date(fromDate) <= new Date(e.timestampFrom) && new Date(toDate) >= new Date(e.timestampFrom));
+    console.log('data',filterData);
     setSortData(filterData);
     setShowChip(true);
   }
@@ -160,7 +163,7 @@ const Step3 = () => {
               }}
               value={dayjs(fromDate)}
               format="DD-MM-YYYY"
-              onChange={(e) => setFromDate(e)}
+              onChange={(e) => setFromDate(e.$d)}
             />
           </Box>
           <Box sx={{ mt: 1 }}>
@@ -176,7 +179,7 @@ const Step3 = () => {
               }}
               value={dayjs(toDate)}
               format="DD-MM-YYYY"
-              onChange={(e) => setToDate(e)}
+              onChange={(e) => setToDate(e.$d)}
             />
           </Box>
         </Box>

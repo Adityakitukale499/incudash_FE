@@ -2,26 +2,42 @@ import React, { useContext, useEffect, useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { baseUrl } from "../servises/constPath";
+import { passwordStrength } from "check-password-strength";
 
-const SignUp = ({ setSignup, setLogin }) => {
+const SignUp = () => {
   const navigate = useNavigate();
+  const [fullName, setFullName] = useState("");
   const [username, setUserName] = useState("");
+  const [phoneNum, setPhoneNum] = useState("");
   const [password, setPassword] = useState("");
-  const [conformPass, setConformPass] = useState("");
-  const [users, setUsers] = useState([]);
+  const [confirmPass, setConfirmPass] = useState("");
+  const [passError, setPassError] = useState(false);
+  //   const [users, setUsers] = useState([]);
+  useEffect(() => {
+    if (password) {
+      setPassError(
+        passwordStrength(password).length < 8 &&
+          passwordStrength(password).contains.length < 3
+      );
+      // console.log(passwordStrength(password));
+    }
+  }, [password]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log("submit", e);
+    if (password !== confirmPass) return;
     const body = {
-      identifier: username,
+      username: username,
+      email: username,
       password: password,
     };
     axios
-      .post("http://localhost:1337/auth/local", body)
+      .post(`${baseUrl}/auth/local/register`, body)
       .then(function (response) {
-        console.log(response.data.jwt);
-        localStorage.setItem("jwt", response.data.jwt);
+        console.log('SignUp',response.data.jwt);
+        // localStorage.setItem("jwt", response.data.jwt);
       })
       .catch(function (error) {
         console.log(error);
@@ -66,8 +82,7 @@ const SignUp = ({ setSignup, setLogin }) => {
               variant="outlined"
               sx={{ height: 45 }}
               onClick={() => {
-                setSignup(false);
-                setLogin(true);
+                navigate("/login");
               }}
             >
               Sign-In
@@ -109,7 +124,27 @@ const SignUp = ({ setSignup, setLogin }) => {
             <form action="" onSubmit={handleSubmit}>
               <input
                 type="text"
+                placeholder="Enter full name..."
                 required
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                style={{
+                  outlineColor: "#0dcaf0",
+                  width: "100%",
+                  border: "none",
+                  fontSize: 16,
+                  padding: 10,
+                  marginTop: 18,
+                  borderRadius: 5,
+                  boxShadow: "2px 1px 3px #888888",
+                  //   backgroundColor: "#d5f2eb",
+                  height: 35,
+                }}
+              />
+              <input
+                required
+                type="email"
+                placeholder="Enter email..."
                 value={username}
                 onChange={(e) => setUserName(e.target.value)}
                 style={{
@@ -117,7 +152,7 @@ const SignUp = ({ setSignup, setLogin }) => {
                   width: "100%",
                   border: "none",
                   fontSize: 16,
-                  padding: 5,
+                  padding: 10,
                   marginTop: 18,
                   borderRadius: 5,
                   boxShadow: "2px 1px 3px #888888",
@@ -127,7 +162,35 @@ const SignUp = ({ setSignup, setLogin }) => {
               />
               <input
                 required
+                type="number"
+                placeholder="Phone Number..."
+                value={phoneNum}
+                onChange={(e) => setPhoneNum(e.target.value)}
+                style={{
+                  outlineColor: "#0dcaf0",
+                  width: "100%",
+                  border: "none",
+                  fontSize: 16,
+                  padding: 10,
+                  marginTop: 18,
+                  borderRadius: 5,
+                  boxShadow: "2px 1px 3px #888888",
+                  //   backgroundColor: "#d5f2eb",
+                  height: 35,
+                }}
+              />
+              {passError ? (
+                <p
+                  style={{ color: "red", fontSize: 14, marginBottom: "-18px" }}
+                >
+                  Your password must be Uppercase, Lowercase, Special Character
+                  and Number
+                </p>
+              ) : null}
+              <input
+                required
                 type="password"
+                placeholder="Password..."
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 style={{
@@ -135,7 +198,7 @@ const SignUp = ({ setSignup, setLogin }) => {
                   width: "100%",
                   border: "none",
                   fontSize: 16,
-                  padding: 5,
+                  padding: 10,
                   marginTop: 18,
                   borderRadius: 5,
                   boxShadow: "2px 1px 3px #888888",
@@ -145,51 +208,17 @@ const SignUp = ({ setSignup, setLogin }) => {
               />
               <input
                 required
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type="text"
+                // disabled={passError}
+                placeholder="Confirm Password..."
+                value={confirmPass}
+                onChange={(e) => setConfirmPass(e.target.value)}
                 style={{
                   outlineColor: "#0dcaf0",
                   width: "100%",
                   border: "none",
                   fontSize: 16,
-                  padding: 5,
-                  marginTop: 18,
-                  borderRadius: 5,
-                  boxShadow: "2px 1px 3px #888888",
-                  //   backgroundColor: "#d5f2eb",
-                  height: 35,
-                }}
-              />
-              <input
-                required
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                style={{
-                  outlineColor: "#0dcaf0",
-                  width: "100%",
-                  border: "none",
-                  fontSize: 16,
-                  padding: 5,
-                  marginTop: 18,
-                  borderRadius: 5,
-                  boxShadow: "2px 1px 3px #888888",
-                  //   backgroundColor: "#d5f2eb",
-                  height: 35,
-                }}
-              />
-              <input
-                required
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                style={{
-                  outlineColor: "#0dcaf0",
-                  width: "100%",
-                  border: "none",
-                  fontSize: 16,
-                  padding: 5,
+                  padding: 10,
                   marginTop: 18,
                   borderRadius: 5,
                   boxShadow: "2px 1px 3px #888888",

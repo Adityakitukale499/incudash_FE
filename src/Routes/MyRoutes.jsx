@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import DashBoard from "../sidebarPages/DashBoard";
 import ConnectMentors from "../sidebarPages/ConnectMentors";
@@ -14,30 +14,40 @@ import Step5 from "../Components/BusinessGrooming/Step5";
 import Step6 from "../Components/BusinessGrooming/Step6";
 import Step7 from "../Components/BusinessGrooming/Step7";
 import Box from "@mui/material/Box";
+import Login from "../authPages/Login";
+import SignUp from "../authPages/SignUp";
+import SideBar from "../SideBar";
+import ProtectedOuterLayerComponent from "../ProtectedOuterLayerComponent";
+import { sidebarRoute ,stepRoute, authRoute } from "../servises/constPath";
+
 
 const MyRoutes = () => {
+  const location = useLocation();
+  // console.log(location.pathname);
   return (
     <>
-     <Box
-        component="main"
-        sx={{ flexGrow: 1, mt: 8, p: 4, height: "100vh", overflow: "scroll" }}
-      >       
-      <Routes>
-        <Route index element={<DashBoard />} />
-        <Route path="/dashboard" element={<DashBoard />} />
-        <Route path="/connectmentors" element={<ConnectMentors />} />
-        <Route path="/founder'sgromming" element={<FoundersGromming />} />
-        <Route path="/requestacallback" element={<RequestACallback />} />
-        <Route path="/stratupsupport" element={<StartupSupport />} />
-        <Route path="/dashboard/step1" element={<Step1 />} />
-        <Route path="/dashboard/step2" element={<Step2 />} />
-        <Route path="/dashboard/step3" element={<Step3 />} />
-        <Route path="/dashboard/step4" element={<Step4 />} />
-        <Route path="/dashboard/step5" element={<Step5 />} />
-        <Route path="/dashboard/step6" element={<Step6 />} />
-        <Route path="/dashboard/step7" element={<Step7 />} />
-      </Routes>
-      </Box>
+      <ProtectedOuterLayerComponent>
+        <Routes>
+          <Route>
+            <Route index element={<DashBoard />} />
+            <Route path={sidebarRoute.dashboard} element={<DashBoard />} />
+            <Route path={sidebarRoute.connectmentors} element={<ConnectMentors />} />
+            <Route path={sidebarRoute.foundersRouteromming} element={<FoundersGromming />} />
+            <Route path={sidebarRoute.requestacallback} element={<RequestACallback />} />
+            <Route path={sidebarRoute.stratupsupport} element={<StartupSupport />} />
+            <Route path={stepRoute.step1} element={<Step1 />} />
+            <Route path={stepRoute.step2} element={<Step2 />} />
+            <Route path={stepRoute.step3} element={<Step3 />} />
+            <Route path={stepRoute.step4} element={<Step4 />} />
+            <Route path={stepRoute.step5} element={<Step5 />} />
+            <Route path={stepRoute.step6} element={<Step6 />} />
+            <Route path={stepRoute.step7} element={<Step7 />} />
+          </Route>
+          <Route path={authRoute.login} element={<Login />} />
+          <Route path={authRoute.signup} element={<SignUp />} />
+        </Routes>
+      </ProtectedOuterLayerComponent>
+      {/* </Box> */}
     </>
   );
 };

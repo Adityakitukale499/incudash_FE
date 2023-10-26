@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ideaContext } from "../../contextApi/context";
+import { putData } from "../../servises/apicofig";
 
 const Step6 = () => {
   const {
@@ -35,7 +36,7 @@ const Step6 = () => {
       });
     
       if(stepNum == 5) setstepNum(6)
-      navigate("/dashboard/step7")
+      navigate("/dashboard")
   };
 
   return (

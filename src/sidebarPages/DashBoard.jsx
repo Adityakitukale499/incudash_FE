@@ -13,6 +13,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { ideaContext } from "../contextApi/context";
 import Tooltip from '@mui/material/Tooltip';
+import { stepRoute } from "../servises/constPath";
 
 const DashBoard = () => {
   const [founderGromingData, setFounderGromingData] = useState([
@@ -96,7 +97,7 @@ const DashBoard = () => {
 
   return (
     <>
-      <Accordion defaultExpanded={true}>
+      <Accordion defaultExpanded={true} sx={{borderRadius:1}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -160,7 +161,7 @@ const DashBoard = () => {
             <Grid item xs={12} sm={6} md={3} >
                 <Card
                   sx={{ border: 1, borderColor: '#009aca'}}
-                  onClick={() => i <= stepNum ?navigate(e.route):null}
+                  onClick={() => navigate(stepRoute.step7)}
                 >
                   <CardActionArea sx={{ textAlign: "start" }}>
                     <img
@@ -192,7 +193,6 @@ const DashBoard = () => {
                     
                   >
                     Track Progress
-                    {/* {i<=stepNum-1?'Review':i > stepNum?'Pending':'Start'} */}
                   </CardActions>
                 </Card>
               </Grid>

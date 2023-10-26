@@ -171,7 +171,7 @@ export default function AddInRoadmap({
               sx={{ width: "100%", my: 1 }}
               onClick={() => addDetails()}
             >
-              {isEdit ? "Conform" : "Add"}
+              {isEdit ? "Confirm" : "Add"}
             </Button>
           </Box>
         </Sheet>

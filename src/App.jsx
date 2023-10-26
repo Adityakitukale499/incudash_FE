@@ -1,6 +1,5 @@
 import theme from "./Theme/theme";
 import { ThemeProvider } from "styled-components";
-import SideBar from "./SideBar";
 import { BrowserRouter } from "react-router-dom";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -12,15 +11,12 @@ import axios from "axios";
 import Loader from "./Components/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Login from "./authPages/Login";
-import SignUp from "./authPages/SignUp";
+import { baseUrl } from "./servises/constPath";
 
 function App() {
   const [idea, setIdea] = useState();
   const [loader, setLoader] = useState(false);
   const [stepNum, setstepNum] = useState(0);
-  const [login, setLogin] = useState(true);
-  const [signup, setSignup] = useState(false);
 
   const successMgs = () => toast.success("Save Successfully!");
   const faildMgs = () => toast.warning("Faild to Save!");
@@ -28,7 +24,7 @@ function App() {
   useEffect(() => {
     setLoader(true);
     axios
-      .get("http://localhost:1337/ideas/652f8bff127bd15a1883f5fd", {
+      .get(`${baseUrl}/ideas/652f8bff127bd15a1883f5fd`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
         },
@@ -44,6 +40,7 @@ function App() {
         setLoader(false);
       });
   }, []);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
@@ -60,14 +57,9 @@ function App() {
               setstepNum,
             }}
           >
-            {signup ? <SignUp setSignup={setSignup} setLogin={setLogin}/> : null}
-            {login ? <Login  setSignup={setSignup} setLogin={setLogin}/> : null}
-            {!login && !signup ? (
-              <Box sx={{ display: "flex", backgroundColor: "#dcdfe3" }}>
-                <SideBar />
-                <MyRoutes />
+              <Box sx={{  backgroundColor: "#dcdfe3" }}>
+              <MyRoutes />
               </Box>
-            ) : null}
             <Loader loader={loader} />
             <ToastContainer
               position="bottom-right"

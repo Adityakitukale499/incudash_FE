@@ -8,7 +8,7 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { ideaContext } from "../../contextApi/context";
 import { handleOpenPicker, putData } from "../../servises/apicofig";
 import { useNavigate } from "react-router-dom";
-import Conformation from "../Conformation";
+import Conformation from "../Confirmation";
 import useDrivePicker from "react-google-drive-picker";
 
 const Step4 = () => {

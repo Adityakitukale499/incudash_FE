@@ -1,11 +1,12 @@
 import axios from "axios";
+import { baseUrl } from "./constPath";
 // import useDrivePicker from "react-google-drive-picker";
 
 // const [openPicker, authResponse] = useDrivePicker();
-const baseUrl = "http://localhost:1337/ideas";
+// const baseUrl = "http://localhost:1337/ideas";
 
 export const putData = async (id, body) => {
-    const response = await axios.put(`${baseUrl}/${id}`, body, {
+    const response = await axios.put(`${baseUrl}/ideas/${id}`, body, {
         headers: {
             Authorization:
                 `Bearer ${localStorage.getItem('jwt')}`,

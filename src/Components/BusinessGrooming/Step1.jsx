@@ -24,7 +24,7 @@ const Step1 = () => {
   useEffect(() => {
     if (idea) {
       setStage(idea.startupStage.stage);
-      setIndustry(idea.startupStage.industry);
+      setIndustry(idea.startupStage.industry.split(','));
     }
   }, [idea]);
 
@@ -32,7 +32,7 @@ const Step1 = () => {
     const body = {
       startupStage: {
         stage: stage,
-        industry: industry,
+        industry: industry.join(','),
       },
       stepNum: stepNum == 0 ? 1 : idea.stepNum,
     };
@@ -217,7 +217,7 @@ const Step1 = () => {
             </Typography>
             <SelectIndustry industry={industry} setIndustry={setIndustry} />
             <NavigateBtn
-              disable={stage === idea.startupStage.stage && industry === idea.startupStage.industry}
+              disable={stage === idea?.startupStage.stage || industry === idea?.startupStage.industry}
               saveFun={saveStep1}
               saveAndNextFun={saveAndNext}
             />
