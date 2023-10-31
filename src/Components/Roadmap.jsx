@@ -89,9 +89,9 @@ export default function Roadmap({ sortData, setOpen, setIsEdit, setEditEntry, ha
             >
               <span style={{fontWeight:550}}>
                 {raodmapStep?.roadmapTitle}{" "}
-                <span style={{ fontSize: 10,fontWeight:500 }}>
+                {/* <span style={{ fontSize: 10,fontWeight:500 }}>
                   {dayjs(raodmapStep.timestampFrom).format("DD/MM/YYYY")} To {dayjs(raodmapStep.timestampTo).format("DD/MM/YYYY")}
-                </span>
+                </span> */}
               </span>
               <span style={{marginTop:'-8px'}}>
                 <IconButton aria-label="edit" onClick={(e)=> handleEditBtn(e,raodmapStep)} >
@@ -104,6 +104,9 @@ export default function Roadmap({ sortData, setOpen, setIsEdit, setEditEntry, ha
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
+          <Box sx={{ fontSize: 10,fontWeight:500, textAlign:'end' }}>
+                  {dayjs(raodmapStep.timestampFrom).format("DD/MM/YYYY")} To {dayjs(raodmapStep.timestampTo).format("DD/MM/YYYY")}
+            </Box>
             <Typography variant="caption" sx={{ wordWrap: "break-word" }}>
               {raodmapStep?.description}
             </Typography>

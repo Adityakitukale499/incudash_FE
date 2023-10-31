@@ -141,7 +141,7 @@ export default function AddInRoadmap({
                 }}
                 value={dayjs(timestampFrom)}
                 format="DD-MM-YYYY"
-                onChange={(e) => setTimestamFrom(e)}
+                onChange={(e) => setTimestamFrom(e.$d)}
               />
               <DatePicker
                 sx={{
@@ -154,7 +154,7 @@ export default function AddInRoadmap({
                 }}
                 value={dayjs(timestampTo)}
                 format="DD-MM-YYYY"
-                onChange={(e) => setTimestampTo(e)}
+                onChange={(e) => setTimestampTo(e.$d)}
               />
             </Box>
             <Box>

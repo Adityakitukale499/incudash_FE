@@ -4,26 +4,28 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../servises/constPath";
 import "react-toastify/dist/ReactToastify.css";
-import { ideaContext } from "../contextApi/context";
+import { ideaContext, userContext } from "../contextApi/context";
 import { toast } from "react-toastify";
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
-    const {
-        idea,
-        setIdea,
-        loader,
-        setLoader,
-        successMgs,
-        faildMgs,
-        stepNum,
-        setstepNum,
-      } = useContext(ideaContext);
-    const [username, setUserName] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState(false);
-    const loginSuccessMgs = () => toast.success("Log-In Successfully!");
-    const loginFaildMgs = () => toast.warning("Faild to Log-In!");
-    const navigate = useNavigate();
+  const {
+    idea,
+    setIdea,
+    loader,
+    setLoader,
+    successMgs,
+    faildMgs,
+    stepNum,
+    setstepNum,
+  } = useContext(ideaContext);
+  const { user, setUser } = useContext(userContext);
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const loginSuccessMgs = () => toast.success("Log-In Successfully!");
+  const loginFaildMgs = () => toast.warning("Faild to Log-In!");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,24 +34,40 @@ const Login = () => {
       identifier: username,
       password: password,
     };
-    setLoader(true)
+    setLoader(true);
     axios
       .post(`${baseUrl}/auth/local`, body)
       .then(function (response) {
         console.log(response.data);
         localStorage.setItem("jwt", response.data.jwt);
         localStorage.setItem("id", response.data.user.id);
-        loginSuccessMgs()
+        loginSuccessMgs();
         setError(false);
-        navigate('/dashboard')
+        navigate("/dashboard");
       })
       .catch(function (error) {
         console.log(error);
-        loginFaildMgs()
+        loginFaildMgs();
         setError(true);
       });
-      setLoader(true)
-      axios
+      
+    const userId = jwtDecode(localStorage.getItem("jwt")).id;
+    // console.log(userId);
+
+    axios
+      .get(`${baseUrl}/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+      .then(function (response) {
+        console.log(response.data);
+        setUser(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    axios
       .get(`${baseUrl}/ideas/652f8bff127bd15a1883f5fd`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -105,7 +123,7 @@ const Login = () => {
               variant="outlined"
               sx={{ height: 45 }}
               onClick={() => {
-                navigate('/signup')
+                navigate("/signup");
               }}
             >
               Sign-Up
@@ -145,7 +163,9 @@ const Login = () => {
               See your growth and get funding support.
             </Typography>
             <form action="" onSubmit={handleSubmit}>
-              {error ? <p style={{color:'red'}}>invalid username or password</p> : null}
+              {error ? (
+                <p style={{ color: "red" }}>invalid username or password</p>
+              ) : null}
               <input
                 type="text"
                 required

@@ -31,6 +31,7 @@ function ProtectedOuterLayerComponent({ children }) {
               : 4,
           height: "100vh",
           overflow: "scroll",
+          // display: "flex", flexDirection:'column'
         }}
       >
         {location.pathname === "/signup" ||

@@ -16,12 +16,12 @@ const RequestACallback = () => {
       >
         <span style={{ color: "#009aca" }}> Request A CallBack</span>{" "}
         <Button
-          color="nuetral"
-          onClick={() => navigate("/dashboard")}
-          // sx={{ mr: 2, bgcolor: "grey" }}
-        >
-          Go To Dashboard
-        </Button>
+      color="neutral"
+      sx={{ mr: 2 }}
+      onClick={() => navigate("/dashboard")}
+    >
+      Go To Dashboard
+    </Button>
       </Typography>
 
       <Box

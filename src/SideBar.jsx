@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -18,9 +18,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { Button, CardMedia } from "@mui/material";
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import Profile from "./Components/Profile";
+import { userContext } from "./contextApi/context";
 
 const drawerWidth = 240;
 
@@ -89,6 +90,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
+
 export default function SideBar() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -115,22 +117,23 @@ export default function SideBar() {
       icon: "https://incudash.com/assets/public/dashboard/images/side-4.jpg",
     },
   ];
+  const {user ,setUser} = useContext(userContext)
 
-  const handleLogout=()=>{
-    localStorage.setItem('jwt','')
-    localStorage.setItem('id','')
-    navigate('/login')
-  }
+  const handleLogout = () => {
+    localStorage.setItem("jwt", "");
+    localStorage.setItem("id", "");
+    navigate("/login");
+  };
 
   return (
-    <Box sx={{ display: "flex", backgroundColor: "#dcdfe3" }}>
+    <>
       <CssBaseline />
       <AppBar
         position="fixed"
         open={open}
         sx={{ backgroundColor: "#fff", color: "#505050", boxShadow: 1 }}
       >
-        <Toolbar sx={{ justifyContent: "space-between" }}>
+        <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -145,9 +148,10 @@ export default function SideBar() {
             {/* <img src="https://incudash.com/assets/public/dashboard/images/sidelogo.png" alt="I" style={{height:40}} /> */}
             <MenuIcon />
           </IconButton>
-          <Typography noWrap component="div">
-          </Typography>
-        <Profile handleLogout={handleLogout}/>
+          <Typography noWrap component="div"></Typography>
+          <Box width={"100%"} display={"flex"} justifyContent={"end"} mr={5}>
+            <Profile handleLogout={handleLogout} user={user}/>
+          </Box>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -211,6 +215,6 @@ export default function SideBar() {
       >
         <MyRoutes />
       </Box> */}
-    </Box>
+    </>
   );
 }

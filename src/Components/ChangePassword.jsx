@@ -4,6 +4,7 @@ import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../servises/constPath";
+import axios from "axios";
 
 const ChangePassword = () => {
   const [error, setError] = useState('');
@@ -30,6 +31,7 @@ const ChangePassword = () => {
       })
       .catch(function (error) {
         console.log(error);
+        if(error.message == 'Request failed with status code 405') setError('Invalid Old Password');
       });
   };
   return (
@@ -51,7 +53,8 @@ const ChangePassword = () => {
         onSubmit={handleChangePassword}
         style={{ display: "flex", flexDirection: "column" }}
       >
-        {error ? <p style={{ color: "red" }}>invalid password</p> : null}
+        {/* {error ? <p style={{ color: "red" }}>invalid password</p> : null} */}
+        <p style={{ color: "red" }}>{error}</p>
 
         <input
           required
@@ -68,7 +71,7 @@ const ChangePassword = () => {
             marginTop: 18,
             borderRadius: 5,
             boxShadow: "2px 1px 3px #888888",
-            backgroundColor: "#d5f2eb",
+            // backgroundColor: "#d5f2eb",
             //   borderColor:"#d5f2eb",
             height: 40,
           }}
@@ -88,7 +91,7 @@ const ChangePassword = () => {
             marginTop: 18,
             borderRadius: 5,
             boxShadow: "2px 1px 3px #888888",
-            backgroundColor: "#d5f2eb",
+            // backgroundColor: "#d5f2eb",
             //   borderColor:"#d5f2eb",
             height: 40,
           }}
@@ -108,7 +111,7 @@ const ChangePassword = () => {
             marginTop: 18,
             borderRadius: 5,
             boxShadow: "2px 1px 3px #888888",
-            backgroundColor: "#d5f2eb",
+            // backgroundColor: "#d5f2eb",
             //   borderColor:"#d5f2eb",
             height: 40,
           }}

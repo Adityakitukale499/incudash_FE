@@ -16,7 +16,16 @@ import { putData } from "../../servises/apicofig";
 import Conformation from "../Confirmation";
 
 const Step3 = () => {
-  const { idea, setIdea, loader, setLoader, successMgs, faildMgs, stepNum, setstepNum } = useContext(ideaContext);
+  const {
+    idea,
+    setIdea,
+    loader,
+    setLoader,
+    successMgs,
+    faildMgs,
+    stepNum,
+    setstepNum,
+  } = useContext(ideaContext);
   const [data, setData] = useState([]);
   const [update, setUpdate] = useState(false);
   const [editEntry, setEditEntry] = useState();
@@ -31,12 +40,14 @@ const Step3 = () => {
   const [showChip, setShowChip] = useState(false);
   const navigate = useNavigate();
 
-
   useEffect(() => {
     if (step) {
-      setSortData([...data, step]);
-      // data.sort((a, b) => a.timestampFrom - b.timestampFrom);
-      setData([...data, step]);
+      const temp = [...data, step].sort(
+        (a, b) => new Date(a.timestampFrom) - new Date(b.timestampFrom)
+      );
+      console.log(temp);
+      setSortData(temp);
+      setData(temp);
       setUpdate(true);
     }
   }, [step]);
@@ -46,21 +57,27 @@ const Step3 = () => {
   }, [data]);
 
   useEffect(() => {
-    // console.log("step3", idea);
     if (idea) {
-      setData([...idea?.productRoadmap.roadMapCollection]);
-      setSortData([...idea?.productRoadmap.roadMapCollection]);
-      setFromDate(idea?.productRoadmap.roadMapCollection[0].timestampFrom)
-      setToDate(idea?.productRoadmap.roadMapCollection[idea?.productRoadmap.roadMapCollection.length-1].timestampTo)
+      setData([...idea?.productRoadmap?.roadMapCollection]);
+      setSortData([...idea?.productRoadmap?.roadMapCollection]);
+      setFromDate(idea?.productRoadmap?.roadMapCollection[0]?.timestampFrom);
+      setToDate(
+        idea?.productRoadmap?.roadMapCollection[
+          idea?.productRoadmap?.roadMapCollection?.length - 1
+        ]?.timestampTo
+      );
     }
   }, [idea]);
 
   const saveStep3 = () => {
+    const temp = [...data, step].sort(
+      (a, b) => new Date(a.timestampFrom) - new Date(b.timestampFrom)
+    );
     const body = {
       productRoadmap: {
-        roadMapCollection: [...sortData],
+        roadMapCollection: [...temp],
         comments: [
-          ...idea.productRoadmap.comments,
+          ...idea?.productRoadmap.comments,
           // {
           //   created_at: "aeiyg6dj",
           //   commentText: "rt6jkmtufysvethdtujfuyjnrdnf",
@@ -68,25 +85,27 @@ const Step3 = () => {
           // },
         ],
       },
-      stepNum: stepNum == 2 ? 3 : idea.stepNum,
+      stepNum: stepNum == 2 ? 3 : idea?.stepNum,
     };
-    setLoader(true)
-    putData("652f8bff127bd15a1883f5fd", body).then((data) => {
-      // console.log("step3putrequest", data.data);
-      setIdea(data.data);
-      setLoader(false)
-      successMgs();
-      if(stepNum == 2) setstepNum(3)
-    }).catch(e =>{
-      console.log(e);
-      setLoader(false)
-      faildMgs()
-    })
+    setLoader(true);
+    putData("652f8bff127bd15a1883f5fd", body)
+      .then((data) => {
+        // console.log("step3putrequest", data.data);
+        setIdea(data.data);
+        setLoader(false);
+        successMgs();
+        if (stepNum == 2) setstepNum(3);
+      })
+      .catch((e) => {
+        console.log(e);
+        setLoader(false);
+        faildMgs();
+      });
     setUpdate(false);
   };
 
   const saveAndNext = () => {
-    // if (update) 
+    // if (update)
     saveStep3();
 
     navigate("/dashboard/step4");
@@ -94,8 +113,12 @@ const Step3 = () => {
 
   function ApplyFilter() {
     console.log(data);
-    let filterData = data.filter((e) => new Date(fromDate) <= new Date(e.timestampFrom) && new Date(toDate) >= new Date(e.timestampFrom));
-    console.log('data',filterData);
+    let filterData = data.filter(
+      (e) =>
+        new Date(fromDate) <= new Date(e.timestampFrom) &&
+        new Date(toDate) >= new Date(e.timestampFrom)
+    );
+    console.log("data", filterData);
     setSortData(filterData);
     setShowChip(true);
   }
@@ -126,26 +149,31 @@ const Step3 = () => {
   }
 
   function handledeleteRoadmapstep(id) {
-    setdeleteConformModal(true)
+    setdeleteConformModal(true);
     deleteConform.current = id;
   }
-  function deleteStep(){
+  function deleteStep() {
     const arr = data.filter((e, i) => e.id !== deleteConform.current);
     setUpdate(true);
     setData(arr);
     setSortData(arr);
   }
-  
+
   function resetDate() {
     setShowChip(false);
     setFromDate(data[0].date);
     setToDate(data[data.length - 1].date);
   }
-  
+
   return (
     <Box sx={{ p: 0, mr: 0 }}>
-      <Conformation open={deleteConformModal} setOpen={setdeleteConformModal} setConform={deleteStep} massage={'Do you want to deletee this step?'}/>
-      <Typography variant="body1" color="initial"  sx={{fontWeight:600}}>
+      <Conformation
+        open={deleteConformModal}
+        setOpen={setdeleteConformModal}
+        setConform={deleteStep}
+        massage={"Do you want to deletee this step?"}
+      />
+      <Typography variant="body1" color="initial" sx={{ fontWeight: 600 }}>
         Step 3 -
         <span style={{ color: "#009aca" }}> Build Your Roadmap with us</span>
       </Typography>
@@ -226,9 +254,9 @@ const Step3 = () => {
 
       {showChip && (
         <Chip
-          label={`Filter apply for ${dayjs(fromDate).format(
+          label={`Filter apply for ${dayjs(fromDate)?.format(
             "DD/MM/YYYY"
-          )} to ${dayjs(toDate).format("DD/MM/YYYY")}`}
+          )} to ${dayjs(toDate)?.format("DD/MM/YYYY")}`}
           sx={{ mt: 2 }}
         />
       )}
