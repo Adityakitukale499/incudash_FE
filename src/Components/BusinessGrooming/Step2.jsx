@@ -20,6 +20,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import Conformation from "../Confirmation";
+import PreviewIcon from "@mui/icons-material/Preview";
 
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
@@ -113,7 +114,9 @@ const Step2 = () => {
   };
 
   const handledeleteAttachment = (id) => {
-    const filterAttachment = attachments.filter((e) => e.id !== deleteAttachmentRef.current);
+    const filterAttachment = attachments.filter(
+      (e) => e.id !== deleteAttachmentRef.current
+    );
     setAttachments(filterAttachment);
   };
 
@@ -140,7 +143,7 @@ const Step2 = () => {
         setConform={handledeleteAttachment}
         massage={"Do you want to delete this Attachment?"}
       />
-      <Typography variant="body1" color="initial" sx={{fontWeight:600}}>
+      <Typography variant="body1" color="initial" sx={{ fontWeight: 600 }}>
         Step 2 - <span style={{ color: "#009aca" }}>Validate Idea</span>
       </Typography>
 
@@ -153,7 +156,7 @@ const Step2 = () => {
         >
           <Box sx={{ mt: -3.5, p: 2 }}>
             <Box sx={{ ml: -3 }}>
-              <Typography variant="h6" color="initial" sx={{fontWeight:600}}>
+              <Typography variant="h6" color="initial" sx={{ fontWeight: 600 }}>
                 Validation of an Idea
               </Typography>
             </Box>
@@ -191,12 +194,17 @@ const Step2 = () => {
             </ul>
           </Box>
         </Grid>
-        <Grid item xs={12} md={5.7} sx={{ bgcolor: "#fff", borderRadius: 2, m: 1 }}>
+        <Grid
+          item
+          xs={12}
+          md={5.7}
+          sx={{ bgcolor: "#fff", borderRadius: 2, m: 1 }}
+        >
           <Box sx={{ mt: -2, pr: 5 }}>
             <Box
               sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}
             >
-              <Typography variant="h6" color="initial" sx={{fontWeight:600}}>
+              <Typography variant="h6" color="initial" sx={{ fontWeight: 600 }}>
                 What is your startup idea?
               </Typography>
               <Box sx={{ display: "flex", gap: 2, height: 40 }}>
@@ -238,9 +246,9 @@ const Step2 = () => {
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Typography sx={{fontWeight:550}}>Attachments</Typography>
+                <Typography sx={{ fontWeight: 550 }}>Attachments</Typography>
               </AccordionSummary>
-              <AccordionDetails sx={{mt:-3}}>
+              <AccordionDetails sx={{ mt: -3 }}>
                 {attachments.map((e, i) => (
                   <Box
                     key={i}
@@ -252,13 +260,13 @@ const Step2 = () => {
                       <span> {e.type} </span>
                     </Box>
                     <Box>
-                      {/* <IconButton
+                      <IconButton
                         aria-label="download"
                         // onClick={() => handleDownloadFile(e.url, e.documentId)}
                         sx={{ mt: 0.5 }}
                       >
-                        <DownloadIcon sx={{ height: 20 }} />
-                      </IconButton> */}
+                        <PreviewIcon sx={{ height: 20 }} />
+                      </IconButton>
                       <IconButton
                         aria-label="deletee"
                         onClick={() => {
@@ -295,7 +303,11 @@ const Step2 = () => {
             </Box>
           </Box>
           <Box sx={{ mt: 3 }}>
-            <Typography variant="body1" color="initial" sx={{fontWeight:550}}>
+            <Typography
+              variant="body1"
+              color="initial"
+              sx={{ fontWeight: 550 }}
+            >
               References Links
             </Typography>
             <Box
@@ -356,9 +368,7 @@ const Step2 = () => {
               </Box>
             </Box> */}
             <NavigateBtn
-              disable={
-                textSize < 500 || !update
-              }
+              disable={textSize < 500 || !update}
               saveFun={saveStep2}
               saveAndNextFun={saveAndNext}
             />

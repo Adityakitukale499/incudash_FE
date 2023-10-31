@@ -17,8 +17,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { Outlet, Link, useNavigate } from "react-router-dom";
-import MyRoutes from "./Routes/MyRoutes";
-import { CardMedia } from "@mui/material";
+import { Button, CardMedia } from "@mui/material";
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Profile from "./Components/Profile";
 
 const drawerWidth = 240;
 
@@ -114,6 +116,12 @@ export default function SideBar() {
     },
   ];
 
+  const handleLogout=()=>{
+    localStorage.setItem('jwt','')
+    localStorage.setItem('id','')
+    navigate('/login')
+  }
+
   return (
     <Box sx={{ display: "flex", backgroundColor: "#dcdfe3" }}>
       <CssBaseline />
@@ -138,8 +146,8 @@ export default function SideBar() {
             <MenuIcon />
           </IconButton>
           <Typography noWrap component="div">
-            IncuDash
           </Typography>
+        <Profile handleLogout={handleLogout}/>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

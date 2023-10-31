@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../servises/constPath";
 import { passwordStrength } from "check-password-strength";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -13,6 +15,8 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   const [passError, setPassError] = useState(false);
+  const signupSuccessMgs = () => toast.success("Sign-Up Successfully!");
+  const signupFaildMgs = () => toast.warning("Faild to Sign-Up!");
   //   const [users, setUsers] = useState([]);
   useEffect(() => {
     if (password) {
@@ -23,7 +27,6 @@ const SignUp = () => {
       // console.log(passwordStrength(password));
     }
   }, [password]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log("submit", e);
@@ -34,13 +37,19 @@ const SignUp = () => {
       password: password,
     };
     axios
-      .post(`${baseUrl}/auth/local/register`, body)
+      .post(`${baseUrl}/auth/local/register`, body, {
+        headers: {
+          Authorization : `Bearer ${localStorage.getItem('jwt')}`
+        }
+    })
       .then(function (response) {
-        console.log('SignUp',response.data.jwt);
+        console.log("SignUp", response.data);
         // localStorage.setItem("jwt", response.data.jwt);
+        signupSuccessMgs();
       })
       .catch(function (error) {
         console.log(error);
+        signupFaildMgs();
       });
   };
 

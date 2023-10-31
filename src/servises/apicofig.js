@@ -17,6 +17,7 @@ export const putData = async (id, body) => {
     else throw Error(JSON.stringify(response.message));
 }
 
+
 export const handleOpenPicker = (uploadFile, openPicker, authResponse) => {
     openPicker({
         clientId:

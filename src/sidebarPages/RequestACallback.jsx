@@ -25,7 +25,6 @@ const RequestACallback = () => {
       </Typography>
 
       <Box
-        item
         sx={{
           bgcolor: "#fff",
           borderRadius: 2,

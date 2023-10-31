@@ -54,7 +54,7 @@ const Step1 = () => {
   };
 
   const saveAndNext = () => {
-    if (stage !== idea.startupStage.stage && industry !== idea.startupStage.industry) {
+    if (stage !== idea?.startupStage.stage && industry !== idea?.startupStage.industry) {
       // console.log('step1 save and next');
       saveStep1();
     }

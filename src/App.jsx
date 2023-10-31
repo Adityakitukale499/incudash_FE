@@ -23,22 +23,24 @@ function App() {
 
   useEffect(() => {
     setLoader(true);
-    axios
-      .get(`${baseUrl}/ideas/652f8bff127bd15a1883f5fd`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
-      })
-      .then(function (response) {
-        // console.log(response.data);
-        setIdea(response.data);
-        setstepNum(response.data.stepNum);
-        setLoader(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-        setLoader(false);
-      });
+    if (localStorage.getItem("jwt") != "") {
+      axios
+        .get(`${baseUrl}/ideas/652f8bff127bd15a1883f5fd`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        })
+        .then(function (response) {
+          // console.log(response.data);
+          setIdea(response.data);
+          setstepNum(response.data.stepNum);
+          setLoader(false);
+        })
+        .catch(function (error) {
+          console.log(error);
+          setLoader(false);
+        });
+    }
   }, []);
 
   return (
@@ -57,9 +59,9 @@ function App() {
               setstepNum,
             }}
           >
-              <Box sx={{  backgroundColor: "#dcdfe3" }}>
+            <Box sx={{ backgroundColor: "#F5F7FA" }}>
               <MyRoutes />
-              </Box>
+            </Box>
             <Loader loader={loader} />
             <ToastContainer
               position="bottom-right"

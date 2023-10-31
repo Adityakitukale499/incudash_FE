@@ -3,12 +3,27 @@ import { Box, Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../servises/constPath";
+import "react-toastify/dist/ReactToastify.css";
+import { ideaContext } from "../contextApi/context";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  const navigate = useNavigate();
-  const [username, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
+    const {
+        idea,
+        setIdea,
+        loader,
+        setLoader,
+        successMgs,
+        faildMgs,
+        stepNum,
+        setstepNum,
+      } = useContext(ideaContext);
+    const [username, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
+    const loginSuccessMgs = () => toast.success("Log-In Successfully!");
+    const loginFaildMgs = () => toast.warning("Faild to Log-In!");
+    const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,17 +32,38 @@ const Login = () => {
       identifier: username,
       password: password,
     };
+    setLoader(true)
     axios
       .post(`${baseUrl}/auth/local`, body)
       .then(function (response) {
-        console.log(response.data.jwt);
+        console.log(response.data);
         localStorage.setItem("jwt", response.data.jwt);
+        localStorage.setItem("id", response.data.user.id);
+        loginSuccessMgs()
         setError(false);
         navigate('/dashboard')
       })
       .catch(function (error) {
         console.log(error);
+        loginFaildMgs()
         setError(true);
+      });
+      setLoader(true)
+      axios
+      .get(`${baseUrl}/ideas/652f8bff127bd15a1883f5fd`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+      .then(function (response) {
+        // console.log(response.data);
+        setIdea(response.data);
+        setstepNum(response.data.stepNum);
+        setLoader(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+        setLoader(false);
       });
   };
 
@@ -115,6 +151,7 @@ const Login = () => {
                 required
                 value={username}
                 onChange={(e) => setUserName(e.target.value)}
+                placeholder="Username..."
                 style={{
                   outlineColor: "#0dcaf0",
                   width: "100%",
@@ -130,7 +167,8 @@ const Login = () => {
               />
               <input
                 required
-                type="password"
+                type="text"
+                placeholder="Password..."
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 style={{

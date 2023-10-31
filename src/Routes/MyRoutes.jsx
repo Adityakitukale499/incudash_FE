@@ -13,12 +13,12 @@ import Step4 from "../Components/BusinessGrooming/Step4";
 import Step5 from "../Components/BusinessGrooming/Step5";
 import Step6 from "../Components/BusinessGrooming/Step6";
 import Step7 from "../Components/BusinessGrooming/Step7";
-import Box from "@mui/material/Box";
 import Login from "../authPages/Login";
 import SignUp from "../authPages/SignUp";
-import SideBar from "../SideBar";
 import ProtectedOuterLayerComponent from "../ProtectedOuterLayerComponent";
 import { sidebarRoute ,stepRoute, authRoute } from "../servises/constPath";
+import ChangePassword from "../Components/ChangePassword";
+import EditProfile from "../Components/EditProfile";
 
 
 const MyRoutes = () => {
@@ -45,9 +45,10 @@ const MyRoutes = () => {
           </Route>
           <Route path={authRoute.login} element={<Login />} />
           <Route path={authRoute.signup} element={<SignUp />} />
+          <Route path={'/changepassword'} element={<ChangePassword />} />
+          <Route path={'/editprofile'} element={<EditProfile />} />
         </Routes>
       </ProtectedOuterLayerComponent>
-      {/* </Box> */}
     </>
   );
 };

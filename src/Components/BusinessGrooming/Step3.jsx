@@ -86,7 +86,8 @@ const Step3 = () => {
   };
 
   const saveAndNext = () => {
-    if (update) saveStep3();
+    // if (update) 
+    saveStep3();
 
     navigate("/dashboard/step4");
   };
