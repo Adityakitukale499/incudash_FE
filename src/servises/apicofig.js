@@ -18,6 +18,10 @@ export const putData = async (id, body) => {
 }
 
 
+export const getData = async ()=>{
+
+}
+
 export const handleOpenPicker = (uploadFile, openPicker, authResponse) => {
     openPicker({
         clientId:

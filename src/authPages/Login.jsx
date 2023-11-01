@@ -44,16 +44,19 @@ const Login = () => {
         loginSuccessMgs();
         setError(false);
         navigate("/dashboard");
+        setLoader(false);
       })
       .catch(function (error) {
         console.log(error);
         loginFaildMgs();
         setError(true);
+        setLoader(false);
       });
-      
+
     const userId = jwtDecode(localStorage.getItem("jwt")).id;
     // console.log(userId);
-
+      
+    setLoader(true);
     axios
       .get(`${baseUrl}/users/${userId}`, {
         headers: {
@@ -63,10 +66,15 @@ const Login = () => {
       .then(function (response) {
         console.log(response.data);
         setUser(response.data);
+        setLoader(false);
       })
       .catch(function (error) {
         console.log(error);
+        setLoader(false);
       });
+
+      
+    setLoader(true);
     axios
       .get(`${baseUrl}/ideas/652f8bff127bd15a1883f5fd`, {
         headers: {
@@ -187,7 +195,7 @@ const Login = () => {
               />
               <input
                 required
-                type="text"
+                type="password"
                 placeholder="Password..."
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

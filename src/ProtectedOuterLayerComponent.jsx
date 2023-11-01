@@ -24,14 +24,14 @@ function ProtectedOuterLayerComponent({ children }) {
           ml:
             location.pathname === "/signup" || location.pathname === "/login"
               ? 0
-              : 8,
+              : 10,
           p:
             location.pathname === "/signup" || location.pathname === "/login"
               ? 0
               : 4,
           height: "100vh",
           overflow: "scroll",
-          // display: "flex", flexDirection:'column'
+          display: "flex", flexDirection:'column'
         }}
       >
         {location.pathname === "/signup" ||

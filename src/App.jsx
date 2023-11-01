@@ -25,11 +25,9 @@ function App() {
   const faildMgs = () => toast.warning("Faild to Save!");
 
   useEffect(() => {
-    setLoader(true);
     if (localStorage.getItem("jwt") != "") {
       const userId = jwtDecode(localStorage.getItem("jwt")).id;
-      // console.log(userId);
-
+      setLoader(true);
       axios
         .get(`${baseUrl}/users/${userId}`, {
           headers: {
@@ -39,9 +37,11 @@ function App() {
         .then(function (response) {
           console.log(response.data);
           setUser(response.data);
+          setLoader(false);
         })
         .catch(function (error) {
           console.log(error);
+          setLoader(false);
         });
 
       axios
