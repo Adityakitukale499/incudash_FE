@@ -7,8 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { ideaContext, userContext } from "../contextApi/context";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
+import { getData } from "../servises/apicofig";
 
-const Login = () => {
+export default function Login() {
   const {
     idea,
     setIdea,
@@ -26,7 +27,7 @@ const Login = () => {
   const loginSuccessMgs = () => toast.success("Log-In Successfully!");
   const loginFaildMgs = () => toast.warning("Faild to Log-In!");
   const navigate = useNavigate();
-
+//  console.log(user);
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log("submit", e);
@@ -52,17 +53,15 @@ const Login = () => {
         setError(true);
         setLoader(false);
       });
+    let userId;
 
-    const userId = jwtDecode(localStorage.getItem("jwt")).id;
+    if (localStorage.getItem("jwt")) {
+      userId = jwtDecode(localStorage.getItem("jwt")).id;
+    }
     // console.log(userId);
-      
+
     setLoader(true);
-    axios
-      .get(`${baseUrl}/users/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
-      })
+    getData(`users/${userId}`)
       .then(function (response) {
         console.log(response.data);
         setUser(response.data);
@@ -73,14 +72,9 @@ const Login = () => {
         setLoader(false);
       });
 
-      
     setLoader(true);
-    axios
-      .get(`${baseUrl}/ideas/652f8bff127bd15a1883f5fd`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
-      })
+
+    getData(`ideas/findByUserId/${userId}`)
       .then(function (response) {
         // console.log(response.data);
         setIdea(response.data);
@@ -226,6 +220,4 @@ const Login = () => {
       </Box>
     </>
   );
-};
-
-export default Login;
+}

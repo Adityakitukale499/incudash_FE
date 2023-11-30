@@ -5,14 +5,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 function ProtectedOuterLayerComponent({ children }) {
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
-    if(!localStorage.getItem('jwt')) navigate('/login')
+    if (!localStorage.getItem("jwt")) navigate("/login");
     // console.log(localStorage.getItem('jwt'));
-  },[localStorage.getItem('jwt')]);
+  }, [localStorage.getItem("jwt")]);
   // console.log(location.pathname);
   return (
     <>
+      {location.pathname === "/signup" ||
+      location.pathname === "/login" ? null : (
+        <SideBar />
+      )}
       <Box
         component="main"
         sx={{
@@ -24,20 +28,17 @@ function ProtectedOuterLayerComponent({ children }) {
           ml:
             location.pathname === "/signup" || location.pathname === "/login"
               ? 0
-              : 10,
+              : 0,
           p:
             location.pathname === "/signup" || location.pathname === "/login"
               ? 0
               : 4,
           height: "100vh",
           overflow: "scroll",
-          display: "flex", flexDirection:'column'
+          display: "flex",
+          flexDirection: "column",
         }}
       >
-        {location.pathname === "/signup" ||
-        location.pathname === "/login" ? null : (
-          <SideBar />
-        )}
         {children}
       </Box>
       {/* <Component/> */}

@@ -69,7 +69,8 @@ export default function Roadmap({ sortData, setOpen, setIsEdit, setEditEntry, ha
 
   return (
     <>
-      {sortData.length == 0 && <Box>Data Not Found !</Box>}
+      {console.log('before map')}
+      {sortData?.length == 0 && <Box>Data Not Found !</Box>}
       {sortData.map((raodmapStep, i) => (
         <Accordion
           key={i}
@@ -113,6 +114,7 @@ export default function Roadmap({ sortData, setOpen, setIsEdit, setEditEntry, ha
           </AccordionDetails>
         </Accordion>
       ))}
+      {/* {console.log('after map')} */}
     </>
   );
 }

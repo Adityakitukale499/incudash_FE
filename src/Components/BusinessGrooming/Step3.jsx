@@ -1,5 +1,12 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { Box, Chip, Typography } from "@mui/material";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Chip,
+  Typography,
+} from "@mui/material";
 import Button from "@mui/joy/Button";
 import { useNavigate } from "react-router-dom";
 import Roadmap from "../Roadmap";
@@ -10,10 +17,13 @@ import DoneAllIcon from "@mui/icons-material/DoneAll";
 import dayjs from "dayjs";
 import AddInRoadmap from "../AddInRoadmap";
 import { Grid } from "@mui/joy";
-import { ideaContext } from "../../contextApi/context";
+import { ideaContext, userContext } from "../../contextApi/context";
 import NavigateBtn from "../NavigateBtn";
 import { putData } from "../../servises/apicofig";
 import Conformation from "../Confirmation";
+import App from "../comments/src/App";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CommentsModal from "../CommentsModal";
 
 const Step3 = () => {
   const {
@@ -26,72 +36,86 @@ const Step3 = () => {
     stepNum,
     setstepNum,
   } = useContext(ideaContext);
-  const [data, setData] = useState([]);
+  const { user, setUser } = useContext(userContext);
+  // const [data, setData] = useState([]);
   const [update, setUpdate] = useState(false);
   const [editEntry, setEditEntry] = useState();
   const [isEdit, setIsEdit] = useState(false);
   const deleteConform = useRef(false);
   const [deleteConformModal, setdeleteConformModal] = useState(false);
-  const [sortData, setSortData] = useState(data);
-  const [fromDate, setFromDate] = useState(data[0]?.timestampFrom);
-  const [toDate, setToDate] = useState(data[data.length - 1]?.timestampTo);
+  const [sortData, setSortData] = useState([]);
+  const [fromDate, setFromDate] = useState(new Date());
+  const [toDate, setToDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState("");
   const [showChip, setShowChip] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [commentsModal, setCommentsModal] = useState(false);
+  const [currentUser, setCurrentUser] = useState({
+    userName: "aditya kitukale",
+    userId: "123456789",
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (user?.id && user?.username) {
+      setCurrentUser({
+        userName: user?.username,
+        userId: user?.id,
+      });
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (idea?.productRoadmap?.comments) {
+      setComments(idea?.productRoadmap?.comments);
+    }
+  }, [idea]);
+  useEffect(() => {
     if (step) {
-      const temp = [...data, step].sort(
+      const temp = [...sortData, step].sort(
         (a, b) => new Date(a.timestampFrom) - new Date(b.timestampFrom)
       );
       console.log(temp);
       setSortData(temp);
-      setData(temp);
       setUpdate(true);
     }
   }, [step]);
 
   useEffect(() => {
-    setSortData(data);
-  }, [data]);
-
-  useEffect(() => {
-    if (idea) {
-      setData([...idea?.productRoadmap?.roadMapCollection]);
-      setSortData([...idea?.productRoadmap?.roadMapCollection]);
-      setFromDate(idea?.productRoadmap?.roadMapCollection[0]?.timestampFrom);
-      setToDate(
-        idea?.productRoadmap?.roadMapCollection[
-          idea?.productRoadmap?.roadMapCollection?.length - 1
-        ]?.timestampTo
-      );
+    try {
+      if (idea) {
+        setSortData([...idea?.productRoadmap?.roadMapCollection]);
+        setFromDate(idea?.productRoadmap?.roadMapCollection[0]?.timestampFrom);
+        setToDate(
+          idea?.productRoadmap?.roadMapCollection[
+            idea?.productRoadmap?.roadMapCollection?.length - 1
+          ]?.timestampTo
+        );
+      }
+    } catch (error) {
+      console.log(idea, "in catch block", typeof idea);
     }
   }, [idea]);
 
   const saveStep3 = () => {
-    const temp = [...data, step].sort(
+    if (!user) return;
+    const temp = [...sortData].sort(
       (a, b) => new Date(a.timestampFrom) - new Date(b.timestampFrom)
     );
+
     const body = {
       productRoadmap: {
         roadMapCollection: [...temp],
-        comments: [
-          ...idea?.productRoadmap.comments,
-          // {
-          //   created_at: "aeiyg6dj",
-          //   commentText: "rt6jkmtufysvethdtujfuyjnrdnf",
-          //   createdBy: "test",
-          // },
-        ],
+        comments: idea?.productRoadmap?.comments,
       },
       stepNum: stepNum == 2 ? 3 : idea?.stepNum,
     };
     setLoader(true);
-    putData("652f8bff127bd15a1883f5fd", body)
+    putData(`ideas/updateByUserId/${user.id}`, body)
       .then((data) => {
         // console.log("step3putrequest", data.data);
-        setIdea(data.data);
+        setIdea(data?.data);
         setLoader(false);
         successMgs();
         if (stepNum == 2) setstepNum(3);
@@ -102,6 +126,7 @@ const Step3 = () => {
         faildMgs();
       });
     setUpdate(false);
+    console.log("stepsaveandnext");
   };
 
   const saveAndNext = () => {
@@ -112,8 +137,8 @@ const Step3 = () => {
   };
 
   function ApplyFilter() {
-    console.log(data);
-    let filterData = data.filter(
+    // console.log(data , fromDate, toDate);
+    let filterData = sortData.filter(
       (e) =>
         new Date(fromDate) <= new Date(e.timestampFrom) &&
         new Date(toDate) >= new Date(e.timestampFrom)
@@ -129,8 +154,8 @@ const Step3 = () => {
     timestampFrom,
     timestampTo,
   }) {
-    const arr = data;
-    for (let i = 0; i < data.length; i++) {
+    const arr = sortData;
+    for (let i = 0; i < arr.length; i++) {
       if (arr[i].id === editEntry.id) {
         arr[i] = {
           ...arr[i],
@@ -143,30 +168,52 @@ const Step3 = () => {
       }
     }
     setUpdate(true);
-    setData(arr);
+    // setData(arr);
     setSortData(arr);
     setIsEdit(false);
   }
 
   function handledeleteRoadmapstep(id) {
-    setdeleteConformModal(true);
     deleteConform.current = id;
+    setdeleteConformModal(true);
   }
   function deleteStep() {
-    const arr = data.filter((e, i) => e.id !== deleteConform.current);
+    console.log("deletstep");
+    const arr = sortData.filter((e, i) => e?.id !== deleteConform.current);
     setUpdate(true);
-    setData(arr);
+    // setData(arr);
     setSortData(arr);
   }
 
   function resetDate() {
     setShowChip(false);
-    setFromDate(data[0].date);
-    setToDate(data[data.length - 1].date);
+    setFromDate(sortData[0]?.timestampFrom);
+    setToDate(sortData[sortData.length - 1]?.timestampFrom);
   }
+  const handleComments = (updatedComments) => {
+    // console.log(updatedComments);
+    const body = {
+      productRoadmap: {
+        roadMapCollection: idea?.productRoadmap?.roadMapCollection,
+        comments: updatedComments,
+      },
+    };
+    if (!idea?.userId) return;
 
+    setLoader(true);
+    putData(`ideas/updateByUserId/${idea?.userId}`, body)
+      .then((data) => {
+        console.log(data);
+        setLoader(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setLoader(false);
+      });
+  };
   return (
-    <Box sx={{ p: 0, mr: 0 }}>
+    <Box sx={{ p: 0, mr: 0, mb:10 }}>
+      {/* {console.log(deleteConformModal, deleteStep)} */}
       <Conformation
         open={deleteConformModal}
         setOpen={setdeleteConformModal}
@@ -289,6 +336,20 @@ const Step3 = () => {
           />
         </Box>
       </Box>
+      <CommentsModal
+        open={commentsModal}
+        setOpen={setCommentsModal}
+        comments={comments}
+        currentUser={currentUser}
+        setComments={handleComments}
+      />
+
+      <img
+        onClick={() => setCommentsModal(true)}
+        src="/commentButton.png"
+        alt="image"
+        style={{ width: "200px", position: "fixed", bottom: 0, right: 50 }}
+      />
     </Box>
   );
 };

@@ -1,15 +1,25 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Box, Button, Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Button,
+  Typography,
+} from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import DownloadIcon from "@mui/icons-material/Download";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import { ideaContext } from "../../contextApi/context";
+import { ideaContext, userContext } from "../../contextApi/context";
 import { handleOpenPicker, putData } from "../../servises/apicofig";
 import { useNavigate } from "react-router-dom";
 import Conformation from "../Confirmation";
 import useDrivePicker from "react-google-drive-picker";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import App from "../comments/src/App";
+import CommentsModal from "../CommentsModal";
 
 const Step4 = () => {
   const {
@@ -22,25 +32,42 @@ const Step4 = () => {
     stepNum,
     setstepNum,
   } = useContext(ideaContext);
+  const { user, setUser } = useContext(userContext);
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [deletefileModal, setdeletefileModal] = useState(false);
   const fileId = useRef();
   const [openPicker, authResponse] = useDrivePicker();
+  const [comments, setComments] = useState([]);
+  const [commentsModal, setCommentsModal] = useState(false);
+  const [currentUser, setCurrentUser] = useState({
+    userName: "Aditya kitukale",
+    userId: "123456789",
+  });
   useEffect(() => {
-    if (idea) {
-      setFiles([...idea.financialValuation.documentCollection]);
+    if (idea?.financialValuation?.documentCollection) {
+      // console.log(idea);
+      setFiles([...idea?.financialValuation?.documentCollection]);
+      setComments(idea?.financialValuation?.comments);
     }
   }, [idea]);
+
+  useEffect(() => {
+    if (user?.id && user?.username) {
+      setCurrentUser({
+        userName: user?.username,
+        userId: user?.id,
+      });
+    }
+  }, [user]);
 
   function handleDownloadFile(url, filename) {
     const atag = document.createElement("a");
     atag.href = url;
     atag.setAttribute("download", filename);
-    // atag.setAttribute("target", '_blank');
-    document.body.appendChild(atag);
-    atag.click();
-    atag.remove();
+    document?.body?.appendChild(atag);
+    atag?.click();
+    atag?.remove();
   }
 
   function handledeleteFile(id) {
@@ -48,17 +75,18 @@ const Step4 = () => {
     setdeletefileModal(true);
   }
   function deleteFile() {
-    const filterFiles = files.filter((e, i) => e.id != fileId.current);
+    const filterFiles = files.filter((e, i) => e?.id != fileId?.current);
     const body = {
       financialValuation: {
-        documentCollection: [...filterFiles],
+        documentCollection: filterFiles,
+        comments: idea?.financialValuation?.comments,
       },
     };
     setLoader(true);
-    putData("652f8bff127bd15a1883f5fd", body).then((data) => {
-      console.log("step4putreqest", data.data);
+    putData(`ideas/updateByUserId/${user?.id}`, body).then((data) => {
+      console.log("step4putreqest", data?.data);
       setLoader(false);
-      setIdea(data.data);
+      setIdea(data?.data);
     });
     setFiles(filterFiles);
   }
@@ -68,29 +96,21 @@ const Step4 = () => {
       const body = {
         financialValuation: {
           documentCollection: [
-            ...idea.financialValuation.documentCollection,
+            ...idea?.financialValuation?.documentCollection,
             {
-              documentId: data.docs[0].name,
-              url: data.docs[0].downloadUrl,
+              documentId: data?.docs[0]?.name,
+              url: data?.docs[0]?.downloadUrl,
               created_at: new Date().toString(),
             },
           ],
-          comments: [
-            ...idea.financialValuation.comments,
-
-            // {
-            //   created_at: "*&^%$#",
-            //   commentText: "trdhgeqatyhr5r6rtdgerdtg",
-            //   createdBy: "erhrth",
-            // },
-          ],
+          comments: idea?.financialValuation?.comments,
         },
       };
       setLoader(true);
-      putData("652f8bff127bd15a1883f5fd", body)
+      putData(`ideas/updateByUserId/${user?.id}`, body)
         .then((d) => {
           // console.log("step4putreqest", data.data);
-          setIdea(d.data);
+          setIdea(d?.data);
           setLoader(false);
           successMgs();
         })
@@ -105,13 +125,13 @@ const Step4 = () => {
 
   const saveStep = () => {
     const body = {
-      stepNum: stepNum == 3 ? 4 : idea.stepNum,
+      stepNum: stepNum == 3 ? 4 : idea?.stepNum,
     };
     setLoader(true);
-    putData("652f8bff127bd15a1883f5fd", body)
+    putData(`ideas/updateByUserId/${user?.id}`, body)
       .then((d) => {
         // console.log("step4putreqest", data.data);
-        setIdea(d.data);
+        setIdea(d?.data);
         setLoader(false);
         successMgs();
       })
@@ -124,8 +144,30 @@ const Step4 = () => {
     navigate("/dashboard/step5");
   };
 
+  const handleComments = (updatedComments) => {
+    // console.log(updatedComments);
+    if (!idea?.userId) return;
+    const body = {
+      financialValuation: {
+        financialValuation: idea?.financialValuation?.roadMapCollection,
+        comments: updatedComments,
+      },
+    };
+
+    setLoader(true);
+    putData(`ideas/updateByUserId/${idea?.userId}`, body)
+      .then((data) => {
+        console.log(data);
+        setLoader(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setLoader(false);
+      });
+  };
+
   return (
-    <Box sx={{ p: 0, mr: 0 }}>
+    <Box sx={{ p: 0, mr: 0, mb:10 }}>
       <Conformation
         open={deletefileModal}
         setOpen={setdeletefileModal}
@@ -163,26 +205,26 @@ const Step4 = () => {
           {" "}
           Uploded Files{" "}
         </Typography>
-        {files.length == 0 && (
+        {files?.length == 0 && (
           <p
             style={{ fontSize: 13, display: "flex", justifyContent: "center" }}
           >
             Data Not Found ...
           </p>
         )}
-        {files.map((e, i) => (
+        {files?.map((e, i) => (
           <Box
             key={i}
             sx={{ display: "flex", justifyContent: "space-between" }}
           >
             <Box>
               {i + 1}) <PictureAsPdfIcon sx={{ color: "red", fontSize: 12 }} />
-              <span> {e.documentId} </span>
+              <span> {e?.documentId} </span>
             </Box>
             <Box>
               <IconButton
                 aria-label="download"
-                onClick={() => handleDownloadFile(e.url, e.documentId)}
+                onClick={() => handleDownloadFile(e?.url, e?.documentId)}
                 sx={{ mt: 0.5 }}
               >
                 <DownloadIcon sx={{ height: 20 }} />
@@ -202,6 +244,20 @@ const Step4 = () => {
           </Button>
         </Box>
       </Box>
+      <CommentsModal
+        open={commentsModal}
+        setOpen={setCommentsModal}
+        comments={comments}
+        currentUser={currentUser}
+        setComments={handleComments}
+      />
+
+      <img
+        onClick={() => setCommentsModal(true)}
+        src="/commentButton.png"
+        alt="image"
+        style={{ width: "200px", position: "fixed", bottom: 0, right: 50 }}
+      />
     </Box>
   );
 };

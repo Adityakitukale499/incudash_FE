@@ -78,7 +78,7 @@ const DashBoard = () => {
     stepNum,
     setstepNum,
   } = useContext(ideaContext);
-
+console.log(idea);
   const handleClick = () => {
     console.log("in handleclick");
     setOpen(!open);
@@ -94,6 +94,8 @@ const DashBoard = () => {
     "Pitch Deck",
     "Funding",
   ];
+
+  console.log(idea);
 
   return (
     <>

@@ -13,8 +13,8 @@ import Step4 from "../Components/BusinessGrooming/Step4";
 import Step5 from "../Components/BusinessGrooming/Step5";
 import Step6 from "../Components/BusinessGrooming/Step6";
 import Step7 from "../Components/BusinessGrooming/Step7";
-import Login from "../authPages/Login";
 import SignUp from "../authPages/SignUp";
+import Login from "../authPages/Login";
 import ProtectedOuterLayerComponent from "../ProtectedOuterLayerComponent";
 import { sidebarRoute ,stepRoute, authRoute } from "../servises/constPath";
 import ChangePassword from "../Components/ChangePassword";
@@ -43,7 +43,7 @@ const MyRoutes = () => {
             <Route path={stepRoute.step6} element={<Step6 />} />
             <Route path={stepRoute.step7} element={<Step7 />} />
           </Route>
-          <Route path={authRoute.login} element={<Login />} />
+          <Route path={authRoute.login} element={<Login/>} />
           <Route path={authRoute.signup} element={<SignUp />} />
           <Route path={'/changepassword'} element={<ChangePassword />} />
           <Route path={'/editprofile'} element={<EditProfile />} />

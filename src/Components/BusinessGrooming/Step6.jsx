@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { ideaContext } from "../../contextApi/context";
+import { ideaContext, userContext } from "../../contextApi/context";
 import { putData } from "../../servises/apicofig";
 
 const Step6 = () => {
@@ -15,6 +15,7 @@ const Step6 = () => {
     stepNum,
     setstepNum,
   } = useContext(ideaContext);
+  const {user, setUser} = useContext(userContext)
   const navigate = useNavigate();
 
   const saveStep = () => {
@@ -22,7 +23,7 @@ const Step6 = () => {
       stepNum: stepNum == 5 ? 6 : idea.stepNum,
     };
     setLoader(true);
-    putData("652f8bff127bd15a1883f5fd", body)
+    putData(`ideas/updateByUserId/${user.id}`, body)
       .then((d) => {
         // console.log("step4putreqest", data.data);
         setIdea(d.data);

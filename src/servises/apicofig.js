@@ -5,8 +5,8 @@ import { baseUrl } from "./constPath";
 // const [openPicker, authResponse] = useDrivePicker();
 // const baseUrl = "http://localhost:1337/ideas";
 
-export const putData = async (id, body) => {
-    const response = await axios.put(`${baseUrl}/ideas/${id}`, body, {
+export const putData = async (path, body) => {
+    const response = await axios.put(`${baseUrl}/${path}`, body, {
         headers: {
             Authorization:
                 `Bearer ${localStorage.getItem('jwt')}`,
@@ -17,9 +17,28 @@ export const putData = async (id, body) => {
     else throw Error(JSON.stringify(response.message));
 }
 
+export const postData = async (path, body) => {
+    const response = await axios.post(`${baseUrl}/${path}`, body, {
+        headers: {
+            Authorization:
+                `Bearer ${localStorage.getItem('jwt')}`,
+        },
+    });
+    // console.log(response);
+    if (response.status === 200) return response;
+    else throw Error(JSON.stringify(response.message));
+}
 
-export const getData = async ()=>{
-
+export const getData = async (path)=>{
+    const response = await axios.get(`${baseUrl}/${path}`,  {
+        headers: {
+            Authorization:
+                `Bearer ${localStorage.getItem('jwt')}`,
+        },
+    });
+    // console.log(response);
+    if (response.status === 200) return response;
+    else throw Error(JSON.stringify(response.message));
 }
 
 export const handleOpenPicker = (uploadFile, openPicker, authResponse) => {

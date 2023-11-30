@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
-import { ideaContext } from "../../contextApi/context";
+import { ideaContext, userContext } from "../../contextApi/context";
 import NavigateBtn from "../NavigateBtn";
 import { Badge } from "@mui/joy";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
@@ -21,6 +21,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import Conformation from "../Confirmation";
 import PreviewIcon from "@mui/icons-material/Preview";
+import App from "../comments/src/App";
+import CommentsModal from "../CommentsModal";
 
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
@@ -37,10 +39,12 @@ const Step2 = () => {
     stepNum,
     setstepNum,
   } = useContext(ideaContext);
-  const [comment, setComment] = useState({
-    createAt: "12-12-2012",
-    commentText: "comment by aditya kitukale",
-    createdBy: "aditya kitukale",
+  const { user, setUser } = useContext(userContext);
+  const [comments, setComments] = useState([]);
+  const [commentsModal, setCommentsModal] = useState(false)
+  const [currentUser, setCurrentUser] = useState({
+    userName: "aditya kitukale",
+    userId: "123456789",
   });
   const [textSize, setTextSize] = useState(0);
   const [ideaText, setIdeaText] = useState();
@@ -56,19 +60,25 @@ const Step2 = () => {
 
   useEffect(() => {
     if (idea) {
-      setIdeaText(idea.validateIdea.ideaText);
-      setChipData(idea.validateIdea.refrenceLinkArray);
-      setAttachments(idea.validateIdea.attachments);
+      setIdeaText(idea?.validateIdea?.ideaText);
+      setChipData(idea?.validateIdea?.refrenceLinkArray);
+      setAttachments(idea?.validateIdea?.attachments);
+      setComments(idea?.validateIdea?.comments);
     }
   }, [idea]);
+  useEffect(() => {
+    if (user?.id && user?.username) {
+      setCurrentUser({
+        userName: user?.username,
+        userId: user?.id,
+      });
+    }
+  }, [user]);
 
   useEffect(() => {
     if (idea) {
-      setUpdate(idea.validateIdea.ideaText !== ideaText);
+      setUpdate(idea?.validateIdea?.ideaText !== ideaText);
     }
-  }, [ideaText]);
-
-  useEffect(() => {
     setTextSize(ideaText?.length);
   }, [ideaText]);
 
@@ -81,14 +91,15 @@ const Step2 = () => {
           ...chipData,
         ],
         attachments: [...attachments],
-        comments: [...idea.validateIdea.comments, comment],
+        comments: idea?.validateIdea?.comments,
       },
-      stepNum: stepNum == 1 ? 2 : idea.stepNum,
+      stepNum: stepNum == 1 ? 2 : idea?.stepNum,
     };
     setLoader(true);
-    putData("652f8bff127bd15a1883f5fd", body)
+    putData(`ideas/updateByUserId/${user.id}`, body)
       .then((data) => {
         // console.log('step2putreqest',data.data);
+        console.log(data);
         setIdea(data.data);
         setIdeaText("");
         setChipData([]);
@@ -104,7 +115,7 @@ const Step2 = () => {
   };
 
   const saveAndNext = () => {
-    if (textSize >= 500 && chipData.length > 0 && update) saveStep2();
+    if (textSize >= 500 && chipData?.length > 0 && update) saveStep2();
 
     navigate("/dashboard/step3");
   };
@@ -135,8 +146,32 @@ const Step2 = () => {
     setChipData(filterData);
     console.log(filterData);
   };
+
+  const handleComments = (updatedComments) => {
+    console.log(updatedComments);
+    if (!idea?.userId) return;
+    const body = {
+      validateIdea: {
+        ideaText: idea?.validateIdea?.ideaText,
+        refrenceLinkArray: idea?.validateIdea?.refrenceLinkArray,
+        attachments: idea?.validateIdea?.attachments,
+        comments: updatedComments,
+      },
+    };
+
+    setLoader(true);
+    putData(`ideas/updateByUserId/${idea?.userId}`, body)
+      .then((data) => {
+        console.log(data);
+        setLoader(false);
+      })
+      .catch((e) => {
+        console.log(e);
+        setLoader(false);
+      });
+  };
   return (
-    <Box sx={{ p: 0, mr: -3 }}>
+    <Box sx={{ p: 0, mr: -3, mb:10 }}>
       <Conformation
         open={deleteAttachmentModal}
         setOpen={setdeleteAttachmentModal}
@@ -249,7 +284,7 @@ const Step2 = () => {
                 <Typography sx={{ fontWeight: 550 }}>Attachments</Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ mt: -3 }}>
-                {attachments.map((e, i) => (
+                {attachments?.map((e, i) => (
                   <Box
                     key={i}
                     sx={{ display: "flex", justifyContent: "space-between" }}
@@ -322,7 +357,7 @@ const Step2 = () => {
               }}
               component="ul"
             >
-              {chipData.map((data, index) => (
+              {chipData?.map((data, index) => (
                 <ListItem key={`chip${index}`}>
                   <Chip
                     label={data.refrerenceLink}
@@ -375,6 +410,27 @@ const Step2 = () => {
           </Box>
         </Grid>
       </Grid>
+      {/* <Accordion sx={{ width: "95%", borderRadius: 2 }}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography sx={{ fontWeight: 550 }}>Comments</Typography>
+        </AccordionSummary>
+        <AccordionDetails sx={{ mt: 3 }}>
+          <App
+            comments={comments}
+            currentUser={currentUser}
+            setComments={handleComments}
+          />
+        </AccordionDetails>
+      </Accordion> */}
+      <CommentsModal open={commentsModal} setOpen={setCommentsModal} comments={comments}
+              currentUser={currentUser}
+              setComments={handleComments}/>
+       
+       <img  onClick={()=> setCommentsModal(true)} src='/commentButton.png' alt="image" style={{width:'200px', position:'fixed', bottom:0, right:50}}/>
     </Box>
   );
 };

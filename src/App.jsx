@@ -13,6 +13,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { baseUrl } from "./servises/constPath";
 import { jwtDecode } from "jwt-decode";
+import { getData } from "./servises/apicofig";
+import SideBar from "./SideBar";
+import ProtectedOuterLayerComponent from "./ProtectedOuterLayerComponent";
 // import jwt from 'jsonwebtoken';
 
 function App() {
@@ -20,22 +23,16 @@ function App() {
   const [loader, setLoader] = useState(false);
   const [stepNum, setstepNum] = useState(0);
   const [user, setUser] = useState();
-
   const successMgs = () => toast.success("Save Successfully!");
   const faildMgs = () => toast.warning("Faild to Save!");
 
   useEffect(() => {
-    if (localStorage.getItem("jwt") != "") {
+    if (localStorage.getItem("jwt")) {
       const userId = jwtDecode(localStorage.getItem("jwt")).id;
       setLoader(true);
-      axios
-        .get(`${baseUrl}/users/${userId}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-          },
-        })
+      getData(`users/${userId}`)
         .then(function (response) {
-          console.log(response.data);
+          // console.log("response.data");
           setUser(response.data);
           setLoader(false);
         })
@@ -43,13 +40,8 @@ function App() {
           console.log(error);
           setLoader(false);
         });
-
-      axios
-        .get(`${baseUrl}/ideas/652f8bff127bd15a1883f5fd`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-          },
-        })
+      setLoader(true);
+      getData(`ideas/findByUserId/${userId}`)
         .then(function (response) {
           // console.log(response.data);
           setIdea(response.data);
@@ -67,7 +59,7 @@ function App() {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <userContext.Provider value={{user, setUser}}>
+          <userContext.Provider value={{ user, setUser }}>
             <ideaContext.Provider
               value={{
                 idea,
@@ -80,7 +72,7 @@ function App() {
                 setstepNum,
               }}
             >
-              <Box sx={{ backgroundColor: "#F5F7FA", display:'flex' }}>
+              <Box sx={{ backgroundColor: "#F5F7FA", display: "flex" }}>
                 <MyRoutes />
               </Box>
               <Loader loader={loader} />

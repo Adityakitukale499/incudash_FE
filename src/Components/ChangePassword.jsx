@@ -1,37 +1,60 @@
 import { Button } from "@mui/joy";
 import { Box, Typography } from "@mui/material";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../servises/constPath";
 import axios from "axios";
+import { postData } from "../servises/apicofig";
+import { jwtDecode } from "jwt-decode";
+import { ideaContext } from "../contextApi/context";
 
 const ChangePassword = () => {
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
+  const [succses, setSuccses] = useState("");
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [conPass, setConPass] = useState("");
   const navigate = useNavigate();
+  const { loader, setLoader } = useContext(ideaContext);
+  const userId = jwtDecode(localStorage.getItem("jwt")).id;
   const handleChangePassword = (e) => {
     e.preventDefault();
-    console.log("handleChangePassword");
-    if(newPass != conPass) {
-        setError('new password and confirm password do not match')
-        return;
+    console.log("handleChangePassword", userId);
+    if (newPass != conPass) {
+      setError("new password and confirm password do not match");
+      return;
     }
     const body = {
-      id: localStorage.getItem('id'),
+      id: userId,
       oldPassword: oldPass,
       newPassword: newPass,
     };
-    axios
-      .post(`${baseUrl}/change-password`,body)
+
+    // axios
+    //   .post(`${baseUrl}/user/change-password`, body, {
+    //     headers: {
+    //       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    //     },
+    //   })
+    setLoader(true);
+    postData("user/change-password", body)
       .then(function (response) {
         console.log(response);
+        if (response.data == "Password changed successfully") {
+          setSuccses(response.data);
+          setError("");
+        } else {
+          setError(response.data);
+          setSuccses("");
+        }
+        setLoader(false);
       })
       .catch(function (error) {
+        setLoader(false);
         console.log(error);
-        if(error.message == 'Request failed with status code 405') setError('Invalid Old Password');
+        if (error.message == "Request failed with status code 405")
+          setError("Invalid Old Password");
       });
   };
   return (
@@ -55,6 +78,7 @@ const ChangePassword = () => {
       >
         {/* {error ? <p style={{ color: "red" }}>invalid password</p> : null} */}
         <p style={{ color: "red" }}>{error}</p>
+        <p style={{ color: "green" }}>{succses}</p>
 
         <input
           required
