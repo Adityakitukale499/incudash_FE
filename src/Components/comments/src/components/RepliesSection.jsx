@@ -28,7 +28,7 @@ const RepliesSection = ({ commentIndex, isReplyTriggered, setIsReplyTriggered })
             replyIndex={index}
           />
         ) : (
-          <Card key={rep.id}>
+          <Card key={rep.id}  sx={{ width: "90%" }}>
             <Box sx={{ p: "15px" }}>
               <Stack spacing={2} direction="row">
                 <Box>

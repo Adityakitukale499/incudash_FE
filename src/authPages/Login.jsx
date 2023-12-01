@@ -4,10 +4,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl } from "../servises/constPath";
 import "react-toastify/dist/ReactToastify.css";
-import { ideaContext, userContext } from "../contextApi/context";
+import { ideaContext, signUpContex, userContext } from "../contextApi/context";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
 import { getData } from "../servises/apicofig";
+import ForgotPasswordModal from "./ForgotPasswordModal";
 
 export default function Login() {
   const {
@@ -21,13 +22,16 @@ export default function Login() {
     setstepNum,
   } = useContext(ideaContext);
   const { user, setUser } = useContext(userContext);
+  const { signUpUserId, setSignUpUserId } = useContext(signUpContex);
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [forgotPassModal, setForgotPassModal] = useState(false);
+  const [jwt, setJwt] = useState("");
   const loginSuccessMgs = () => toast.success("Log-In Successfully!");
   const loginFaildMgs = () => toast.warning("Faild to Log-In!");
   const navigate = useNavigate();
-//  console.log(user);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log("submit", e);
@@ -40,8 +44,9 @@ export default function Login() {
       .post(`${baseUrl}/auth/local`, body)
       .then(function (response) {
         console.log(response.data);
+        setJwt(response.data.jwt);
         localStorage.setItem("jwt", response.data.jwt);
-        localStorage.setItem("id", response.data.user.id);
+        // localStorage.setItem("id", response.data.user.id);
         loginSuccessMgs();
         setError(false);
         navigate("/dashboard");
@@ -53,39 +58,58 @@ export default function Login() {
         setError(true);
         setLoader(false);
       });
-    let userId;
-
-    if (localStorage.getItem("jwt")) {
-      userId = jwtDecode(localStorage.getItem("jwt")).id;
-    }
-    // console.log(userId);
-
-    setLoader(true);
-    getData(`users/${userId}`)
-      .then(function (response) {
-        console.log(response.data);
-        setUser(response.data);
-        setLoader(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-        setLoader(false);
-      });
-
-    setLoader(true);
-
-    getData(`ideas/findByUserId/${userId}`)
-      .then(function (response) {
-        // console.log(response.data);
-        setIdea(response.data);
-        setstepNum(response.data.stepNum);
-        setLoader(false);
-      })
-      .catch(function (error) {
-        console.log(error);
-        setLoader(false);
-      });
+    // console.log(signUpUserId);
+    // if (signUpUserId) {
+    //   const ideaBody = {
+    //     userId: signUpUserId,
+    //     stepNum: 0,
+    //   };
+    //   setLoader(true);
+    //   axios
+    //     .post(`${baseUrl}/ideas`, ideaBody)
+    //     .then((res) => {
+    //       console.log(res);
+    //       setLoader(false);
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //       setLoader(false);
+    //     });
+    // }
   };
+
+  useEffect(() => {
+    if (jwt) {
+      let userId = jwtDecode(jwt).id;
+      if (!userId) return;
+
+      setLoader(true);
+      getData(`users/${userId}`)
+        .then(function (response) {
+          console.log(response.data);
+          setUser(response.data);
+          setLoader(false);
+        })
+        .catch(function (error) {
+          console.log(error);
+          setLoader(false);
+        });
+
+      setLoader(true);
+
+      getData(`ideas/findByUserId/${userId}`)
+        .then(function (response) {
+          // console.log(response.data);
+          setIdea(response.data);
+          setstepNum(response.data.stepNum);
+          setLoader(false);
+        })
+        .catch(function (error) {
+          console.log(error);
+          setLoader(false);
+        });
+    }
+  }, [jwt]);
 
   return (
     <>
@@ -189,7 +213,7 @@ export default function Login() {
               />
               <input
                 required
-                type="password"
+                type="text"
                 placeholder="Password..."
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -209,7 +233,9 @@ export default function Login() {
               />
               {/* <input type="password" /> */}
               <Box sx={{ textAlign: "end", color: "#88898e", pt: 2, pb: 3 }}>
-                Forgot Password?
+                <span style={{cursor:'pointer'}} onClick={() => setForgotPassModal(true)}>
+                  Forgot Password?
+                </span>
               </Box>
               <Button variant="contained" type="submit" sx={{ width: "100%" }}>
                 Let's Incudash!
@@ -217,6 +243,10 @@ export default function Login() {
             </form>
           </Grid>
         </Grid>
+        <ForgotPasswordModal
+          open={forgotPassModal}
+          setOpen={setForgotPassModal}
+        />
       </Box>
     </>
   );

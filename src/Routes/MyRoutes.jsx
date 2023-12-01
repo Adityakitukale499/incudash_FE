@@ -19,6 +19,7 @@ import ProtectedOuterLayerComponent from "../ProtectedOuterLayerComponent";
 import { sidebarRoute ,stepRoute, authRoute } from "../servises/constPath";
 import ChangePassword from "../Components/ChangePassword";
 import EditProfile from "../Components/EditProfile";
+import ResetPassword from "../authPages/ResetPassword";
 
 
 const MyRoutes = () => {
@@ -47,6 +48,7 @@ const MyRoutes = () => {
           <Route path={authRoute.signup} element={<SignUp />} />
           <Route path={'/changepassword'} element={<ChangePassword />} />
           <Route path={'/editprofile'} element={<EditProfile />} />
+          <Route path={'/reset-password'} element={<ResetPassword />} />
         </Routes>
       </ProtectedOuterLayerComponent>
     </>

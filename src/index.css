@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,7 +7,10 @@
 ::-webkit-scrollbar {
   display: none;
 }
-#root{
-  background-color:'#dcdfe3' !important;
-
+#root {
+  background-color: "#dcdfe3" !important;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }

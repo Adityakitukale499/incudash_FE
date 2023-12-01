@@ -43,7 +43,7 @@ const OwnReply = ({ onContent,
         replyIndex={replyIndex}
         isReplyDelete={true}
       />
-      <Card>
+      <Card >
         <Box sx={{ p: "15px" }}>
           <Stack spacing={2} direction="row">
             <Box>

@@ -6,6 +6,10 @@ import { baseUrl } from "../servises/constPath";
 import { passwordStrength } from "check-password-strength";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ideaContext, signUpContex, userContext } from "../contextApi/context";
+import PasswordStrengthBar from "react-password-strength-bar";
+import { postData } from "../servises/apicofig";
+import Login from "./Login";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -15,40 +19,69 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   const [passError, setPassError] = useState(false);
-  const signupSuccessMgs = () => toast.success("Sign-Up Successfully!");
+  const [error, setError] = useState("");
+  const { signUpUserId, setSignUpUserId } = useContext(signUpContex);
+  const signupSuccessMgs = () =>
+    toast.success(
+      "Confirmation link successfully sent on your mailId please use that link to log-in"
+    );
   const signupFaildMgs = () => toast.warning("Faild to Sign-Up!");
-  //   const [users, setUsers] = useState([]);
+  const {
+    idea,
+    setIdea,
+    loader,
+    setLoader,
+    successMgs,
+    faildMgs,
+    stepNum,
+    setstepNum,
+  } = useContext(ideaContext);
+
   useEffect(() => {
     if (password) {
       setPassError(
         passwordStrength(password).length < 8 &&
           passwordStrength(password).contains.length < 3
       );
-      // console.log(passwordStrength(password));
     }
   }, [password]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("submit", e);
+    console.log("signUp function", signUpUserId, setSignUpUserId);
     if (password !== confirmPass) return;
     const body = {
       username: username,
       email: username,
       password: password,
+      confirmed: true,
     };
+    setLoader(true);
     axios
-      .post(`${baseUrl}/auth/local/register`, body, {
-        headers: {
-          Authorization : `Bearer ${localStorage.getItem('jwt')}`
-        }
-    })
+      .post(`${baseUrl}/auth/local/register`, body)
       .then(function (response) {
-        console.log("SignUp", response.data);
-        // localStorage.setItem("jwt", response.data.jwt);
+        console.log("SignUp", response.data.user.id);
+        setLoader(false);
+        const ideaBody = {
+          userId: response.data.user.id,
+          stepNum: 0,
+        };
+        setLoader(true);
+        axios
+          .post(`${baseUrl}/ideas`, ideaBody)
+          .then((res) => {
+            console.log(res);
+            setLoader(false);
+          })
+          .catch((e) => {
+            console.log(e);
+            setLoader(false);
+          });
         signupSuccessMgs();
       })
       .catch(function (error) {
-        console.log(error);
+        console.log(error.response.data.message[0].messages[0].message);
+        setError(error.response.data.message[0].messages[0].message);
+        setLoader(false);
         signupFaildMgs();
       });
   };
@@ -130,6 +163,7 @@ const SignUp = () => {
             >
               See your growth and get funding support.
             </Typography>
+            <p style={{ color: "red" }}>{error}</p>
             <form action="" onSubmit={handleSubmit}>
               <input
                 type="text"
@@ -174,7 +208,10 @@ const SignUp = () => {
                 type="number"
                 placeholder="Phone Number..."
                 value={phoneNum}
-                onChange={(e) => setPhoneNum(e.target.value)}
+                onChange={(e) => {
+                  setError("");
+                  setPhoneNum(e.target.value);
+                }}
                 style={{
                   outlineColor: "#0dcaf0",
                   width: "100%",
@@ -188,14 +225,18 @@ const SignUp = () => {
                   height: 35,
                 }}
               />
-              {passError ? (
+              {/* {passError ? (
                 <p
-                  style={{ color: "red", fontSize: 14, marginBottom: "-18px" }}
+                  style={{
+                    color: "red",
+                    fontSize: 14,
+                    marginBottom: "-18px",
+                  }}
                 >
                   Your password must be Uppercase, Lowercase, Special Character
                   and Number
                 </p>
-              ) : null}
+              ) : null} */}
               <input
                 required
                 type="password"
@@ -215,9 +256,10 @@ const SignUp = () => {
                   height: 35,
                 }}
               />
+              <PasswordStrengthBar password={password} />
               <input
                 required
-                type="text"
+                type="password"
                 // disabled={passError}
                 placeholder="Confirm Password..."
                 value={confirmPass}

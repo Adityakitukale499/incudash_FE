@@ -130,7 +130,7 @@ const Step3 = () => {
   };
 
   const saveAndNext = () => {
-    // if (update)
+    if (update)
     saveStep3();
 
     navigate("/dashboard/step4");

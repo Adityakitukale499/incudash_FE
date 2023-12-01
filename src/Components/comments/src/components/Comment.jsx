@@ -32,7 +32,7 @@ const Comment = ({ comment }) => {
   return (
     <ThemeProvider theme={theme}>
       <ConfirmDelete onOpen={openModal} onClose={() => setOpenModal(false)} commentIndex={commentIndex} isReplyDelete={false} />
-      <Card>
+      <Card sx={{ width: "80%" }}>
         <Box sx={{ p: "15px" }}>
           <Stack spacing={2} direction="row">
             <Box>

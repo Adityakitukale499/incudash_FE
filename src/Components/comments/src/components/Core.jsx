@@ -6,7 +6,7 @@ import {CommentContext} from "../App";
 
 export const Core = () => {
   const { commentSection } = useContext(CommentContext);
-  console.log({ commentSection }, "line 9")
+  // console.log({ commentSection }, "line 9")
   return (
     <Container maxWidth="md" >
       <Stack spacing={3}>

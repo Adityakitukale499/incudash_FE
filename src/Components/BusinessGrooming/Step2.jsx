@@ -60,10 +60,10 @@ const Step2 = () => {
 
   useEffect(() => {
     if (idea) {
-      setIdeaText(idea?.validateIdea?.ideaText);
-      setChipData(idea?.validateIdea?.refrenceLinkArray);
-      setAttachments(idea?.validateIdea?.attachments);
-      setComments(idea?.validateIdea?.comments);
+      setIdeaText(idea?.validateIdea?.ideaText?idea?.validateIdea?.ideaText:'');
+      setChipData(idea?.validateIdea?.refrenceLinkArray?idea?.validateIdea?.refrenceLinkArray:[]);
+      setAttachments(idea?.validateIdea?.attachments?idea?.validateIdea?.attachments:[]);
+      setComments(idea?.validateIdea?.comments?idea?.validateIdea?.comments:[]);
     }
   }, [idea]);
   useEffect(() => {
@@ -137,6 +137,7 @@ const Step2 = () => {
   };
 
   const handleRefrence = () => {
+    
     setChipData([...chipData, { refrerenceLink: refrence }]);
     setRefrence("");
   };

@@ -5,8 +5,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import MyRoutes from "./Routes/MyRoutes";
 import Box from "@mui/material/Box";
-import { useEffect, useState } from "react";
-import { ideaContext, userContext } from "./contextApi/context";
+import { useContext, useEffect, useState } from "react";
+import { ideaContext, userContext, signUpContex } from "./contextApi/context";
 import axios from "axios";
 import Loader from "./Components/Loader";
 import { ToastContainer, toast } from "react-toastify";
@@ -23,8 +23,36 @@ function App() {
   const [loader, setLoader] = useState(false);
   const [stepNum, setstepNum] = useState(0);
   const [user, setUser] = useState();
+  const [signUpUserId, setSignUpUserId] = useState("");
   const successMgs = () => toast.success("Save Successfully!");
   const faildMgs = () => toast.warning("Faild to Save!");
+
+  // useEffect(()=>{
+  //   console.log(localStorage.getItem("jwt"));
+  //   if(!localStorage.getItem("jwt")) return;
+  //   const userId = jwtDecode(localStorage.getItem("jwt")).id;
+  //   if(signUpUser.username && signUpUser.password){
+  //     const body = {
+  //       userId,
+  //       stepNum:0
+  //     };
+  //     setLoader(true);
+  //     axios
+  //       .post(`${baseUrl}/ideas`, body, {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+  //         },
+  //       })
+  //       .then((res) => {
+  //         console.log(res);
+  //         setLoader(false);
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //         setLoader(false);
+  //       });
+  //   }
+  // },[signUpUser])
 
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
@@ -72,22 +100,24 @@ function App() {
                 setstepNum,
               }}
             >
-              <Box sx={{ backgroundColor: "#F5F7FA", display: "flex" }}>
-                <MyRoutes />
-              </Box>
-              <Loader loader={loader} />
-              <ToastContainer
-                position="bottom-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-              />
+              <signUpContex.Provider value={{ signUpUserId, setSignUpUserId }}>
+                <Box sx={{ backgroundColor: "#F5F7FA", display: "flex" }}>
+                  <MyRoutes />
+                </Box>
+                <Loader loader={loader} />
+                <ToastContainer
+                  position="bottom-right"
+                  autoClose={5000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="dark"
+                />
+              </signUpContex.Provider>
             </ideaContext.Provider>
           </userContext.Provider>
         </BrowserRouter>

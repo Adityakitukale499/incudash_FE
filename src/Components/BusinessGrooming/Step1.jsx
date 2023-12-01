@@ -43,11 +43,13 @@ const Step1 = () => {
   const [industry, setIndustry] = useState("");
   useEffect(() => {
     if (idea?.startupStage?.comments) {
+      // console.log(idea?.startupStage?.comments);
       setComments(idea?.startupStage?.comments);
       setStage(idea?.startupStage?.stage);
-      setIndustry(idea?.startupStage?.industry.split(","));
+      setIndustry(idea?.startupStage?.industry?.split(","));
     }
   }, [idea]);
+  
 
   useEffect(() => {
     if (user?.id && user?.username) {
@@ -72,6 +74,7 @@ const Step1 = () => {
       startupStage: {
         stage: stage,
         industry: industry.join(","),
+        comments: idea?.startupStage?.comments
       },
       stepNum: stepNum == 0 ? 1 : idea.stepNum,
     };
@@ -129,7 +132,7 @@ const Step1 = () => {
 
   return (
     <>
-      <Box sx={{ p: 0, mr: -3, mb:10 }}>
+      <Box sx={{ p: 0, mr: -3 }}>
         <Typography variant="body1" color="initial" sx={{ fontWeight: 600 }}>
           Step 1 - <span style={{ color: "#009aca" }}>Stage of a StartUp</span>
         </Typography>
@@ -206,7 +209,7 @@ const Step1 = () => {
                 Select the stage of your StartUp
               </Typography>
               <Grid container spacing={3} sx={{ mt: 0.1 }}>
-                {stages.map((e, i) => (
+                {stages?.map((e, i) => (
                   <Grid item xs={12} sm={6} md={4} key={i}>
                     <Card
                       sx={{
@@ -250,8 +253,8 @@ const Step1 = () => {
               <SelectIndustry industry={industry} setIndustry={setIndustry} />
               <NavigateBtn
                 disable={
-                  stage === idea?.startupStage.stage ||
-                  industry === idea?.startupStage.industry
+                  stage === idea?.startupStage?.stage ||
+                  industry === idea?.startupStage?.industry
                 }
                 saveFun={saveStep1}
                 saveAndNextFun={saveAndNext}

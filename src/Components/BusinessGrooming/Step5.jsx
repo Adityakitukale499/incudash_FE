@@ -144,8 +144,8 @@ const Step5 = () => {
   };
 
   const handleComments = (updatedComments) => {
-    // console.log(updatedComments);
     if (!idea?.userId) return;
+    console.log(updatedComments, 'step55555555555555555555555');
     const body = {
       pitchDeckValidation: {
         pitchDeckValidation: idea?.pitchDeckValidation?.roadMapCollection,

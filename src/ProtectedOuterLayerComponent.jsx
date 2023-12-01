@@ -11,28 +11,17 @@ function ProtectedOuterLayerComponent({ children }) {
     // console.log(localStorage.getItem('jwt'));
   }, [localStorage.getItem("jwt")]);
   // console.log(location.pathname);
+  const paths = ["/signup", "/login", "/reset-password"];
   return (
     <>
-      {location.pathname === "/signup" ||
-      location.pathname === "/login" ? null : (
-        <SideBar />
-      )}
+      {paths.includes(location.pathname) ? null : <SideBar />}
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          mt:
-            location.pathname === "/signup" || location.pathname === "/login"
-              ? 0
-              : 8,
-          ml:
-            location.pathname === "/signup" || location.pathname === "/login"
-              ? 0
-              : 0,
-          p:
-            location.pathname === "/signup" || location.pathname === "/login"
-              ? 0
-              : 4,
+          mt: paths.includes(location.pathname) ? 0 : 8,
+          ml: paths.includes(location.pathname) ? 0 : 0,
+          p: paths.includes(location.pathname) ? 0 : 4,
           height: "100vh",
           overflow: "scroll",
           display: "flex",
