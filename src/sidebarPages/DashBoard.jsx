@@ -78,7 +78,7 @@ const DashBoard = () => {
     stepNum,
     setstepNum,
   } = useContext(ideaContext);
-console.log(idea);
+// console.log(idea);
   const handleClick = () => {
     console.log("in handleclick");
     setOpen(!open);
@@ -95,7 +95,7 @@ console.log(idea);
     "Funding",
   ];
 
-  console.log(idea);
+  // console.log(idea);
 
   return (
     <>
@@ -108,7 +108,7 @@ console.log(idea);
           <Typography variant="h5" sx={{fontWeight:550}}> Founder's Gromming</Typography>
         </AccordionSummary>
         <Box sx={{ width: "100%", mb: 3 }}>
-          <Stepper activeStep={stepNum} alternativeLabel>
+          <Stepper activeStep={stepNum} alternativeLabel sx={{display:{lg:'flex',sm:'flex',xs:'none'}}}>
             {steps.map((label) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
@@ -249,7 +249,7 @@ console.log(idea);
       >
         <Link
           onClick={handleClick}
-          style={{ paddingTop: 5, marginRight: "15px" }}
+          style={{ paddingTop: 10, marginRight: "15px",zIndex:99 }}
         >
           {open ? "Hide" : "See All"}
         </Link>

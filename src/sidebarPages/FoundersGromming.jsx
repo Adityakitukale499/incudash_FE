@@ -97,7 +97,7 @@ const FoundersGromming = () => {
                 <img
                   src={e?.founderInfo?.imageRef}
                   alt="img"
-                  style={{ height: 150, margin: 15, borderRadius: "50%" }}
+                  style={{ height: 150, width:150, margin: 15, borderRadius: "50%" }}
                 />
                 <CardContent>
                   <Typography

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { baseUrl } from "../servises/constPath";
 import { passwordStrength } from "check-password-strength";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -57,7 +56,7 @@ const SignUp = () => {
     };
     setLoader(true);
     axios
-      .post(`${baseUrl}/auth/local/register`, body)
+      .post(`${import.meta.env.VITE_REACT_BASE_URL}/auth/local/register`, body)
       .then(function (response) {
         console.log("SignUp", response.data.user.id);
         setLoader(false);
@@ -67,7 +66,7 @@ const SignUp = () => {
         };
         setLoader(true);
         axios
-          .post(`${baseUrl}/ideas`, ideaBody)
+          .post(`${import.meta.env.VITE_REACT_BASE_URL}/ideas`, ideaBody)
           .then((res) => {
             console.log(res);
             setLoader(false);

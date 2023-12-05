@@ -68,7 +68,7 @@ const RequestACallback = () => {
         <Box
           sx={{ width: "88vw", display: "flex", justifyContent: "end", mt: 5 }}
         >
-          <Button variant="contained">Request a call</Button>
+          <Button variant="solid">Request a call</Button>
         </Box>
       </Box>
     </Box>

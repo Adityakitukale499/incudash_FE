@@ -1,4 +1,5 @@
-export const baseUrl = "http://localhost:1337";
+export const baseUrl = import.meta.env.VITE_REACT_BASE_URL;
+console.log(baseUrl);
 
 export const authRoute = {
     signup: '/signup',

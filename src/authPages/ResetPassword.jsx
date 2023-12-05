@@ -9,7 +9,6 @@ import { postData } from "../servises/apicofig";
 const ResetPassword = () => {
   const [error, setError] = useState("");
   const [succses, setSuccses] = useState("");
-  const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [conPass, setConPass] = useState("");
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ const ResetPassword = () => {
     e.preventDefault();
     if (!code.search.split("code=")[1]) {
       // alert("Invalide way, to reset password");
-      invalidCode()
+      invalidCode();
       return;
     }
     if (newPass != conPass) {
@@ -42,24 +41,24 @@ const ResetPassword = () => {
       .then(function (response) {
         setLoader(false);
         console.log(response);
-        // alert("Reset password succesfully!");
-        passwordReset()
+        setNewPass("");
+        setConPass("");
+        passwordReset();
       })
       .catch(function (error) {
         setLoader(false);
-        // alert("faild to reset passsword!!");
-        faildToPasswordReset()
+        faildToPasswordReset();
         console.log(error);
       });
   };
   return (
-    <Box sx={{m:8}}>
+    <Box sx={{ m: 8 }}>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h4" sx={{ fontWeight: 600, color: "#009aca" }}>
           Reset Password
         </Typography>
       </Box>
-        <hr/>
+      <hr />
       <form
         action=""
         onSubmit={handleChangePassword}

@@ -1,9 +1,10 @@
 import axios from "axios";
-import { baseUrl } from "./constPath";
+// import { baseUrl } from "./constPath";
 // import useDrivePicker from "react-google-drive-picker";
 
 // const [openPicker, authResponse] = useDrivePicker();
 // const baseUrl = "http://localhost:1337/ideas";
+const baseUrl  = import.meta.env.VITE_REACT_BASE_URL
 
 export const putData = async (path, body) => {
     const response = await axios.put(`${baseUrl}/${path}`, body, {

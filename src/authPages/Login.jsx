@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { baseUrl } from "../servises/constPath";
 import "react-toastify/dist/ReactToastify.css";
 import { ideaContext, signUpContex, userContext } from "../contextApi/context";
 import { toast } from "react-toastify";
@@ -41,7 +40,7 @@ export default function Login() {
     };
     setLoader(true);
     axios
-      .post(`${baseUrl}/auth/local`, body)
+      .post(`${import.meta.env.VITE_REACT_BASE_URL}/auth/local`, body)
       .then(function (response) {
         console.log(response.data);
         setJwt(response.data.jwt);
