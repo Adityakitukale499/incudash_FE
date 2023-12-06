@@ -130,8 +130,7 @@ const Step3 = () => {
   };
 
   const saveAndNext = () => {
-    if (update)
-    saveStep3();
+    if (update) saveStep3();
 
     navigate("/dashboard/step4");
   };
@@ -212,7 +211,7 @@ const Step3 = () => {
       });
   };
   return (
-    <Box sx={{ p: 0, mr: 0, mb:10 }}>
+    <Box sx={{ p: 0, mr: 0, mb: 10 }}>
       {/* {console.log(deleteConformModal, deleteStep)} */}
       <Conformation
         open={deleteConformModal}
@@ -348,7 +347,7 @@ const Step3 = () => {
         onClick={() => setCommentsModal(true)}
         src="/commentButton.png"
         alt="image"
-        style={{ width: "200px", position: "fixed", bottom: 0, right: 50 }}
+        style={{ width: "170px", position: "fixed", bottom: 70, right: 70 }}
       />
     </Box>
   );

@@ -167,7 +167,7 @@ const Step4 = () => {
   };
 
   return (
-    <Box sx={{ p: 0, mr: 0, mb:10 }}>
+    <Box sx={{ p: 0, mr: 0, mb: 10 }}>
       <Conformation
         open={deletefileModal}
         setOpen={setdeletefileModal}
@@ -256,7 +256,7 @@ const Step4 = () => {
         onClick={() => setCommentsModal(true)}
         src="/commentButton.png"
         alt="image"
-        style={{ width: "200px", position: "fixed", bottom: 0, right: 50 }}
+        style={{ width: "170px", position: "fixed", bottom: 70, right: 70 }}
       />
     </Box>
   );

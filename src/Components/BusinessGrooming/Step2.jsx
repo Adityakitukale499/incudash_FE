@@ -431,7 +431,7 @@ const Step2 = () => {
               currentUser={currentUser}
               setComments={handleComments}/>
        
-       <img  onClick={()=> setCommentsModal(true)} src='/commentButton.png' alt="image" style={{width:'200px', position:'fixed', bottom:0, right:50}}/>
+       <img  onClick={()=> setCommentsModal(true)} src='/commentButton.png' alt="image" style={{width:'170px', position:'fixed', bottom:70, right:70}}/>
     </Box>
   );
 };
