@@ -98,23 +98,23 @@ export default function SideBar() {
   const MenuList = [
     {
       item: "DashBoard",
-      icon: "https://incudash.com/assets/public/dashboard/images/side-1.jpg",
+      icon: "sidebar/dashboard.png",
     },
     {
       item: "Request a Callback",
-      icon: "https://incudash.com/assets/public/dashboard/images/side-4.jpg",
+      icon: "sidebar/requestACallback.png",
     },
     {
       item: "Stratup Support",
-      icon: "https://incudash.com/assets/public/dashboard/images/side-5.jpg",
+      icon: "sidebar/startupSuporter.png",
     },
     {
       item: "Founder's Gromming",
-      icon: "https://incudash.com/assets/public/dashboard/images/side-3.jpg",
+      icon: "sidebar/foundergrooming.png",
     },
     {
       item: "Connect Mentors",
-      icon: "https://incudash.com/assets/public/dashboard/images/side-4.jpg",
+      icon: "sidebar/connectsmentore.png",
     },
   ];
   const {user ,setUser} = useContext(userContext)

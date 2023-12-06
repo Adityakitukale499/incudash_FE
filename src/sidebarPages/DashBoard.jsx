@@ -18,42 +18,42 @@ import { stepRoute } from "../servises/constPath";
 const DashBoard = () => {
   const [founderGromingData, setFounderGromingData] = useState([
     {
-      img: "https://incudash.com/assets/public/dashboard/images/jicon-1.jpg",
+      img: "dashboard/step1.png",
       title: "Start'Up Stage",
       content:
         "It is important to understand what phase your Startup is currently in & which is the next phase to grow into.",
       route: "/dashboard/step1",
     },
     {
-      img: "https://incudash.com/assets/public/dashboard/images/jicon-2.jpg",
+      img: "dashboard/step2.png",
       title: "Validate Idea",
       content:
         "Validation reduces the risk, speeds up the delivery of a value-creating service in the market, and minimizes the costs.",
       route: "/dashboard/step2",
     },
     {
-      img: "https://incudash.com/assets/public/dashboard/images/jicon-3.jpg",
+      img: "dashboard/step3.png",
       title: "Product Roadmap",
       content:
         "A product roadmap is an illustration of how you get from your company’s big-picture, high-level goals to the actual actions you need to take to achieve those goals.",
       route: "/dashboard/step3",
     },
     {
-      img: "https://incudash.com/assets/public/dashboard/images/jicon-4.jpg",
+      img: "dashboard/step4.png",
       title: "Financial Valuation Validation",
       content:
         "Validation gives a simple sanity check to the modeling team by addressing oversights, providing additional insights, and verifying the performance.",
       route: "/dashboard/step4",
     },
     {
-      img: "https://incudash.com/assets/public/dashboard/images/jicon-4.jpg",
+      img: "dashboard/step5.png",
       title: "Pitch Deck Validation",
       content:
         "Expert Validation to make sure your Pitch Deck is ready to be showcased to an Investor.",
       route: "/dashboard/step5",
     },
     {
-      img: "https://incudash.com/assets/public/dashboard/images/jicon-6.jpg",
+      img: "dashboard/step6.png",
       title: "Raise Funding",
       content:
         "Let us connect your pitch to the investors best suited for you.",
@@ -167,7 +167,7 @@ const DashBoard = () => {
                 >
                   <CardActionArea sx={{ textAlign: "start" }}>
                     <img
-                      src='https://incudash.com/assets/public/dashboard/images/jicon-7.jpg'
+                      src="dashboard/step7.png"
                       alt="img"
                       style={{ height: 60, margin: 5 }}
                     />
@@ -207,7 +207,7 @@ const DashBoard = () => {
           <Card onClick={() => navigate("/stratupsupport")}>
             <CardActionArea sx={{ display: "flex", justifyContent: "left" }}>
               <img
-                src="https://incudash.com/assets/public/dashboard/images/dash.jpg"
+                src="dashboard/dashboard-startup-supporter.png"
                 alt="img"
                 style={{ height: 90, margin: 5 }}
               />
@@ -227,7 +227,7 @@ const DashBoard = () => {
           <Card onClick={() => navigate("/requestacallback")}>
             <CardActionArea sx={{ display: "flex", justifyContent: "left" }}>
               <img
-                src="https://incudash.com/assets/public/dashboard/images/talk.jpg"
+                src="dashboard/dashboard-talk-to-an-expert.png"
                 alt="img"
                 style={{ height: 90, margin: 5 }}
               />
