@@ -52,7 +52,7 @@ const ResetPassword = () => {
       });
   };
   return (
-    <Box sx={{ m: 8 }}>
+    <Box sx={{ mx: 3 }}>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h4" sx={{ fontWeight: 600, color: "#009aca" }}>
           Reset Password

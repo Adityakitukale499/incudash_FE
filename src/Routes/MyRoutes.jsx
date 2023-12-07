@@ -66,7 +66,7 @@ const MyRoutes = () => {
           <Route path={"/changepassword"} element={<ChangePassword />} />
           <Route path={"/editprofile"} element={<EditProfile />} />
           <Route path={"/reset-password"} element={<ResetPassword />} />
-          {/* <Route path={"/Admin"} element={<App />} /> */}
+          <Route path={"/admin"} element={<App />} />
           <Route
             path="/admin/usersinformation"
             element={<UsersInformation />}

@@ -7,11 +7,6 @@ import AdminSideBar from "./Admin/src/AdminSidebar";
 function ProtectedOuterLayerComponent({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!localStorage.getItem("jwt")) navigate("/login");
-    // console.log(localStorage.getItem('jwt'));
-  }, [localStorage.getItem("jwt")]);
-  // console.log(location.pathname);
   const authPath = ["/signup",
   "/login", "/reset-password",]
   const paths = [   
@@ -22,9 +17,15 @@ function ProtectedOuterLayerComponent({ children }) {
     "/admin/founder'sgrooming",
     "/admin/mentorgrooming",
   ];
+  useEffect(() => {
+    if (!localStorage.getItem("jwt") && !authPath.includes(location.pathname)) navigate("/login");
+    // console.log(localStorage.getItem('jwt'));
+  }, [localStorage.getItem("jwt")]);
+  // console.log(location.pathname);
+  
   return (
     <>
-      {paths.includes(location.pathname) ? authPath.includes(location.pathname)? null:<AdminSideBar/> :<SideBar/>}
+      {paths.includes(location.pathname) ? <AdminSideBar/>: authPath.includes(location.pathname)?null :<SideBar/>}
       <Box
         component="main"
         sx={{
