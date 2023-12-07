@@ -7,7 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { loaderContext } from "../ContextApi/context";
+// import { loaderContext } from "../ContextApi/context";
 import { Box, Button, Typography } from "@mui/material";
 
 import TableFooter from "@mui/material/TableFooter";
@@ -105,7 +105,7 @@ const UsersInformation = () => {
   const [users, setUsers] = useState([]);
   const [finalUsersList, setFinalUsersList] = useState([]);
   const [search, setSearch] = useState("");
-  const { loader, setLoader } = useContext(loaderContext);
+  // const { loader, setLoader } = useContext(loaderContext);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [selectedUser, setSelectedUser] = useState({});
@@ -182,13 +182,13 @@ const UsersInformation = () => {
   };
 
   useEffect(() => {
-    setLoader(true);
+    // setLoader(true);
     getData("users")
       .then((res) => {
         // console.log(res.data);
         setUsers(res.data);
         setFinalUsersList(res.data);
-        setLoader(false);
+        // setLoader(false);
       })
       .catch((e) => console.log(e));
   }, []);
@@ -203,7 +203,14 @@ const UsersInformation = () => {
   ];
 
   return (
-    <div>
+    <Box sx={{
+      flexGrow: 1,
+      mt: 8,         
+      p: 4,
+      minHeight: "100vh",
+      display: "flex",
+      flexDirection: "column",
+    }}>
       <Confirmation
         open={conModal}
         setOpen={setConModal}
@@ -327,7 +334,7 @@ const UsersInformation = () => {
           </TableFooter>
         </Table>
       </TableContainer>
-    </div>
+    </Box>
   );
 };
 

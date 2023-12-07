@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import React, { useEffect } from "react";
 import SideBar from "./SideBar";
 import { useLocation, useNavigate } from "react-router-dom";
+import AdminSideBar from "./Admin/src/AdminSidebar";
 
 function ProtectedOuterLayerComponent({ children }) {
   const location = useLocation();
@@ -11,10 +12,19 @@ function ProtectedOuterLayerComponent({ children }) {
     // console.log(localStorage.getItem('jwt'));
   }, [localStorage.getItem("jwt")]);
   // console.log(location.pathname);
-  const paths = ["/signup", "/login", "/reset-password",'/admin/mentorgrooming'];
+  const authPath = ["/signup",
+  "/login", "/reset-password",]
+  const paths = [   
+    "/admin",
+    "/admin/mentorgrooming",
+    "/admin/usersinformation",
+    "/admin/idea",
+    "/admin/founder'sgrooming",
+    "/admin/mentorgrooming",
+  ];
   return (
     <>
-      {paths.includes(location.pathname) ? null : <SideBar />}
+      {paths.includes(location.pathname) ? authPath.includes(location.pathname)? null:<AdminSideBar/> :<SideBar/>}
       <Box
         component="main"
         sx={{

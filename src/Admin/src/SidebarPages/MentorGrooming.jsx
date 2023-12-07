@@ -16,7 +16,7 @@ import CreateMentorModal from "../Components/Modals/CreateMentorModal";
 import AddIcon from "@mui/icons-material/Add";
 import { Fab } from "@mui/material";
 import { Tooltip } from "@mui/material";
-import { loaderContext } from "../ContextApi/context";
+// import { loaderContext } from "../ContextApi/context";
 
 const MentorGrooming = () => {
     const [mentors, setMentors] = useState([]);
@@ -169,7 +169,14 @@ const MentorGrooming = () => {
 
     return (
         <>
-            <Box>
+            <Box sx={{
+          flexGrow: 1,
+          mt: 8,         
+          p: 4,
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+        }}>
                 <Typography variant="h5" color="#009cff" sx={{ fontWeight: 600, mb: 2 }}>
                     Mentors
                 </Typography>

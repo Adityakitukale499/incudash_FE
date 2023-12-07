@@ -10,7 +10,7 @@ import {
     Typography,
 } from "@mui/material";
 import { useEffect } from "react";
-import { loaderContext } from "../ContextApi/context";
+// import { loaderContext } from "../ContextApi/context";
 import { getData, putData, postData } from "../Services/api";
 import ToggleButton from "../Components/Modals/ToggleButton";
 import UpdateFounderModal from "../Components/Modals/UpdateFounderModal";
@@ -22,7 +22,7 @@ import { Tooltip } from "@mui/material";
 const FoundersGrooming = () => {
     const [founders, setFounders] = React.useState([]);
     const [testFounders , setTestFounders] = React.useState([]);
-    const { loader, setLoader } = React.useContext(loaderContext);
+    // const { loader, setLoader } = React.useContext(loaderContext);
     const [updateModalOpen, setUpdateModalOpen] = React.useState(false);
     const [createModalOpen, setCreateModalOpen] = React.useState(false);
     const [founderName, setFounderName] = React.useState("");
@@ -34,19 +34,19 @@ const FoundersGrooming = () => {
     const userID = React.useRef(null);
 
     useEffect(() => {
-        setLoader(true);
+        // setLoader(true);
         getData('founder-groomings')
             .then((response) => {
                 console.log(response.data);
                 setFounders(response.data);
-                setLoader(false);
+                // setLoader(false);
             })
             .catch((error) => {
                 console.log(error);
-                setLoader(false);
+                // setLoader(false);
             });
 
-    }, [setLoader]);
+    }, []);
 
     useEffect(()=>{
         !updateModalOpen ? 
@@ -188,7 +188,14 @@ const FoundersGrooming = () => {
 
     return (
         <>
-            <Box>
+            <Box sx={{
+          flexGrow: 1,
+          mt: 8,         
+          p: 4,
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+        }}>
                 <Typography variant="h5" color="#009cff" sx={{ fontWeight: 600, mb: 2 }}>
                     Founders
                 </Typography>

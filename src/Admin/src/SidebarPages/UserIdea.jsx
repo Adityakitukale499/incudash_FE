@@ -9,7 +9,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { loaderContext } from "../ContextApi/context";
+// import { loaderContext } from "../ContextApi/context";
 import { getData } from "../Services/api";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
@@ -112,7 +112,7 @@ const GetStep = ({ id }) => {
 const UserIdea = () => {
   const [users, setUsers] = useState([]);
   const [finalUsersList, setFinalUsersList] = useState([]);
-  const { loader, setLoader } = useContext(loaderContext);
+  // const { loader, setLoader } = useContext(loaderContext);
   const [search, setSearch] = useState("");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -144,17 +144,17 @@ const UserIdea = () => {
     setFinalUsersList(filterData);
   };
   useEffect(() => {
-    setLoader(true);
+    // setLoader(true);
     const fetchUsers = async () => {
       try {
         const response = await axios.get("http://localhost:1337/users");
         setUsers(response.data);
         setFinalUsersList(response.data);
         console.log(response.data);
-        setLoader(false);
+        // setLoader(false);
       } catch (error) {
         console.error("Error fetching user data:", error);
-        setLoader(false);
+        // setLoader(false);
       }
     };
     fetchUsers();
@@ -170,7 +170,14 @@ const UserIdea = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <Box sx={{
+      flexGrow: 1,
+      mt: 8,         
+      p: 4,
+      minHeight: "100vh",
+      display: "flex",
+      flexDirection: "column",
+    }}>
       <Typography variant="h4" pb={1}>
         Users Idea
       </Typography>
@@ -254,7 +261,7 @@ const UserIdea = () => {
           </TableFooter>
         </Table>
       </TableContainer>
-    </div>
+    </Box>
   );
 };
 

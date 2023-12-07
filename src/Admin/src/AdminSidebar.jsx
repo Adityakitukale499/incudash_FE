@@ -16,12 +16,12 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { Outlet, Link, useNavigate, NavLink, } from "react-router-dom";
+import { Outlet, Link, useNavigate, NavLink } from "react-router-dom";
 import { Button, CardMedia } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import GroupIcon from '@mui/icons-material/Group';
-import ModelTrainingIcon from '@mui/icons-material/ModelTraining';
+import GroupIcon from "@mui/icons-material/Group";
+import ModelTrainingIcon from "@mui/icons-material/ModelTraining";
 // import Profile from "./Components/Profile";
 // import { userContext } from "./contextApi/context";
 
@@ -92,41 +92,40 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-
-export default function SideBar() {
+export default function AdminSideBar() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [selectMenuItem, setSelectMenuItem] = useState('')
+  const [selectMenuItem, setSelectMenuItem] = useState("");
   const navigate = useNavigate();
   const MenuList = [
     {
       item: "Users Information",
-      icon: <GroupIcon/>,
+      icon: <GroupIcon />,
     },
     {
       item: "Idea",
-      icon: <ModelTrainingIcon/>,
+      icon: <ModelTrainingIcon />,
     },
     // {
     //   item: "Stratup Support",
     //   icon: <GroupIcon/>,
     // },
-     {
+    {
       item: "Founder's Grooming",
-      icon: <GroupIcon/>,
+      icon: <GroupIcon />,
     },
     {
       item: "Mentor Grooming",
-      icon: <GroupIcon/>,
+      icon: <GroupIcon />,
     },
   ];
-//   const {user ,setUser} = useContext(userContext)
+  //   const {user ,setUser} = useContext(userContext)
 
-//   const handleLogout = () => {
-//     localStorage.setItem("jwt", "");
-//     localStorage.setItem("id", "");
-//     navigate("/login");
-//   };
+  //   const handleLogout = () => {
+  //     localStorage.setItem("jwt", "");
+  //     localStorage.setItem("id", "");
+  //     navigate("/login");
+  //   };
 
   return (
     <>
@@ -181,10 +180,10 @@ export default function SideBar() {
               key={i}
               disablePadding
               sx={{ display: "block" }}
-              onClick={() => navigate(e.item.split(" ").join("").toLowerCase())}
+              onClick={() => navigate(`admin/${e.item.split(" ").join("").toLowerCase()}`)}
             >
               <ListItemButton
-               onClick={()=> setSelectMenuItem(e.item)}
+                onClick={() => setSelectMenuItem(e.item)}
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
@@ -196,11 +195,11 @@ export default function SideBar() {
                     minWidth: 0,
                     mr: open ? 3 : "auto",
                     justifyContent: "center",
-                    color: selectMenuItem === e.item?'#0dcaf0':''
+                    color: selectMenuItem === e.item ? "#0dcaf0" : "",
                   }}
                 >
-                 <NavLink
-                    to={e.item.split(" ").join("").toLowerCase()}
+                  <NavLink
+                    to={`admin/${e.item.split(" ").join("").toLowerCase()}`}
                     style={({ isActive }) => ({
                       color: isActive ? "#0dcaf0" : "black",
                       textDecoration: "none",
