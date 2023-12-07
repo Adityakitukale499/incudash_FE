@@ -203,14 +203,7 @@ const UsersInformation = () => {
   ];
 
   return (
-    <Box sx={{
-      flexGrow: 1,
-      mt: 8,         
-      p: 4,
-      minHeight: "100vh",
-      display: "flex",
-      flexDirection: "column",
-    }}>
+    <Box >
       <Confirmation
         open={conModal}
         setOpen={setConModal}

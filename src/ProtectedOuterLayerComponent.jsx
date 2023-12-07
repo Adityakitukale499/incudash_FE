@@ -30,9 +30,9 @@ function ProtectedOuterLayerComponent({ children }) {
         component="main"
         sx={{
           flexGrow: 1,
-          mt: paths.includes(location.pathname) ? 0 : 8,
-          ml: paths.includes(location.pathname) ? 0 : 0,
-          p: paths.includes(location.pathname) ? 0 : 4,
+          mt: authPath.includes(location.pathname) ? 0 : 8,
+          ml: authPath.includes(location.pathname) ? 0 : 0,
+          p: authPath.includes(location.pathname) ? 0 : 4,
           height: "100vh",
           overflow: "scroll",
           display: "flex",

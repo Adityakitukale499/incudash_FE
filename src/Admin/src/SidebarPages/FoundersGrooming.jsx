@@ -191,14 +191,7 @@ const FoundersGrooming = () => {
 
     return (
         <>
-            <Box sx={{
-          flexGrow: 1,
-          mt: 8,         
-          p: 4,
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-        }}>
+            <Box >
                 <Typography variant="h5" color="#009cff" sx={{ fontWeight: 600, mb: 2 }}>
                     Founders
                 </Typography>

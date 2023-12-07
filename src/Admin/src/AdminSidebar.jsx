@@ -180,7 +180,7 @@ export default function AdminSideBar() {
               key={i}
               disablePadding
               sx={{ display: "block" }}
-              // onClick={() => navigate(`${e.item.split(" ").join("").toLowerCase()}`)}
+              onClick={() => navigate(`admin/${e.item.split(" ").join("").toLowerCase()}`)}
             >
               <ListItemButton
                 onClick={() => setSelectMenuItem(e.item)}
@@ -198,8 +198,10 @@ export default function AdminSideBar() {
                     color: selectMenuItem === e.item ? "#0dcaf0" : "",
                   }}
                 >
-                  <NavLink
-                    to={`admin/${e.item.split(" ").join("").toLowerCase()}`}
+                {e.icon}
+
+                  {/* <NavLink
+                    // to={`admin/${e.item.split(" ").join("").toLowerCase()}`}
                     style={({ isActive }) => ({
                       color: isActive ? "#0dcaf0" : "black",
                       textDecoration: "none",
@@ -210,9 +212,8 @@ export default function AdminSideBar() {
                     })}
                     onClick={() => scrollTop()}
                   >
-                    {e.icon}
                     <br />
-                  </NavLink>
+                  </NavLink> */}
                 </ListItemIcon>
                 <ListItemText primary={e.item} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>

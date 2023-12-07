@@ -71,6 +71,10 @@ const MyRoutes = () => {
             path="/admin/usersinformation"
             element={<UsersInformation />}
           />
+          <Route
+            path="/admin"
+            element={<UsersInformation />}
+          />
           <Route path="/admin/idea" element={<UserIdea />} />
           <Route path="/admin/idea/:userId" element={<ViewIdea />} />
           <Route path="/admin/reset-password" element={<ResetPassword />} />

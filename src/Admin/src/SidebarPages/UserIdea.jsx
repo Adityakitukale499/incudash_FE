@@ -170,14 +170,7 @@ const UserIdea = () => {
   const navigate = useNavigate();
 
   return (
-    <Box sx={{
-      flexGrow: 1,
-      mt: 8,         
-      p: 4,
-      minHeight: "100vh",
-      display: "flex",
-      flexDirection: "column",
-    }}>
+    <Box >
       <Typography variant="h4" pb={1}>
         Users Idea
       </Typography>
