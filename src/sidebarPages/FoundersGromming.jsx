@@ -11,6 +11,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { getData, postData } from "../servises/apicofig";
 import { ideaContext, userContext } from "../contextApi/context";
+import axios from "axios";
 const FoundersGromming = () => {
   const [selectDate, setSelectDate] = useState(new Date());
   const [founders, setFounders] = useState([]);
@@ -18,16 +19,25 @@ const FoundersGromming = () => {
   const { user, setUser } = useContext(userContext);
   useEffect(() => {
     setLoader(true);
-    getData("founder-groomings")
-      .then((response) => {
-        console.log(response.data);
-        setFounders(response.data);
-        setLoader(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoader(false);
-      });
+    // getData("founder-groomings")
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     setFounders(response.data);
+    //     setLoader(false);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     setLoader(false);
+    //   });
+    axios.get(`${import.meta.env.VITE_REACT_BASE_URL}/founder-groomings`).then((response) => {
+      console.log(response.data);
+      setFounders(response.data);
+      setLoader(false);
+  })
+  .catch((error) => {
+      console.log(error);
+      setLoader(false);
+  });
   }, []);
 
   const changeSelectData = (e) => {
