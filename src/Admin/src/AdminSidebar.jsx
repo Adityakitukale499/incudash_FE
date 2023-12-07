@@ -180,7 +180,7 @@ export default function AdminSideBar() {
               key={i}
               disablePadding
               sx={{ display: "block" }}
-              onClick={() => navigate(`admin/${e.item.split(" ").join("").toLowerCase()}`)}
+              // onClick={() => navigate(`${e.item.split(" ").join("").toLowerCase()}`)}
             >
               <ListItemButton
                 onClick={() => setSelectMenuItem(e.item)}
