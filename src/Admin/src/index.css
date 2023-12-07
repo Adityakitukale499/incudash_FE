@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.heading {
+  text-align: center;
+  font-size: 2rem;
+}
+.flex-row{
+position:relative;
+}
+
+.toggle {
+  position : absolute;
+  top: 1rem;
+  margin-left:55%;
+  margin-right: 0;
+}
+
+.close {
+  margin-top: -3.5rem;
+}
+
+.update-btn {
+  margin-left : 12rem;
+}

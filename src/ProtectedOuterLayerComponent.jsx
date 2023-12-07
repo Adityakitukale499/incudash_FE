@@ -11,7 +11,7 @@ function ProtectedOuterLayerComponent({ children }) {
     // console.log(localStorage.getItem('jwt'));
   }, [localStorage.getItem("jwt")]);
   // console.log(location.pathname);
-  const paths = ["/signup", "/login", "/reset-password"];
+  const paths = ["/signup", "/login", "/reset-password",'/admin/mentorgrooming'];
   return (
     <>
       {paths.includes(location.pathname) ? null : <SideBar />}

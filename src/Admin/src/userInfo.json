@@ -1,0 +1,542 @@
+
+{
+    "_id": "652f8bff127bd15a1883f5fd",
+    "userId": "6538bf44364de47c88601169",
+    "step": "abhi start kiya he hsgud7tfresrf",
+    "published_at": "2023-10-18T07:40:59.212Z",
+    "startupStage": {
+        "_id": "654353438a72a50cacd5bd9a",
+        "stage": "seed",
+        "industry": "April Tucker,Ralph Hubbard",
+        "comments": [],
+        "__v": 0,
+        "id": "654353438a72a50cacd5bd9a"
+    },
+    "validateIdea": {
+        "_id": "65436264090afa55906c6c96",
+        "ideaText": "um dolor sit amet consectetur adipisicing elit. Labore ipsam expedita dolorem rerum optio repellendus. Quidem, dolor sed! Eius quis rerum id nihil earum soluta.gmergmrke Reiciendis animi hic eaque quibusdam!\nSeed Stage/Early Stage\nLorem ipsum dolor sit amet consectetur adipisicing elit. fvbLabore ipsam expedita dolorem rerum optio repelledew,foewkfodewdewdndus. Quidem, dolor sed! Eius quis rerum id nihil earuvfdlvdflgfhm soluta. Reiciendis animi hic eaque quibusdam!dc\nGrowth Stage/Series fercvofkoerfkoSfrlflerftagededde\nLorem ipsum dolor sit amet consectetur adipisicing elit. Labore ipsam expedita dolorefelf,lew,fmfd rerum oprtio repellendus. Quidem, dolor sed! Eius quis rerum id nihil earum soluta. Rciendis animi hic eaque quibusdam!hhdfdbnjvbbheffhgijyhlflefewfk",
+        "refrenceLinkArray": [
+            {
+                "_id": "652fab93127bd15a1883f679",
+                "refrerenceLink": "www.google.com",
+                "__v": 0,
+                "id": "652fab93127bd15a1883f679"
+            },
+            {
+                "_id": "652fab93127bd15a1883f67a",
+                "refrerenceLink": "www.google.com",
+                "__v": 0,
+                "id": "652fab93127bd15a1883f67a"
+            },
+            {
+                "_id": "65363ae3d2131129e48fadf9",
+                "refrerenceLink": "www.google.com",
+                "__v": 0,
+                "id": "65363ae3d2131129e48fadf9"
+            },
+            {
+                "_id": "6539053b364de47c8860117c",
+                "refrerenceLink": "www.incudash.com",
+                "__v": 0,
+                "id": "6539053b364de47c8860117c"
+            },
+            {
+                "_id": "65435c408a72a50cacd5bdf5",
+                "refrerenceLink": "fmekmf",
+                "__v": 0,
+                "id": "65435c408a72a50cacd5bdf5"
+            }
+        ],
+        "attachments": [
+            {
+                "_id": "65373c84ac879d7974699dc8",
+                "type": "image/jpeg",
+                "url": "AdityakitukalePhoto2.jpg",
+                "__v": 0,
+                "id": "65373c84ac879d7974699dc8"
+            },
+            {
+                "_id": "65373c84ac879d7974699dc9",
+                "type": "image/png",
+                "url": "Screenshot 2023-09-01 153726.png",
+                "__v": 0,
+                "id": "65373c84ac879d7974699dc9"
+            },
+            {
+                "_id": "6539053b364de47c88601183",
+                "type": "image/png",
+                "url": "Screenshot 2023-09-01 163228.png",
+                "__v": 0,
+                "id": "6539053b364de47c88601183"
+            }
+        ],
+        "comments": [
+            {
+                "_id": "652fa5c2127bd15a1883f672",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "652fa5c2127bd15a1883f672"
+            },
+            {
+                "_id": "652fbd43127bd15a1883f6c3",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "652fbd43127bd15a1883f6c3"
+            },
+            {
+                "_id": "65301cdd127bd15a1883f6e6",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65301cdd127bd15a1883f6e6"
+            },
+            {
+                "_id": "6531035477e94ba30477c62b",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "6531035477e94ba30477c62b"
+            },
+            {
+                "_id": "65310c0a77e94ba30477c66a",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65310c0a77e94ba30477c66a"
+            },
+            {
+                "_id": "65324007df6cc71510dd7e71",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65324007df6cc71510dd7e71"
+            },
+            {
+                "_id": "65337465c70ead56503eb63e",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65337465c70ead56503eb63e"
+            },
+            {
+                "_id": "65363160d2131129e48fadce",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65363160d2131129e48fadce"
+            },
+            {
+                "_id": "65363ae3d2131129e48fae06",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65363ae3d2131129e48fae06"
+            },
+            {
+                "_id": "65366aabac879d7974699d97",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65366aabac879d7974699d97"
+            },
+            {
+                "_id": "65373c84ac879d7974699dd6",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65373c84ac879d7974699dd6"
+            },
+            {
+                "_id": "6537757dac879d7974699dfd",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "6537757dac879d7974699dfd"
+            },
+            {
+                "_id": "653775fbac879d7974699e26",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "653775fbac879d7974699e26"
+            },
+            {
+                "_id": "6539053c364de47c88601194",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "6539053c364de47c88601194"
+            },
+            {
+                "_id": "65390d1d364de47c886011f4",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65390d1d364de47c886011f4"
+            },
+            {
+                "_id": "653a3cc0364de47c88601262",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "653a3cc0364de47c88601262"
+            },
+            {
+                "_id": "653a4b79364de47c88601295",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "653a4b79364de47c88601295"
+            },
+            {
+                "_id": "65429c7a8a72a50cacd5b8ba",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65429c7a8a72a50cacd5b8ba"
+            },
+            {
+                "_id": "6542a0498a72a50cacd5b905",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "6542a0498a72a50cacd5b905"
+            },
+            {
+                "_id": "6542a06f8a72a50cacd5b93c",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "6542a06f8a72a50cacd5b93c"
+            },
+            {
+                "_id": "6542a1e68a72a50cacd5b975",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "6542a1e68a72a50cacd5b975"
+            },
+            {
+                "_id": "6542a2058a72a50cacd5b9b0",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "6542a2058a72a50cacd5b9b0"
+            },
+            {
+                "_id": "6542a3408a72a50cacd5b9ed",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "6542a3408a72a50cacd5b9ed"
+            },
+            {
+                "_id": "6542a3668a72a50cacd5ba2c",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "6542a3668a72a50cacd5ba2c"
+            },
+            {
+                "_id": "65431cc88a72a50cacd5ba95",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65431cc88a72a50cacd5ba95"
+            },
+            {
+                "_id": "65431d338a72a50cacd5bad8",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65431d338a72a50cacd5bad8"
+            },
+            {
+                "_id": "65431d678a72a50cacd5bb1d",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65431d678a72a50cacd5bb1d"
+            },
+            {
+                "_id": "65431fcb8a72a50cacd5bb64",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65431fcb8a72a50cacd5bb64"
+            },
+            {
+                "_id": "654320d48a72a50cacd5bbad",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "654320d48a72a50cacd5bbad"
+            },
+            {
+                "_id": "654341e98a72a50cacd5bbf8",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "654341e98a72a50cacd5bbf8"
+            },
+            {
+                "_id": "6543422e8a72a50cacd5bc45",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "6543422e8a72a50cacd5bc45"
+            },
+            {
+                "_id": "654342a78a72a50cacd5bc94",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "654342a78a72a50cacd5bc94"
+            },
+            {
+                "_id": "654343588a72a50cacd5bcf5",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "654343588a72a50cacd5bcf5"
+            },
+            {
+                "_id": "65435b858a72a50cacd5bdcc",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65435b858a72a50cacd5bdcc"
+            },
+            {
+                "_id": "65435c418a72a50cacd5be23",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65435c418a72a50cacd5be23"
+            },
+            {
+                "_id": "65435d068a72a50cacd5be7c",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65435d068a72a50cacd5be7c"
+            },
+            {
+                "_id": "65435d718a72a50cacd5bed7",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65435d718a72a50cacd5bed7"
+            },
+            {
+                "_id": "65435eb08a72a50cacd5bf34",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65435eb08a72a50cacd5bf34"
+            },
+            {
+                "_id": "65435f208a72a50cacd5bf93",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65435f208a72a50cacd5bf93"
+            },
+            {
+                "_id": "65435fbb8a72a50cacd5bff4",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65435fbb8a72a50cacd5bff4"
+            },
+            {
+                "_id": "6543602f8a72a50cacd5c057",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "6543602f8a72a50cacd5c057"
+            },
+            {
+                "_id": "6543609b8a72a50cacd5c0bc",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "6543609b8a72a50cacd5c0bc"
+            },
+            {
+                "_id": "654360fa8a72a50cacd5c123",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "654360fa8a72a50cacd5c123"
+            },
+            {
+                "_id": "65436264090afa55906c6cd2",
+                "createAt": "12-12-2012",
+                "commentText": "comment by aditya kitukale",
+                "createdBy": "aditya kitukale",
+                "__v": 0,
+                "id": "65436264090afa55906c6cd2"
+            }
+        ],
+        "__v": 3,
+        "id": "65436264090afa55906c6c96"
+    },
+    "productRoadmap": {
+        "_id": "655b1aaec046bb7d2ce47e52",
+        "roadMapCollection": [
+            {
+                "_id": "6543510f8a72a50cacd5bd8a",
+                "roadmapTitle": "hbrkguerhkgetjbsfhbrhg",
+                "description": "jbrhbghghdbvhg",
+                "timestampFrom": "2023-09-01T07:32:31.000Z",
+                "__v": 0,
+                "id": "6543510f8a72a50cacd5bd8a"
+            },
+            {
+                "_id": "6540d7f760e9eb7314158836",
+                "roadmapTitle": "bkrjgkjetn",
+                "description": "mmkringilerig",
+                "timestampFrom": "2023-10-01T10:28:36.000Z",
+                "timestampTo": "2023-10-31T10:28:36.575Z",
+                "__v": 0,
+                "id": "6540d7f760e9eb7314158836"
+            },
+            {
+                "_id": "6540d8f060e9eb731415883f",
+                "roadmapTitle": "hjbgt",
+                "description": "ethg",
+                "timestampFrom": "2023-10-06T10:33:32.000Z",
+                "timestampTo": "2023-10-31T10:33:32.449Z",
+                "__v": 0,
+                "id": "6540d8f060e9eb731415883f"
+            },
+            {
+                "_id": "6540d7f760e9eb7314158834",
+                "roadmapTitle": "jkrngubrj",
+                "description": "hnuingfiwrmogwoo",
+                "timestampFrom": "2023-10-24T10:28:36.000Z",
+                "timestampTo": "2023-10-31T10:28:36.575Z",
+                "__v": 0,
+                "id": "6540d7f760e9eb7314158834"
+            }
+        ],
+        "comments": [],
+        "__v": 1,
+        "id": "655b1aaec046bb7d2ce47e52"
+    },
+    "financialValuation": {
+        "_id": "65366cc3ac879d7974699db9",
+        "documentCollection": [],
+        "comments": [],
+        "__v": 0,
+        "id": "65366cc3ac879d7974699db9"
+    },
+    "pitchDeckValidation": {
+        "_id": "653906af364de47c886011b0",
+        "documentCollection": [
+            {
+                "_id": "65362691d2131129e48fada4",
+                "documentId": "background img.jpeg",
+                "url": "https://docs.google.com/uc?export=download&id=1lT2UactuINhKlnTRoLSfivFaS20PD8NX&revid=0B-ffv4c4HQXXVjlPK2dDVEdxZVgwOVM0eGFoQUQrV0xiaWZZPQ",
+                "__v": 0,
+                "id": "65362691d2131129e48fada4"
+            }
+        ],
+        "comments": [],
+        "__v": 1,
+        "id": "653906af364de47c886011b0"
+    },
+    "raiseFunding": {
+        "_id": "652f8c05127bd15a1883f61c",
+        "fundingFormattedText": "ffyjrdyt",
+        "created_at": "test",
+        "updated_at": "test",
+        "createdBy": "test",
+        "lastUpdatedBy": "test",
+        "__v": 0,
+        "id": "652f8c05127bd15a1883f61c"
+    },
+    "createdAt": "2023-10-18T07:40:47.897Z",
+    "updatedAt": "2023-11-20T08:37:27.768Z",
+    "__v": 260,
+    "created_by": {
+        "isActive": true,
+        "blocked": false,
+        "roles": [
+            "651fc846b6f3385e84d4eea7"
+        ],
+        "_id": "651fc9939a488c6d0cb5fef2",
+        "username": null,
+        "registrationToken": null,
+        "email": "paras.seth.projects@gmail.com",
+        "firstname": "Paras",
+        "lastname": "seth",
+        "password": "$2a$10$Ha1Rq7P9HPMnivJcE41Cp.rSVvDjhAanOV.sK/6Hs4X7uCyUUuNUy",
+        "__v": 0,
+        "id": "651fc9939a488c6d0cb5fef2"
+    },
+    "updated_by": {
+        "isActive": true,
+        "blocked": false,
+        "roles": [
+            "651fc846b6f3385e84d4eea7"
+        ],
+        "_id": "651fc9939a488c6d0cb5fef2",
+        "username": null,
+        "registrationToken": null,
+        "email": "paras.seth.projects@gmail.com",
+        "firstname": "Paras",
+        "lastname": "seth",
+        "password": "$2a$10$Ha1Rq7P9HPMnivJcE41Cp.rSVvDjhAanOV.sK/6Hs4X7uCyUUuNUy",
+        "__v": 0,
+        "id": "651fc9939a488c6d0cb5fef2"
+    },
+    "stepNum": 5,
+    "id": "652f8bff127bd15a1883f5fd"
+}
