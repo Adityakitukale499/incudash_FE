@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useState, useContext } from "react";
-import { getData, postData, putData } from "../Services/api";
+import { getData, postData, putData } from "../../../servises/apicofig";
 import ToggleButton from "../Components/Modals/ToggleButton";
 import UpdateMentorModal from "../Components/Modals/UpdateMentorModal";
 import CreateMentorModal from "../Components/Modals/CreateMentorModal";

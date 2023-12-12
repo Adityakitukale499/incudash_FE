@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useEffect } from "react";
 // import { loaderContext } from "../ContextApi/context";
-import { getData, putData, postData } from "../Services/api";
+import { getData, putData, postData } from "../../../servises/apicofig";
 import ToggleButton from "../Components/Modals/ToggleButton";
 import UpdateFounderModal from "../Components/Modals/UpdateFounderModal";
 import CreateFounderModal from "../Components/Modals/CreateFounderModal";
