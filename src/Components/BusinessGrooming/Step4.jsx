@@ -137,8 +137,8 @@ const Step4 = () => {
     await axios
       .post("http://localhost:1337/generate-urls/generate-upload-url", Body)
       .then(async(res) => {
-        // console.log(res.data.url);
-        // console.log(file.type);
+        console.log(res.data.url);
+        console.log(file.type);
         await axios
           .put(res?.data?.url, {file}, {
             headers: {
