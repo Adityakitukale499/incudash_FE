@@ -12,10 +12,14 @@ function ProtectedOuterLayerComponent({ children }) {
   const paths = [   
     "/admin",
     "/admin/mentorgrooming",
+    "/admin/admin/mentorgrooming",
     "/admin/usersinformation",
+    "/admin/admin/usersinformation",
     "/admin/idea",
+    "/admin/admin/idea",
     "/admin/founder'sgrooming",
-    "/admin/mentorgrooming",
+    "/admin/admin/founder'sgrooming",
+    // "/admin/idea/:userId"
   ];
   useEffect(() => {
     if (!localStorage.getItem("jwt") && !authPath.includes(location.pathname)) navigate("/login");

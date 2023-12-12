@@ -67,22 +67,20 @@ const MyRoutes = () => {
           <Route path={"/editprofile"} element={<EditProfile />} />
           <Route path={"/reset-password"} element={<ResetPassword />} />
           <Route path={"/admin"} element={<App />} />
-          <Route
-            path="/admin/usersinformation"
-            element={<UsersInformation />}
-          />
+          <Route path="/admin/usersinformation" element={<UsersInformation />}/>
+          <Route path="/admin/admin/usersinformation" element={<UsersInformation />}/>
           <Route
             path="/admin"
             element={<UsersInformation />}
           />
           <Route path="/admin/idea" element={<UserIdea />} />
+          <Route path="/admin/admin/idea" element={<UserIdea />} />
           <Route path="/admin/idea/:userId" element={<ViewIdea />} />
           <Route path="/admin/reset-password" element={<ResetPassword />} />
-          <Route
-            path="/admin/founder'sgrooming"
-            element={<FoundersGrooming />}
-          />
+          <Route path="/admin/founder'sgrooming" element={<FoundersGrooming />}/>
+          <Route path="/admin/admin/founder'sgrooming" element={<FoundersGrooming />}/>
           <Route path="/admin/mentorgrooming" element={<MentorGrooming />} />
+          <Route path="/admin/admin/mentorgrooming" element={<MentorGrooming />} />
         </Routes>
       </ProtectedOuterLayerComponent>
     </>

@@ -21,6 +21,7 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 import dayjs from "dayjs";
+import ViewIdea from "../Components/Pages/ViewIdea";
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -111,6 +112,7 @@ const GetStep = ({ id }) => {
 
 const UserIdea = () => {
   const [users, setUsers] = useState([]);
+  const [userId, setUserId] = useState();
   const [finalUsersList, setFinalUsersList] = useState([]);
   // const { loader, setLoader } = useContext(loaderContext);
   const [search, setSearch] = useState("");
@@ -118,7 +120,9 @@ const UserIdea = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - finalUsersList.length) : 0;
+    page > 0
+      ? Math.max(0, (1 + page) * rowsPerPage - finalUsersList.length)
+      : 0;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -136,10 +140,10 @@ const UserIdea = () => {
     }
     const filterData = users.filter(
       (e) =>
-        e.name.firstName.includes(search) ||
-        e.name.lastName.includes(search) ||
-        e.email.includes(search) ||
-        e.phoneNumber.includes(search)
+        e?.name?.firstName?.includes(search) ||
+        e?.name?.lastName?.includes(search) ||
+        e?.email?.includes(search) ||
+        e?.phoneNumber?.includes(search)
     );
     setFinalUsersList(filterData);
   };
@@ -170,90 +174,107 @@ const UserIdea = () => {
   const navigate = useNavigate();
 
   return (
-    <Box >
-      <Typography variant="h4" pb={1}>
-        Users Idea
-      </Typography>
-      <hr />
-      <Box sx={{ display: "flex", justifyContent: "end", gap: 1, py: 2 }}>
-        <input
-          type="text"
-          placeholder="search here..."
-          style={{ outline: "none", padding: "5px" }}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <Button variant="contained" onClick={searchUser}>
-          search
-        </Button>
-      </Box>
-      <TableContainer component={Paper}>
-        <Table
-          sx={{ minWidth: 650, marginTop: "1rem" }}
-          aria-label="simple table"
-        >
-          <TableHead>
-            <TableRow>
-            {userTableHeadings.map(item => (
-                <TableCell align="center" key={item}>{item}</TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-          {(rowsPerPage > 0
-            ? finalUsersList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : finalUsersList
-          ).map((item , index) => (
-              <TableRow
-                key={`row${index}`}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell align="center">
-                  {item.name.firstName} {item.name.lastName}
-                </TableCell>
+    <Box>
+      {!userId ? (
+        <>
+          <Typography variant="h4" pb={1}>
+            Users Idea
+          </Typography>
+          <hr />
+          <Box sx={{ display: "flex", justifyContent: "end", gap: 1, py: 2 }}>
+            <input
+              type="text"
+              placeholder="search here..."
+              style={{ outline: "none", padding: "5px" }}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <Button variant="contained" onClick={searchUser}>
+              search
+            </Button>
+          </Box>
+          <TableContainer component={Paper}>
+            <Table
+              sx={{ minWidth: 650, marginTop: "1rem" }}
+              aria-label="simple table"
+            >
+              <TableHead>
+                <TableRow>
+                  {userTableHeadings.map((item) => (
+                    <TableCell align="center" key={item}>
+                      {item}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {(rowsPerPage > 0
+                  ? finalUsersList.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                  : finalUsersList
+                ).map((item, index) => (
+                  <TableRow
+                    key={`row${index}`}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="center">
+                      {item?.name?.firstName} {item?.name?.lastName}
+                    </TableCell>
 
-                <TableCell align="center">{item.email}</TableCell>
+                    <TableCell align="center">{item?.email}</TableCell>
 
-                <TableCell align="center">
-                  {item.createdAt
-                    ?dayjs(item.createdA).format("DD/MM/YYYY")
-                    : "-"}
-                </TableCell>
+                    <TableCell align="center">
+                      {item?.createdAt
+                        ? dayjs(item?.createdA).format("DD/MM/YYYY")
+                        : "-"}
+                    </TableCell>
 
-                <TableCell align="center">
-                  {/* {stages[idea[index]?.stepNum]} */}
-                  <GetStep id={item.id} />
-                </TableCell>
+                    <TableCell align="center">
+                      {/* {stages[idea[index]?.stepNum]} */}
+                      <GetStep id={item.id} />
+                    </TableCell>
 
-                <TableCell align="center">
-                  <Button onClick={() => navigate(`/idea/${item._id}`)}>
-                    View Idea
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                // colSpan={3}
-                count={finalUsersList.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-              />
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </TableContainer>
+                    <TableCell align="center">
+                      {/* <Button onClick={() => navigate(`/idea/${item._id}`)}> */}
+                      <Button onClick={()=> setUserId(item._id)}>
+                        View Idea
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 53 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+              <TableFooter>
+                <TableRow>
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      { label: "All", value: -1 },
+                    ]}
+                    // colSpan={3}
+                    count={finalUsersList.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                  />
+                </TableRow>
+              </TableFooter>
+            </Table>
+          </TableContainer>
+        </>
+      ) : (
+        <ViewIdea userId={userId} />
+      )}
     </Box>
   );
 };

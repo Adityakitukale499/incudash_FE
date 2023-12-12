@@ -214,15 +214,15 @@ const MentorGrooming = () => {
                         component="div"
                         sx={{ fontWeight: 600 }}
                       >
-                        {e?.mentorInfo?.name}
+                        {e?.mentorInfo[0]?.name}
                       </Typography>
                       <Typography
                         variant="body1"
                         color="primary"
                         sx={{ fontWeight: 600 }}
                       >
-                        {e?.mentorInfo?.designation} At{" "}
-                        {e?.mentorInfo?.companyName}
+                        {e?.mentorInfo[0]?.designation} At{" "}
+                        {e?.mentorInfo[0]?.companyName}
                       </Typography>
                       <Typography
                         variant="h6"

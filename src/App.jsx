@@ -27,33 +27,6 @@ function App() {
   const successMgs = () => toast.success("Save Successfully!");
   const faildMgs = () => toast.warning("Faild to Save!");
 
-  // useEffect(()=>{
-  //   console.log(localStorage.getItem("jwt"));
-  //   if(!localStorage.getItem("jwt")) return;
-  //   const userId = jwtDecode(localStorage.getItem("jwt")).id;
-  //   if(signUpUser.username && signUpUser.password){
-  //     const body = {
-  //       userId,
-  //       stepNum:0
-  //     };
-  //     setLoader(true);
-  //     axios
-  //       .post(`${baseUrl}/ideas`, body, {
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-  //         },
-  //       })
-  //       .then((res) => {
-  //         console.log(res);
-  //         setLoader(false);
-  //       })
-  //       .catch((e) => {
-  //         console.log(e);
-  //         setLoader(false);
-  //       });
-  //   }
-  // },[signUpUser])
-
   useEffect(() => {
     if (localStorage.getItem("jwt")) {
       const userId = jwtDecode(localStorage.getItem("jwt")).id;

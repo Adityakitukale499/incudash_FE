@@ -3,6 +3,8 @@ import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ideaContext, userContext } from "../../contextApi/context";
 import { putData } from "../../servises/apicofig";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 const Step6 = () => {
   const {
@@ -17,6 +19,12 @@ const Step6 = () => {
   } = useContext(ideaContext);
   const {user, setUser} = useContext(userContext)
   const navigate = useNavigate();
+  const raisFundingRef = useRef()
+
+  useEffect(()=>{
+    // console.log(idea.raiseFunding.fundingFormattedText);
+    document.getElementById('container').innerHTML=idea?.raiseFunding?.fundingFormattedText
+  },[idea])
 
   const saveStep = () => {
     const body = {
@@ -49,22 +57,26 @@ const Step6 = () => {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum ipsum alias
         fugit est, iste officia
       </Typography>
-
-      <Box
-        sx={{
-          bgcolor: "#fff",
+      <Box sx={{bgcolor: "#fff",
           borderRadius: 2,
           m: "auto",
           mt: 5,
           p: 4,
-          height: 450,
+          height: 450,}} ref={raisFundingRef}>
+<div id="container"></div>
+
+      </Box>
+
+      <Box
+        sx={{
           display: "flex",
           justifyContent: "end",
-          alignItems: "end",
+          
         }}
       >
         <Button
           variant="contained"
+          sx={{mt:-7,mr:3, height:40}}
           onClick={() => saveStep()}
         >
           Next

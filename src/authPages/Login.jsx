@@ -45,7 +45,32 @@ export default function Login() {
         console.log(response.data);
         setJwt(response.data.jwt);
         localStorage.setItem("jwt", response.data.jwt);
-        // localStorage.setItem("id", response.data.user.id);
+        let userId = jwtDecode(response.data.jwt).id;
+        setLoader(true);
+        getData(`users/${userId}`)
+          .then(function (response) {
+            console.log(response.data);
+            setUser(response.data);
+            setLoader(false);
+          })
+          .catch(function (error) {
+            console.log(error);
+            setLoader(false);
+          });
+
+        setLoader(true);
+
+        getData(`ideas/findByUserId/${userId}`)
+          .then(function (response) {
+            // console.log(response.data);
+            setIdea(response.data);
+            setstepNum(response.data.stepNum);
+            setLoader(false);
+          })
+          .catch(function (error) {
+            console.log(error);
+            setLoader(false);
+          });
         loginSuccessMgs();
         setError(false);
         navigate("/dashboard");
@@ -57,59 +82,9 @@ export default function Login() {
         setError(true);
         setLoader(false);
       });
-    // console.log(signUpUserId);
-    // if (signUpUserId) {
-    //   const ideaBody = {
-    //     userId: signUpUserId,
-    //     stepNum: 0,
-    //   };
-    //   setLoader(true);
-    //   axios
-    //     .post(`${baseUrl}/ideas`, ideaBody)
-    //     .then((res) => {
-    //       console.log(res);
-    //       setLoader(false);
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //       setLoader(false);
-    //     });
-    // }
   };
 
-  useEffect(() => {
-    if (jwt) {
-      let userId = jwtDecode(jwt).id;
-      if (!userId) return;
-
-      setLoader(true);
-      getData(`users/${userId}`)
-        .then(function (response) {
-          console.log(response.data);
-          setUser(response.data);
-          setLoader(false);
-        })
-        .catch(function (error) {
-          console.log(error);
-          setLoader(false);
-        });
-
-      setLoader(true);
-
-      getData(`ideas/findByUserId/${userId}`)
-        .then(function (response) {
-          // console.log(response.data);
-          setIdea(response.data);
-          setstepNum(response.data.stepNum);
-          setLoader(false);
-        })
-        .catch(function (error) {
-          console.log(error);
-          setLoader(false);
-        });
-    }
-  }, [jwt]);
-
+ 
   return (
     <>
       <Box
@@ -232,7 +207,10 @@ export default function Login() {
               />
               {/* <input type="password" /> */}
               <Box sx={{ textAlign: "end", color: "#88898e", pt: 2, pb: 3 }}>
-                <span style={{cursor:'pointer'}} onClick={() => setForgotPassModal(true)}>
+                <span
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setForgotPassModal(true)}
+                >
                   Forgot Password?
                 </span>
               </Box>

@@ -265,9 +265,7 @@ const Step1 = () => {
         <CommentsModal open={commentsModal} setOpen={setCommentsModal} comments={comments}
               currentUser={currentUser}
               setComments={handleComments}/>
-       
-        {/* <Box sx={{}}>
-          <Button onClick={()=> setCommentsModal(true)}>comments box</Button> */}
+              
           <img  onClick={()=> setCommentsModal(true)} src='/commentButton.png' alt="image" style={{width:'170px', position:'fixed', bottom:70, right:70}}/>
       </Box>
     </>

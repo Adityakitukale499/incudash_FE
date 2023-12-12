@@ -91,36 +91,38 @@ const Step4 = () => {
     setFiles(filterFiles);
   }
 
-  const handleUploadFile = () => {
-    const uploadFile = (data) => {
-      const body = {
-        financialValuation: {
-          documentCollection: [
-            ...idea?.financialValuation?.documentCollection,
-            {
-              documentId: data?.docs[0]?.name,
-              url: data?.docs[0]?.downloadUrl,
-              created_at: new Date().toString(),
-            },
-          ],
-          comments: idea?.financialValuation?.comments,
-        },
-      };
-      setLoader(true);
-      putData(`ideas/updateByUserId/${user?.id}`, body)
-        .then((d) => {
-          // console.log("step4putreqest", data.data);
-          setIdea(d?.data);
-          setLoader(false);
-          successMgs();
-        })
-        .catch((e) => {
-          console.log(e);
-          faildMgs();
-          setLoader(false);
-        });
-    };
-    handleOpenPicker(uploadFile, openPicker, authResponse);
+  const handleUploadFile = (event) => {
+    console.log(event.target.value);
+    // const uploadFile = (data) => {
+    //   console.log(data);
+    //   const body = {
+    //     financialValuation: {
+    //       documentCollection: [
+    //         ...idea?.financialValuation?.documentCollection,
+    //         {
+    //           documentId: data?.docs[0]?.name,
+    //           url: data?.docs[0]?.downloadUrl,
+    //           created_at: new Date().toString(),
+    //         },
+    //       ],
+    //       comments: idea?.financialValuation?.comments,
+    //     },
+    //   };
+    //   setLoader(true);
+    //   putData(`ideas/updateByUserId/${user?.id}`, body)
+    //     .then((d) => {
+    //       // console.log("step4putreqest", data.data);
+    //       setIdea(d?.data);
+    //       setLoader(false);
+    //       successMgs();
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //       faildMgs();
+    //       setLoader(false);
+    //     });
+    // };
+    // handleOpenPicker(uploadFile, openPicker, authResponse);
   };
 
   const saveStep = () => {
@@ -195,10 +197,10 @@ const Step4 = () => {
             component="label"
             variant="contained"
             startIcon={<CloudUploadIcon />}
-            onClick={() => handleUploadFile()}
+            // onClick={() => handleUploadFile()}
           >
             Upload file
-            {/* <input type="file" hidden onChange={handleFiles} /> */}
+            <input type="file" hidden onChange={handleUploadFile} />
           </Button>
         </Box>
         <Typography variant="body1" color="initial" sx={{ fontWeight: 600 }}>

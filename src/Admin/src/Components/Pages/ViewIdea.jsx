@@ -6,15 +6,15 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
-import { loaderContext } from "../../ContextApi/context";
 import { getData } from "../../Services/api";
-// import ShowFullMessageModal from "../ShowFullMessageModatl";
+
 import StartupStage from "../userIdea/StartupStage";
 import ValidateIdea from "../userIdea/ValidateIdea";
 import ProductRoadmap from "../userIdea/ProductRoadmap";
 import FinancialValuationValidation from "../userIdea/FinancialValuationValidation";
 import PitchDeckValidation from "../userIdea/PitchDeckValidation";
 import RaiseFunding from "../userIdea/RaiseFunding";
+import { ideaContext } from "../../../../contextApi/context";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -43,9 +43,9 @@ const AccordionSummary = styled((props) => (
   },
 }));
 
-const ViewIdea = () => {
-  const { loader, setLoader } = useContext(loaderContext);
-  const { userId } = useParams();
+const ViewIdea = ({userId}) => {
+  const { loader, setLoader } = useContext(ideaContext);
+  // const { userId } = useParams();
   const [idea, setIdea] = useState({});
   const [user, setUser] = useState({});
   const [expanded, setExpanded] = useState(true);
@@ -87,44 +87,6 @@ const ViewIdea = () => {
 
   const pitchDeckValidationTable = ["Document", ""];
   const commentsTable = ["Comment", "Created By", "Created At"];
-
-  // const comments = [
-  //   {
-  //     id: 1,
-  //     content:
-  //       "Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!",
-  //     createdAt: "2 weeks ago",
-  //     score: 5,
-  //     user: {
-  //       userName: "maxblagun",
-  //       userId: "4321",
-  //     },
-  //     replies: [
-  //       {
-  //         id: 3,
-  //         content:
-  //           "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
-  //         createdAt: "1 week ago",
-  //         score: 4,
-  //         user: {
-  //           userName: "ramsesmiron",
-  //           userId: 5678,
-  //         },
-  //       },
-  //       {
-  //         id: 4,
-  //         content:
-  //           "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
-  //         createdAt: "2 days ago",
-  //         score: 2,
-  //         user: {
-  //           userName: "juliusomo",
-  //           userId: "7890",
-  //         },
-  //       },
-  //     ],
-  //   },
-  // ];
 
   return (
     <>
@@ -263,7 +225,7 @@ const ViewIdea = () => {
             <RaiseFunding idea={idea} />
           </Accordion>
         </Box>
-        <ShowFullMassageModal open={open} setOpen={setOpen} massage={massage} />
+        {/* <ShowFull open={open} setOpen={setOpen} massage={massage} /> */}
       </div>
     </>
   );

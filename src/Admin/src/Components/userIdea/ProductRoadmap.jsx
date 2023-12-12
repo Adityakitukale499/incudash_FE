@@ -15,18 +15,20 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { loaderContext } from "../../ContextApi/context";
 import { getData, putData } from "../../Services/api";
 import dayjs from "dayjs";
-import App from "../comments/src/App";
+// import App from "../comments/src/App";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CommentsModal from "../../../../Components/CommentsModal";
+import { ideaContext } from "../../../../contextApi/context";
 
 const ProductRoadmap = ({ idea, currentUser }) => {
   const roadmapTable = ["Title", "Description", "Start Time", "End Time"];
 
-  const { loader, setLoader } = useContext(loaderContext);
+  const { loader, setLoader } = useContext(ideaContext);
   const [comments, setComments] = useState([]);
   const [expanded, setExpanded] = useState(true);
+  const [commentsModal, setCommentsModal] = useState(false)
 
   useEffect(() => {
     if (idea?.productRoadmap?.comments) {
@@ -117,7 +119,15 @@ const ProductRoadmap = ({ idea, currentUser }) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Accordion
+      <Typography sx={{ fontSize: "20px", fontWeight: "400" }}>
+            Comments
+          </Typography>
+        <CommentsModal open={commentsModal} setOpen={setCommentsModal} comments={comments}
+              currentUser={currentUser}
+              setComments={handleComments}/>
+              
+          <img  onClick={()=> setCommentsModal(true)} src='/commentButton.png' alt="image" style={{width:'170px'}}/>
+      {/* <Accordion
       
       expandIcon={<ExpandMoreIcon />}
         expanded={expanded === "panel3"}
@@ -125,17 +135,9 @@ const ProductRoadmap = ({ idea, currentUser }) => {
         sx={{ p: 0.5, borderRadius: 1, mt: 2 }}
       >
         <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography sx={{ fontSize: "20px", fontWeight: "400" }}>
-            Comments
-          </Typography>
         </AccordionSummary>
-
-        <App
-          comments={comments}
-          currentUser={currentUser}
-          setComments={handleComments}
-        />
-      </Accordion>
+          
+      </Accordion> */}
     </Box>
   );
 };
