@@ -13,13 +13,14 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { ideaContext, userContext } from "../../contextApi/context";
-import { handleOpenPicker, putData } from "../../servises/apicofig";
+import { handleOpenPicker, postData, putData } from "../../servises/apicofig";
 import { useNavigate } from "react-router-dom";
 import Conformation from "../Confirmation";
 import useDrivePicker from "react-google-drive-picker";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import App from "../comments/src/App";
 import CommentsModal from "../CommentsModal";
+import axios from "axios";
 
 const Step4 = () => {
   const {
@@ -61,11 +62,44 @@ const Step4 = () => {
     }
   }, [user]);
 
-  function handleDownloadFile(url, filename) {
+  async function handleDownloadFile(filename, type) {
+    // console.log(filename, type);
+    const body = {
+      fileName: filename,
+    };
+    let url;
+
+    // setLoader(true);
+    // postData("generate-urls/generate-download-url", body)
+    //   .then((res) => {
+    //     setLoader(false);
+    //     const atag = document.createElement("a");
+    //     atag.href = res.data.url;
+    //     document?.body?.appendChild(atag);
+    //     atag.setAttribute("download", filename);
+    //     atag.setAttribute("target", "_blank");
+    //     atag?.click();
+    //     atag?.remove();
+    //   })
+    //   .catch((e) => {
+    //     setLoader(false);
+    //     console.log(e);
+    //   });
+
+    await axios
+      .post(
+        "https://api.incudash.com/generate-urls/generate-download-url",
+        body
+      )
+      .then((res) => (url = res.data.url))
+      .catch((e) => console.log(e));
+    console.log(url);
+
     const atag = document.createElement("a");
     atag.href = url;
-    atag.setAttribute("download", filename);
     document?.body?.appendChild(atag);
+    atag.setAttribute("download", filename);
+    atag.setAttribute("target", "_blank");
     atag?.click();
     atag?.remove();
   }
@@ -91,38 +125,56 @@ const Step4 = () => {
     setFiles(filterFiles);
   }
 
-  const handleUploadFile = (event) => {
-    console.log(event.target.value);
-    // const uploadFile = (data) => {
-    //   console.log(data);
-    //   const body = {
-    //     financialValuation: {
-    //       documentCollection: [
-    //         ...idea?.financialValuation?.documentCollection,
-    //         {
-    //           documentId: data?.docs[0]?.name,
-    //           url: data?.docs[0]?.downloadUrl,
-    //           created_at: new Date().toString(),
-    //         },
-    //       ],
-    //       comments: idea?.financialValuation?.comments,
-    //     },
-    //   };
-    //   setLoader(true);
-    //   putData(`ideas/updateByUserId/${user?.id}`, body)
-    //     .then((d) => {
-    //       // console.log("step4putreqest", data.data);
-    //       setIdea(d?.data);
-    //       setLoader(false);
-    //       successMgs();
-    //     })
-    //     .catch((e) => {
-    //       console.log(e);
-    //       faildMgs();
-    //       setLoader(false);
-    //     });
-    // };
-    // handleOpenPicker(uploadFile, openPicker, authResponse);
+  const handleUploadFile = async(event) => {
+    // console.log(event.target.files[0]);
+    let { name, type } = event.target.files[0];
+    const file = event.target.files[0];
+    // console.log(name, type);
+    const Body = {
+      name: `incudash-folder/${name}`,
+      type,
+    };
+    await axios
+      .post("http://localhost:1337/generate-urls/generate-upload-url", Body)
+      .then(async(res) => {
+        // console.log(res.data.url);
+        // console.log(file.type);
+        await axios
+          .put(res?.data?.url, {file}, {
+            headers: {
+              "Content-Type": file.type,
+            },
+          })
+          .then((response) => console.log(response))
+          .catch((e) => console.log(e));
+      })
+      .catch((e) => console.log(e));
+
+      const body = {
+        financialValuation: {
+          documentCollection: [
+            ...idea?.financialValuation ?.documentCollection,
+            {
+              documentId: `incudash-folder/${name}`,
+              fileName: `incudash-folder/${name}`,
+              type,
+            },
+          ],
+          comments: idea?.financialValuation?.comments,
+        },
+      };
+      setLoader(true);
+      putData(`ideas/updateByUserId/${user.id}`, body)
+        .then((res) => {
+          setIdea(res.data);
+          setLoader(false);
+          successMgs();
+        })
+        .catch((e) => {
+          console.log(e);
+          faildMgs();
+          setLoader(false);
+        });
   };
 
   const saveStep = () => {
@@ -200,7 +252,7 @@ const Step4 = () => {
             // onClick={() => handleUploadFile()}
           >
             Upload file
-            <input type="file" hidden onChange={handleUploadFile} />
+            <input type="file" hidden onChange={(e) => handleUploadFile(e)} />
           </Button>
         </Box>
         <Typography variant="body1" color="initial" sx={{ fontWeight: 600 }}>
@@ -221,12 +273,12 @@ const Step4 = () => {
           >
             <Box>
               {i + 1}) <PictureAsPdfIcon sx={{ color: "red", fontSize: 12 }} />
-              <span> {e?.documentId} </span>
+              <span> {e?.fileName} </span>
             </Box>
             <Box>
               <IconButton
                 aria-label="download"
-                onClick={() => handleDownloadFile(e?.url, e?.documentId)}
+                onClick={() => handleDownloadFile(e?.fileName, e?.type)}
                 sx={{ mt: 0.5 }}
               >
                 <DownloadIcon sx={{ height: 20 }} />

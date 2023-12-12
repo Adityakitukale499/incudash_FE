@@ -21,6 +21,7 @@ import dayjs from "dayjs";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CommentsModal from "../../../../Components/CommentsModal";
 import { ideaContext } from "../../../../contextApi/context";
+import { ShowFullMessageModal } from "../Modals/ShowFullMessageModatl";
 
 const ProductRoadmap = ({ idea, currentUser }) => {
   const roadmapTable = ["Title", "Description", "Start Time", "End Time"];
@@ -29,6 +30,9 @@ const ProductRoadmap = ({ idea, currentUser }) => {
   const [comments, setComments] = useState([]);
   const [expanded, setExpanded] = useState(true);
   const [commentsModal, setCommentsModal] = useState(false)
+  const [mgsModal , setMgsModal] = useState(false)
+  const [mgs , setMgs] = useState('')
+
 
   useEffect(() => {
     if (idea?.productRoadmap?.comments) {
@@ -60,8 +64,15 @@ const ProductRoadmap = ({ idea, currentUser }) => {
         setLoader(false);
       });
   };
+
+  const handleDescription =(discription)=>{
+    setMgs(discription)
+    setMgsModal(true)
+  }
+
   return (
     <Box p={5}>
+      <ShowFullMessageModal open={mgsModal} setOpen={setMgsModal} message={mgs}/>
       <Typography sx={{ textAlign: "center", mt: 3, mb: 2 }}>
         Roadmap
       </Typography>

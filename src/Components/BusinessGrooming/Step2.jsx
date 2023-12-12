@@ -23,6 +23,7 @@ import Conformation from "../Confirmation";
 import PreviewIcon from "@mui/icons-material/Preview";
 import App from "../comments/src/App";
 import CommentsModal from "../CommentsModal";
+import axios from "axios";
 
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
@@ -41,7 +42,7 @@ const Step2 = () => {
   } = useContext(ideaContext);
   const { user, setUser } = useContext(userContext);
   const [comments, setComments] = useState([]);
-  const [commentsModal, setCommentsModal] = useState(false)
+  const [commentsModal, setCommentsModal] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     userName: "aditya kitukale",
     userId: "123456789",
@@ -60,10 +61,20 @@ const Step2 = () => {
 
   useEffect(() => {
     if (idea) {
-      setIdeaText(idea?.validateIdea?.ideaText?idea?.validateIdea?.ideaText:'');
-      setChipData(idea?.validateIdea?.refrenceLinkArray?idea?.validateIdea?.refrenceLinkArray:[]);
-      setAttachments(idea?.validateIdea?.attachments?idea?.validateIdea?.attachments:[]);
-      setComments(idea?.validateIdea?.comments?idea?.validateIdea?.comments:[]);
+      setIdeaText(
+        idea?.validateIdea?.ideaText ? idea?.validateIdea?.ideaText : ""
+      );
+      setChipData(
+        idea?.validateIdea?.refrenceLinkArray
+          ? idea?.validateIdea?.refrenceLinkArray
+          : []
+      );
+      setAttachments(
+        idea?.validateIdea?.attachments ? idea?.validateIdea?.attachments : []
+      );
+      setComments(
+        idea?.validateIdea?.comments ? idea?.validateIdea?.comments : []
+      );
     }
   }, [idea]);
   useEffect(() => {
@@ -137,7 +148,6 @@ const Step2 = () => {
   };
 
   const handleRefrence = () => {
-    
     setChipData([...chipData, { refrerenceLink: refrence }]);
     setRefrence("");
   };
@@ -159,6 +169,28 @@ const Step2 = () => {
         comments: updatedComments,
       },
     };
+  };
+  async function handleViwe(filename) {
+    const body = {
+      fileName: filename,
+    };
+    let url;
+    await axios
+      .post(
+        "https://api.incudash.com/generate-urls/generate-download-url",
+        body
+      )
+      .then((res) => (url = res.data.url))
+      .catch((e) => console.log(e));
+    console.log(url);
+
+    const atag = document.createElement("a");
+    atag.href = url;
+    document?.body?.appendChild(atag);
+    atag.setAttribute("download", filename);
+    atag.setAttribute("target", "_blank");
+    atag?.click();
+    atag?.remove();
 
     setLoader(true);
     putData(`ideas/updateByUserId/${idea?.userId}`, body)
@@ -170,9 +202,9 @@ const Step2 = () => {
         console.log(e);
         setLoader(false);
       });
-  };
+  }
   return (
-    <Box sx={{ p: 0, mr: -3, mb:10 }}>
+    <Box sx={{ p: 0, mr: -3, mb: 10 }}>
       <Conformation
         open={deleteAttachmentModal}
         setOpen={setdeleteAttachmentModal}
@@ -293,12 +325,12 @@ const Step2 = () => {
                     <Box>
                       {i + 1}){" "}
                       <PictureAsPdfIcon sx={{ color: "red", fontSize: 12 }} />
-                      <span> {e.type} </span>
+                      <span> {e.fileName.split("/")[1]} </span>
                     </Box>
                     <Box>
                       <IconButton
-                        aria-label="download"
-                        // onClick={() => handleDownloadFile(e.url, e.documentId)}
+                        // aria-label="download"
+                        onClick={() => handleViwe(e.fileName)}
                         sx={{ mt: 0.5 }}
                       >
                         <PreviewIcon sx={{ height: 20 }} />
@@ -427,11 +459,20 @@ const Step2 = () => {
           />
         </AccordionDetails>
       </Accordion> */}
-      <CommentsModal open={commentsModal} setOpen={setCommentsModal} comments={comments}
-              currentUser={currentUser}
-              setComments={handleComments}/>
-       
-       <img  onClick={()=> setCommentsModal(true)} src='/commentButton.png' alt="image" style={{width:'170px', position:'fixed', bottom:70, right:70}}/>
+      <CommentsModal
+        open={commentsModal}
+        setOpen={setCommentsModal}
+        comments={comments}
+        currentUser={currentUser}
+        setComments={handleComments}
+      />
+
+      <img
+        onClick={() => setCommentsModal(true)}
+        src="/commentButton.png"
+        alt="image"
+        style={{ width: "170px", position: "fixed", bottom: 70, right: 70 }}
+      />
     </Box>
   );
 };

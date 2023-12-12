@@ -17,7 +17,7 @@ const style = {
   p: 4,
 };
 
-export default function ShowFullMessageModal({open, setOpen, message }) {
+export function ShowFullMessageModal({open, setOpen, message }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 

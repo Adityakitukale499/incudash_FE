@@ -37,9 +37,22 @@ const Step1 = () => {
     userId: "123456789",
   });
   const [comments, setComments] = useState([]);
-  const [commentsModal, setCommentsModal] = useState(false)
+  const [commentsModal, setCommentsModal] = useState(false);
   const [stage, setStage] = useState("");
-  const [stages, setStages] = useState([]);
+  const [stages, setStages] = useState([
+    {
+      stageName: "Idea Stage",
+      stageImage: "https://incudash.com/ideaStages/idea-stage1.png",
+    },
+    {
+      stageName: "Seed Stage",
+      stageImage: "https://incudash.com/ideaStages/idea-stage2.png",
+    },
+    {
+      stageName: "Series Stage",
+      stageImage: "https://incudash.com/ideaStages/idea-stage2.png",
+    },
+  ]);
   const [industry, setIndustry] = useState("");
   useEffect(() => {
     if (idea?.startupStage?.comments) {
@@ -49,7 +62,6 @@ const Step1 = () => {
       setIndustry(idea?.startupStage?.industry?.split(","));
     }
   }, [idea]);
-  
 
   useEffect(() => {
     if (user?.id && user?.username) {
@@ -60,21 +72,12 @@ const Step1 = () => {
     }
   }, [user]);
 
-  useEffect(() => {
-    getData("start-up-stage-types")
-      .then((data) => {
-        // console.log(data?.data[0]?.startUpStageType);
-        setStages(data?.data[0]?.startUpStageType);
-      })
-      .catch((e) => console.log(e));
-  }, []);
-
   const saveStep1 = () => {
     const body = {
       startupStage: {
         stage: stage,
         industry: industry.join(","),
-        comments: idea?.startupStage?.comments
+        comments: idea?.startupStage?.comments,
       },
       stepNum: stepNum == 0 ? 1 : idea.stepNum,
     };
@@ -97,8 +100,8 @@ const Step1 = () => {
 
   const saveAndNext = () => {
     if (
-      stage !== idea?.startupStage.stage &&
-      industry !== idea?.startupStage.industry
+      stage !== idea?.startupStage?.stage &&
+      industry !== idea?.startupStage?.industry
     ) {
       // console.log('step1 save and next');
       saveStep1();
@@ -262,11 +265,20 @@ const Step1 = () => {
             </Box>
           </Grid>
         </Grid>
-        <CommentsModal open={commentsModal} setOpen={setCommentsModal} comments={comments}
-              currentUser={currentUser}
-              setComments={handleComments}/>
-              
-          <img  onClick={()=> setCommentsModal(true)} src='/commentButton.png' alt="image" style={{width:'170px', position:'fixed', bottom:70, right:70}}/>
+        <CommentsModal
+          open={commentsModal}
+          setOpen={setCommentsModal}
+          comments={comments}
+          currentUser={currentUser}
+          setComments={handleComments}
+        />
+
+        <img
+          onClick={() => setCommentsModal(true)}
+          src="/commentButton.png"
+          alt="image"
+          style={{ width: "170px", position: "fixed", bottom: 70, right: 70 }}
+        />
       </Box>
     </>
   );

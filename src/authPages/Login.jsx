@@ -98,7 +98,7 @@ export default function Login() {
       >
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <img
-            src="https://incudash.com/assets/public/images/logo.png"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqsGmeujPuFNcJ3D7Ms_xMDkyfyU2or8tSiBDQTFB1&s"
             alt="incuDashImg"
             height={50}
           />
