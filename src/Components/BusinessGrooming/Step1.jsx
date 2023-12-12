@@ -55,7 +55,7 @@ const Step1 = () => {
   ]);
   const [industry, setIndustry] = useState("");
   useEffect(() => {
-    if (idea?.startupStage?.comments) {
+    if (idea) {
       // console.log(idea?.startupStage?.comments);
       setComments(idea?.startupStage?.comments);
       setStage(idea?.startupStage?.stage);

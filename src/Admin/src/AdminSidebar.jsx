@@ -18,8 +18,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { Outlet, Link, useNavigate, NavLink } from "react-router-dom";
 import { Button, CardMedia } from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import GroupIcon from "@mui/icons-material/Group";
 import ModelTrainingIcon from "@mui/icons-material/ModelTraining";
 // import Profile from "./Components/Profile";

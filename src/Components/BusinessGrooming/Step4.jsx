@@ -68,24 +68,6 @@ const Step4 = () => {
       fileName: filename,
     };
     let url;
-
-    // setLoader(true);
-    // postData("generate-urls/generate-download-url", body)
-    //   .then((res) => {
-    //     setLoader(false);
-    //     const atag = document.createElement("a");
-    //     atag.href = res.data.url;
-    //     document?.body?.appendChild(atag);
-    //     atag.setAttribute("download", filename);
-    //     atag.setAttribute("target", "_blank");
-    //     atag?.click();
-    //     atag?.remove();
-    //   })
-    //   .catch((e) => {
-    //     setLoader(false);
-    //     console.log(e);
-    //   });
-
     await axios
       .post(
         "https://api.incudash.com/generate-urls/generate-download-url",
