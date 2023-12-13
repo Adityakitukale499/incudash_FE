@@ -15,7 +15,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { getData, putData } from "../../Services/api";
+import { getData, putData } from "../../services/api";
 import dayjs from "dayjs";
 // import App from "../comments/src/App";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";

@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Accordion, AccordionSummary, Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { getData, putData } from "../../Services/api";
+import { getData, putData } from "../../services/api";
 import CommentsModal from "../../../../Components/CommentsModal";
 import { ideaContext } from "../../../../contextApi/context";
 
