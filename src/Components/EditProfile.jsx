@@ -2,9 +2,7 @@ import { Button } from "@mui/joy";
 import { Box, Typography } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { baseUrl } from "../servises/constPath";
-import { userContext } from "../contextApi/context";
-import axios from "axios";
+import { ideaContext, userContext } from "../contextApi/context";
 import { putData } from "../servises/apicofig";
 
 const EditProfile = () => {
@@ -16,7 +14,8 @@ const EditProfile = () => {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
   const { user, setUser } = useContext(userContext);
-  // console.log(user);
+  const {loader, setLoader} = useContext(ideaContext)
+  
   useEffect(() => {
     if (user) {
       setFirstName(user?.name?.firstName);
@@ -54,9 +53,6 @@ const EditProfile = () => {
     e.preventDefault();
     console.log("handleChangePassword");
     const body = {
-      //   confirmed: true,
-      //   blocked: false,
-      //   provider: "local",
       username: username,
       email: email,
       phoneNumber: phoneNumber,
@@ -65,19 +61,16 @@ const EditProfile = () => {
         lastName: lastName,
       },
     };
-    // axios
-    //   .put(`${baseUrl}/user/update/${user.id}`, body, {
-    //     headers: {
-    //       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-    //     },
-    //   })
+    setLoader(true)
     putData(`user/update/${user.id}`,body)
       .then(function (response) {
         console.log(response.data);
         setUser(response.data);
+        setLoader(false)
       })
       .catch(function (error) {
         console.log(error);
+        setLoader(false)
       });
   };
   return (
@@ -125,8 +118,6 @@ const EditProfile = () => {
 
                 borderRadius: 5,
                 boxShadow: "0px 1px 5px #888888",
-                // backgroundColor: "#d5f2eb",
-                //   borderColor:"#d5f2eb",
                 height: 40,
               }}
             />
@@ -143,15 +134,11 @@ const EditProfile = () => {
               style={{
                 outlineColor: "#0dcaf0",
                 width: "100%",
-                //   minWidth: "250px",
                 border: "none",
                 fontSize: 16,
                 padding: 5,
-                // marginTop: 18,
                 borderRadius: 5,
                 boxShadow: "0px 1px 5px #888888",
-                // backgroundColor: "#d5f2eb",
-                //   borderColor:"#d5f2eb",
                 height: 40,
               }}
             />
@@ -176,15 +163,11 @@ const EditProfile = () => {
               style={{
                 outlineColor: "#0dcaf0",
                 width: "100%",
-                //   minWidth: "250px",
                 border: "none",
                 fontSize: 16,
                 padding: 5,
-                // marginTop: 18,
                 borderRadius: 5,
                 boxShadow: "0px 1px 5px #888888",
-                // backgroundColor: "#d5f2eb",
-                //   borderColor:"#d5f2eb",
                 height: 40,
               }}
             />
@@ -201,15 +184,11 @@ const EditProfile = () => {
               style={{
                 outlineColor: "#0dcaf0",
                 width: "100%",
-                //   minWidth: "250px",
                 border: "none",
                 fontSize: 16,
                 padding: 5,
-                // marginTop: 18,
                 borderRadius: 5,
                 boxShadow: "0px 1px 5px #888888",
-                // backgroundColor: "#d5f2eb",
-                //   borderColor:"#d5f2eb",
                 height: 40,
               }}
             />
@@ -231,11 +210,8 @@ const EditProfile = () => {
             border: "none",
             fontSize: 16,
             padding: 5,
-            // marginTop: 18,
             borderRadius: 5,
             boxShadow: "0px 1px 5px #888888",
-            // backgroundColor: "#d5f2eb",
-            //   borderColor:"#d5f2eb",
             height: 40,
           }}
         />

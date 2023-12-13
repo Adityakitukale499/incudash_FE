@@ -80,7 +80,7 @@ const Step4 = () => {
     const atag = document.createElement("a");
     atag.href = url;
     document?.body?.appendChild(atag);
-    atag.setAttribute("download", filename);
+    // atag.setAttribute("download", filename);
     atag.setAttribute("target", "_blank");
     atag?.click();
     atag?.remove();
@@ -100,7 +100,7 @@ const Step4 = () => {
     };
     setLoader(true);
     putData(`ideas/updateByUserId/${user?.id}`, body).then((data) => {
-      console.log("step4putreqest", data?.data);
+      // console.log("step4putreqest", data?.data);
       setLoader(false);
       setIdea(data?.data);
     });
@@ -117,12 +117,12 @@ const Step4 = () => {
       type,
     };
     await axios
-      .post("http://localhost:1337/generate-urls/generate-upload-url", Body)
+      .post("https://api.incudash.com/generate-urls/generate-upload-url", Body)
       .then(async(res) => {
         console.log(res.data.url);
         console.log(file.type);
         await axios
-          .put(res?.data?.url, {file}, {
+          .put(res?.data?.url, file, {
             headers: {
               "Content-Type": file.type,
             },

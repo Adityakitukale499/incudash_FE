@@ -1,22 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Button,
-  Card,
-  CardActionArea,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box, Card, CardActionArea, Grid, Typography } from "@mui/material";
 import SelectIndustry from "../SelectIndustry";
 import { useNavigate } from "react-router-dom";
 import { ideaContext, userContext } from "../../contextApi/context";
 import NavigateBtn from "../NavigateBtn";
 import { getData, putData } from "../../servises/apicofig";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import App from "../comments/src/App";
 import CommentsModal from "../CommentsModal";
 
 const Step1 = () => {

@@ -1,12 +1,5 @@
 import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Chip,
-  Typography,
-} from "@mui/material";
+import { Box, Chip, Typography } from "@mui/material";
 import Button from "@mui/joy/Button";
 import { useNavigate } from "react-router-dom";
 import Roadmap from "../Roadmap";
@@ -21,8 +14,6 @@ import { ideaContext, userContext } from "../../contextApi/context";
 import NavigateBtn from "../NavigateBtn";
 import { putData } from "../../servises/apicofig";
 import Conformation from "../Confirmation";
-import App from "../comments/src/App";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CommentsModal from "../CommentsModal";
 
 const Step3 = () => {

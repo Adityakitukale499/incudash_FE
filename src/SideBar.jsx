@@ -16,10 +16,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { Outlet, Link, useNavigate } from "react-router-dom";
-import { Button, CardMedia } from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
+import { Outlet,  useNavigate } from "react-router-dom";
+import { CardMedia } from "@mui/material";
 import Profile from "./Components/Profile";
 import { userContext } from "./contextApi/context";
 
@@ -120,8 +118,8 @@ export default function SideBar() {
   const {user ,setUser} = useContext(userContext)
 
   const handleLogout = () => {
-    localStorage.setItem("jwt", "");
-    localStorage.setItem("id", "");
+    console.log('logout');
+    localStorage.removeItem("jwt");
     navigate("/login");
   };
 

@@ -17,7 +17,7 @@ export default function ForgotPasswordModal({ open, setOpen }) {
       "Confirmation link successfully sent on your mailId please use that link to reset the password"
     );
   const faildToSentMail = () => toast.error("Invalid Email Id.");
-  console.log(EmailValidator.validate(email));
+  // console.log(EmailValidator.validate(email));
   const handleForgotPassword = () => {
     if (!EmailValidator.validate(email)) return;
 

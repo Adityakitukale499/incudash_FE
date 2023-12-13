@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import DashBoard from "../sidebarPages/DashBoard";
 import ConnectMentors from "../sidebarPages/ConnectMentors";
@@ -28,8 +28,6 @@ import MentorGrooming from "../Admin/src/SidebarPages/MentorGrooming";
 import FoundersGrooming from "../Admin/src/SidebarPages/FoundersGrooming";
 
 const MyRoutes = () => {
-  const location = useLocation();
-  // console.log(location.pathname);
   return (
     <>
       <ProtectedOuterLayerComponent>

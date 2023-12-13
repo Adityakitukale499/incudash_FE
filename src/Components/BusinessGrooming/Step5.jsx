@@ -117,7 +117,7 @@ const Step5 = () => {
       type,
     };
     await axios
-      .post("http://localhost:1337/generate-urls/generate-upload-url", Body)
+      .post("https://api.incudash.com/generate-urls/generate-upload-url", Body)
       .then(async (res) => {
         console.log(res.data.url);
         console.log(file.type);

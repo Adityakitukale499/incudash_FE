@@ -59,13 +59,6 @@ const DashBoard = () => {
         "Let us connect your pitch to the investors best suited for you.",
       route: "/dashboard/step6",
     },
-    // {
-    //   img: "https://incudash.com/assets/public/dashboard/images/jicon-6.jpg",
-    //   title: "Track Progress",
-    //   content:
-    //     "Get access to tools to track your progress and growth in your startup journey.",
-    //   route: "/dashboard/step7",
-    // },
   ]);
   const [open, setOpen] = useState(false);
   const {
@@ -78,7 +71,6 @@ const DashBoard = () => {
     stepNum,
     setstepNum,
   } = useContext(ideaContext);
-// console.log(idea);
   const handleClick = () => {
     console.log("in handleclick");
     setOpen(!open);
@@ -94,9 +86,6 @@ const DashBoard = () => {
     "Pitch Deck",
     "Funding",
   ];
-
-  // console.log(idea);
-
   return (
     <>
       <Accordion defaultExpanded={true} sx={{borderRadius:1}}>

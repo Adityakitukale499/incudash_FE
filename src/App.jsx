@@ -5,18 +5,13 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import MyRoutes from "./Routes/MyRoutes";
 import Box from "@mui/material/Box";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ideaContext, userContext, signUpContex } from "./contextApi/context";
-import axios from "axios";
 import Loader from "./Components/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { baseUrl } from "./servises/constPath";
 import { jwtDecode } from "jwt-decode";
 import { getData } from "./servises/apicofig";
-import SideBar from "./SideBar";
-import ProtectedOuterLayerComponent from "./ProtectedOuterLayerComponent";
-// import jwt from 'jsonwebtoken';
 
 function App() {
   const [idea, setIdea] = useState();

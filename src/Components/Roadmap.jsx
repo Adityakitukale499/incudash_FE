@@ -10,6 +10,9 @@ import { Box } from "@mui/joy";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
+import { useState } from "react";
+import Conformation from "./Confirmation";
+import { useRef } from "react";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -49,7 +52,8 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 export default function Roadmap({ sortData, setOpen, setIsEdit, setEditEntry, handledeleteRoadmapstep }) {
   const [expanded, setExpanded] = React.useState("panel1");
-
+  const [deleteMgsModal, setDeleteMgsModal] = useState(false)
+  const stepIdRef = useRef()
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
@@ -62,14 +66,15 @@ export default function Roadmap({ sortData, setOpen, setIsEdit, setEditEntry, ha
   }
   const handledeleteBtn=(e, id)=>{
     e.stopPropagation()
-    // const res = confirm('Do you want to deletee this step?')
+    stepIdRef.current = id
+    // const res = confirm()
     // if(res) 
     handledeleteRoadmapstep(id)
   }
 
   return (
     <>
-      {console.log('before map')}
+    <Conformation open={deleteMgsModal} setOpen={setDeleteMgsModal} setConform={handledeleteRoadmapstep} massage={'Do you want to deletee this step?'}/>
       {sortData?.length == 0 && <Box>Data Not Found !</Box>}
       {sortData.map((raodmapStep, i) => (
         <Accordion
@@ -89,10 +94,7 @@ export default function Roadmap({ sortData, setOpen, setIsEdit, setEditEntry, ha
               variant="body2"
             >
               <span style={{fontWeight:550}}>
-                {raodmapStep?.roadmapTitle}{" "}
-                {/* <span style={{ fontSize: 10,fontWeight:500 }}>
-                  {dayjs(raodmapStep.timestampFrom).format("DD/MM/YYYY")} To {dayjs(raodmapStep.timestampTo).format("DD/MM/YYYY")}
-                </span> */}
+                {raodmapStep?.roadmapTitle}
               </span>
               <span style={{marginTop:'-8px'}}>
                 <IconButton aria-label="edit" onClick={(e)=> handleEditBtn(e,raodmapStep)} >
@@ -114,7 +116,6 @@ export default function Roadmap({ sortData, setOpen, setIsEdit, setEditEntry, ha
           </AccordionDetails>
         </Accordion>
       ))}
-      {/* {console.log('after map')} */}
     </>
   );
 }
