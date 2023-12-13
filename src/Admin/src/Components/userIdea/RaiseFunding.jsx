@@ -2,7 +2,7 @@ import { AccordionDetails, Box, Button, Chip, ListItem } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import QuillEditor from "../QuillEditor";
 import { useContext, useEffect, useState } from "react";
-import { putData } from "../../Services/api";
+import { putData } from "../../services/api";
 import { ideaContext } from "../../../../contextApi/context";
 
 const RaiseFunding = ({ idea }) => {

@@ -6,7 +6,7 @@ import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
-import { getData } from "../../Services/api";
+import { getData } from "../../services/api";
 
 import StartupStage from "../userIdea/StartupStage";
 import ValidateIdea from "../userIdea/ValidateIdea";

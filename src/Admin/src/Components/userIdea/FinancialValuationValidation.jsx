@@ -10,7 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 // import App from "../comments/src/App";
-import { putData } from "../../Services/api";
+import { putData } from "../../services/api";
 import CommentsModal from "../../../../Components/CommentsModal";
 import { ideaContext } from "../../../../contextApi/context";
 

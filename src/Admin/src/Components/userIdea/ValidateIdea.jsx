@@ -9,7 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 // import App from "../comments/src/App";
 import { useContext, useEffect, useState } from "react";
-import { putData } from "../../Services/api";
+import { putData } from "../../services/api";
 import CommentsModal from "../../../../Components/CommentsModal";
 import { ideaContext } from "../../../../contextApi/context";
 
