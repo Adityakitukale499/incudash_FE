@@ -1,26 +1,17 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Button,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import DownloadIcon from "@mui/icons-material/Download";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { ideaContext, userContext } from "../../contextApi/context";
 import { handleOpenPicker, putData } from "../../servises/apicofig";
 import { useNavigate } from "react-router-dom";
 import Conformation from "../Confirmation";
 import useDrivePicker from "react-google-drive-picker";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import App from "../comments/src/App";
 import CommentsModal from "../CommentsModal";
 import axios from "axios";
+import FileIcon from "../FileIcon";
 
 const Step5 = () => {
   const {
@@ -38,7 +29,6 @@ const Step5 = () => {
   const [files, setFiles] = useState([]);
   const [deletfileModal, setDeletfileModal] = useState(false);
   const fileId = useRef();
-  const [openPicker, authResponse] = useDrivePicker();
   const [comments, setComments] = useState([]);
   const [commentsModal, setCommentsModal] = useState(false);
   const [currentUser, setCurrentUser] = useState({
@@ -258,9 +248,13 @@ const Step5 = () => {
             key={i}
             sx={{ display: "flex", justifyContent: "space-between" }}
           >
-            <Box>
-              {i + 1}) <PictureAsPdfIcon sx={{ color: "red", fontSize: 12 }} />
-              <span> {e.documentId} </span>
+            <Box sx={{ display: "flex" }}>
+              {i + 1}){" "}
+              <FileIcon
+                filename={e.fileName}
+                style={{ height: "20px", padding: "1px" }}
+              />
+              <span> {e?.fileName.split("/")[1]} </span>
             </Box>
             <Box>
               <IconButton

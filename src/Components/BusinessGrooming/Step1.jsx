@@ -50,6 +50,7 @@ const Step1 = () => {
       setIndustry(idea?.startupStage?.industry?.split(","));
     }
   }, [idea]);
+  
 
   useEffect(() => {
     if (user?.id && user?.username) {
@@ -244,8 +245,12 @@ const Step1 = () => {
               <SelectIndustry industry={industry} setIndustry={setIndustry} />
               <NavigateBtn
                 disable={
-                  stage === idea?.startupStage?.stage ||
-                  industry === idea?.startupStage?.industry
+                  stage === idea?.startupStage?.stage
+                    ? industry.toString() ===
+                      idea?.startupStage?.industry.toString()
+                      ? true
+                      : false
+                    : false
                 }
                 saveFun={saveStep1}
                 saveAndNextFun={saveAndNext}

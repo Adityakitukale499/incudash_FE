@@ -22,6 +22,7 @@ import Conformation from "../Confirmation";
 import PreviewIcon from "@mui/icons-material/Preview";
 import CommentsModal from "../CommentsModal";
 import axios from "axios";
+import FileIcon from "../FileIcon";
 
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),
@@ -320,11 +321,15 @@ const Step2 = () => {
                     key={i}
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <Box>
+                    <Box sx={{display:'flex'}}>
+              {i + 1}){' '} <FileIcon filename={e.fileName} style={{height:'20px',padding:'1px'}}/> 
+              <span> {e?.fileName.split("/")[1]} </span>
+            </Box>
+                    {/* <Box>
                       {i + 1}){" "}
                       <PictureAsPdfIcon sx={{ color: "red", fontSize: 12 }} />
                       <span> {e.fileName.split("/")[1]} </span>
-                    </Box>
+                    </Box> */}
                     <Box>
                       <IconButton
                         // aria-label="download"

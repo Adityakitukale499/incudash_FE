@@ -1,26 +1,17 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Button,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import DownloadIcon from "@mui/icons-material/Download";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import { ideaContext, userContext } from "../../contextApi/context";
-import { handleOpenPicker, postData, putData } from "../../servises/apicofig";
+import { postData, putData } from "../../servises/apicofig";
 import { useNavigate } from "react-router-dom";
 import Conformation from "../Confirmation";
 import useDrivePicker from "react-google-drive-picker";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import App from "../comments/src/App";
 import CommentsModal from "../CommentsModal";
 import axios from "axios";
+import FileIcon from "../FileIcon";
 
 const Step4 = () => {
   const {
@@ -107,7 +98,7 @@ const Step4 = () => {
     setFiles(filterFiles);
   }
 
-  const handleUploadFile = async(event) => {
+  const handleUploadFile = async (event) => {
     // console.log(event.target.files[0]);
     let { name, type } = event.target.files[0];
     const file = event.target.files[0];
@@ -118,7 +109,7 @@ const Step4 = () => {
     };
     await axios
       .post("https://api.incudash.com/generate-urls/generate-upload-url", Body)
-      .then(async(res) => {
+      .then(async (res) => {
         console.log(res.data.url);
         console.log(file.type);
         await axios
@@ -132,31 +123,31 @@ const Step4 = () => {
       })
       .catch((e) => console.log(e));
 
-      const body = {
-        financialValuation: {
-          documentCollection: [
-            ...idea?.financialValuation ?.documentCollection,
-            {
-              documentId: `incudash-folder/${name}`,
-              fileName: `incudash-folder/${name}`,
-              type,
-            },
-          ],
-          comments: idea?.financialValuation?.comments,
-        },
-      };
-      setLoader(true);
-      putData(`ideas/updateByUserId/${user.id}`, body)
-        .then((res) => {
-          setIdea(res.data);
-          setLoader(false);
-          successMgs();
-        })
-        .catch((e) => {
-          console.log(e);
-          faildMgs();
-          setLoader(false);
-        });
+    const body = {
+      financialValuation: {
+        documentCollection: [
+          ...idea?.financialValuation?.documentCollection,
+          {
+            documentId: `incudash-folder/${name}`,
+            fileName: `incudash-folder/${name}`,
+            type,
+          },
+        ],
+        comments: idea?.financialValuation?.comments,
+      },
+    };
+    setLoader(true);
+    putData(`ideas/updateByUserId/${user.id}`, body)
+      .then((res) => {
+        setIdea(res.data);
+        setLoader(false);
+        successMgs();
+      })
+      .catch((e) => {
+        console.log(e);
+        faildMgs();
+        setLoader(false);
+      });
   };
 
   const saveStep = () => {
@@ -253,9 +244,13 @@ const Step4 = () => {
             key={i}
             sx={{ display: "flex", justifyContent: "space-between" }}
           >
-            <Box>
-              {i + 1}) <PictureAsPdfIcon sx={{ color: "red", fontSize: 12 }} />
-              <span> {e?.fileName} </span>
+            <Box sx={{ display: "flex" }}>
+              {i + 1}){" "}
+              <FileIcon
+                filename={e.fileName}
+                style={{ height: "20px", padding: "1px" }}
+              />
+              <span> {e?.fileName.split("/")[1]} </span>
             </Box>
             <Box>
               <IconButton
