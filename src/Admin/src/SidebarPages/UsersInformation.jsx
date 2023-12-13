@@ -6,10 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
-// import { loaderContext } from "../ContextApi/context";
 import { Box, Button, Typography } from "@mui/material";
-
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import IconButton from "@mui/material/IconButton";
@@ -22,9 +19,9 @@ import { useTheme } from "@mui/material/styles";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { getData, postData, putData } from "../Services/api";
 import dayjs from "dayjs";
 import Confirmation from "../Components/Confirmation";
+import { getData, postData, putData } from "../../../servises/apicofig";
 
 function TablePaginationActions(props) {
   const theme = useTheme();

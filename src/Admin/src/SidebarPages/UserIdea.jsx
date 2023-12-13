@@ -9,8 +9,6 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-// import { loaderContext } from "../ContextApi/context";
-import { getData } from "../Services/api";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import IconButton from "@mui/material/IconButton";
@@ -21,7 +19,7 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
 import dayjs from "dayjs";
-import ViewIdea from "../Components/Pages/ViewIdea";
+import ViewIdea from "../Components/Pages/ViewIdea";import { getData } from "../../../servises/apicofig";
 
 function TablePaginationActions(props) {
   const theme = useTheme();

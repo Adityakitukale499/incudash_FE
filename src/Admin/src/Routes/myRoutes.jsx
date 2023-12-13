@@ -1,12 +1,6 @@
 
 import { Route, Routes } from "react-router-dom";
-import UsersInformation from "../SidebarPages/UsersInformation";
-import UserIdea from "../SidebarPages/UserIdea";
-import ViewIdea from "../Components/Pages/ViewIdea";
-import { Box } from "@mui/material";
-import ResetPassword from "../Authentication/ResetPassword";
-import FoundersGrooming from "../SidebarPages/FoundersGrooming";
-import MentorGrooming from "../SidebarPages/MentorGrooming";
+import { Box } from "@mui/material"
 
 const MyRoutes = () => {
   return (
