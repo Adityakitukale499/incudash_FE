@@ -29,7 +29,6 @@ const Step4 = () => {
   const [files, setFiles] = useState([]);
   const [deletefileModal, setdeletefileModal] = useState(false);
   const fileId = useRef();
-  const [openPicker, authResponse] = useDrivePicker();
   const [comments, setComments] = useState([]);
   const [commentsModal, setCommentsModal] = useState(false);
   const [currentUser, setCurrentUser] = useState({
@@ -37,10 +36,9 @@ const Step4 = () => {
     userId: "123456789",
   });
   useEffect(() => {
-    if (idea?.financialValuation?.documentCollection) {
-      // console.log(idea);
-      setFiles([...idea?.financialValuation?.documentCollection]);
-      setComments(idea?.financialValuation?.comments);
+    if (idea) {
+      setFiles(idea?.financialValuation?.documentCollection?idea?.financialValuation?.documentCollection:[]);
+      setComments(idea?.financialValuation?.comments? idea?.financialValuation?.comments:[]);
     }
   }, [idea]);
 
@@ -82,6 +80,7 @@ const Step4 = () => {
     setdeletefileModal(true);
   }
   function deleteFile() {
+    setLoader(true);
     const filterFiles = files.filter((e, i) => e?.id != fileId?.current);
     const body = {
       financialValuation: {
@@ -89,12 +88,14 @@ const Step4 = () => {
         comments: idea?.financialValuation?.comments,
       },
     };
-    setLoader(true);
-    putData(`ideas/updateByUserId/${user?.id}`, body).then((data) => {
-      // console.log("step4putreqest", data?.data);
-      setLoader(false);
-      setIdea(data?.data);
-    });
+    putData(`ideas/updateByUserId/${user?.id}`, body)
+      .then((data) => {
+        setLoader(false);
+        setIdea(data?.data);
+        // console.log(data.data.financialValuation?.documentCollection);
+        window.location.reload();
+      })
+      .catch((e) => setLoader(false));
     setFiles(filterFiles);
   }
 
@@ -140,8 +141,10 @@ const Step4 = () => {
     putData(`ideas/updateByUserId/${user.id}`, body)
       .then((res) => {
         setIdea(res.data);
+        // console.log(res.data.financialValuation?.documentCollection);
         setLoader(false);
         successMgs();
+        window.location.reload();
       })
       .catch((e) => {
         console.log(e);

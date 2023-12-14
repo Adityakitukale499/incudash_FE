@@ -5,10 +5,9 @@ import DownloadIcon from "@mui/icons-material/Download";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ideaContext, userContext } from "../../contextApi/context";
-import { handleOpenPicker, putData } from "../../servises/apicofig";
+import { putData } from "../../servises/apicofig";
 import { useNavigate } from "react-router-dom";
 import Conformation from "../Confirmation";
-import useDrivePicker from "react-google-drive-picker";
 import CommentsModal from "../CommentsModal";
 import axios from "axios";
 import FileIcon from "../FileIcon";
@@ -36,9 +35,17 @@ const Step5 = () => {
     userId: "123456789",
   });
   useEffect(() => {
-    if (idea?.pitchDeckValidation?.documentCollection) {
-      setFiles(idea?.pitchDeckValidation?.documentCollection);
-      setComments(idea?.pitchDeckValidation?.comments);
+    if (idea) {
+      setFiles(
+        idea?.pitchDeckValidation?.documentCollection
+          ? idea?.pitchDeckValidation?.documentCollection
+          : []
+      );
+      setComments(
+        idea?.pitchDeckValidation?.comments
+          ? idea?.pitchDeckValidation?.comments
+          : []
+      );
     }
   }, [idea]);
   useEffect(() => {
@@ -90,12 +97,13 @@ const Step5 = () => {
       console.log("step4putreqest", data.data);
       setLoader(false);
       setIdea(data.data);
+      window.location.reload();
     });
     setFiles(filterFiles);
   }
 
   const handleUploadFile = async (event) => {
-    console.log(event.target.files[0]);
+    console.log(event.target.files);
     let { name, type } = event.target.files[0];
     const file = event.target.files[0];
     console.log(name, type);
@@ -106,6 +114,7 @@ const Step5 = () => {
       name: `incudash-folder/${name}`,
       type,
     };
+    setLoader(true);
     await axios
       .post("https://api.incudash.com/generate-urls/generate-upload-url", Body)
       .then(async (res) => {
@@ -121,10 +130,19 @@ const Step5 = () => {
               },
             }
           )
-          .then((response) => console.log(response))
-          .catch((e) => console.log(e));
+          .then((response) => {
+            console.log(response);
+            setLoader(false);
+          })
+          .catch((e) => {
+            setLoader(false);
+            console.log(e);
+          });
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        setLoader(false);
+      });
 
     const body = {
       pitchDeckValidation: {
@@ -142,16 +160,17 @@ const Step5 = () => {
     setLoader(true);
     putData(`ideas/updateByUserId/${user.id}`, body)
       .then((d) => {
-        // console.log("step4putreqest", data.data);
         setIdea(d.data);
         setLoader(false);
         successMgs();
+        window.location.reload();
       })
       .catch((e) => {
         console.log(e);
         faildMgs();
         setLoader(false);
       });
+  
   };
 
   const saveStep = () => {
@@ -226,10 +245,10 @@ const Step5 = () => {
             component="label"
             variant="contained"
             startIcon={<CloudUploadIcon />}
-            onClick={() => handleUploadFile()}
           >
             Upload file
-            {/* <input type="file" hidden onChange={handleFiles} /> */}
+            <input type="file" hidden 
+            onChange={(e) => handleUploadFile(e)} />
           </Button>
         </Box>
         <Typography variant="body1" color="initial" sx={{ fontWeight: 550 }}>
