@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import Step7 from "../Components/BusinessGrooming/Step7";
 
 const StartupSupport = () => {
-  return (
-    <div>StartupSupport</div>
-  )
-}
+  return <Step7 />;
+};
 
-export default StartupSupport
+export default StartupSupport;
