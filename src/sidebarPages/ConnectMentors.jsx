@@ -76,85 +76,85 @@ const ConnectMentors = () => {
   };
 
   return (
-    // <>
-    //   <Typography variant="h5" color="#009cff" sx={{ fontWeight: 600, mb: 2 }}>
-    //     Book your mentor for Founder
-    //   </Typography>
-    //   <hr />
-    //   <Grid container sx={{ mt: 2, gap: 1 }}>
-    //     <Grid item xs={12} md={4} sx={{}}>
-    //       <Typography
-    //         variant="body1"
-    //         color="initial"
-    //         sx={{ fontWeight: 600, mb: 1 }}
-    //       >
-    //         Calendar Booking
-    //       </Typography>
-    //       {/* <Calendar
-    //         minDate={new Date()}
-    //         onChange={changeSelectData}
-    //         value={selectDate}
-    //         style={{ maxWidth: "100%" }}
-    //       /> */}
-    //       <iframe
-    //         title="Calendly Scheduling"
-    //         width="100%"
-    //         height="800px"
-    //         src={"https://api.calendly.com/scheduled_events/upcoming"}
-    //         frameBorder="0"
-    //       ></iframe>
-    //     </Grid>
-    //     <Grid item xs={12} md={7.9}>
-    //       <Typography variant="h6" color="initial" sx={{ fontWeight: 600 }}>
-    //         List of founder
-    //       </Typography>
-    //       {founders.map((e) => (
-    //         <Card sx={{ my: 1 }} key={e.id}>
-    //           {/* {console.log(e)} */}
-    //           <CardActionArea sx={{ display: "flex", justifyContent: "left" }}>
-    //             <img
-    //               src={e?.mentorInfo[0]?.imageRef}
-    //               alt="img"
-    //               style={{
-    //                 height: 150,
-    //                 width: 150,
-    //                 margin: 15,
-    //                 borderRadius: "50%",
-    //               }}
-    //             />
-    //             <CardContent>
-    //               <Typography
-    //                 variant="h6"
-    //                 component="div"
-    //                 sx={{ fontWeight: 600 }}
-    //               >
-    //                 {e?.mentorInfo[0]?.name}
-    //               </Typography>
-    //               <Typography
-    //                 variant="body1"
-    //                 color="primary"
-    //                 sx={{ fontWeight: 600 }}
-    //               >
-    //                 {e?.mentorInfo[0]?.designation}
-    //               </Typography>
-    //               <Typography
-    //                 variant="h6"
-    //                 color="initial"
-    //                 sx={{ fontWeight: 600 }}
-    //               >
-    //                 ₹{e?.price}
-    //               </Typography>
-    //               <Button variant="contained" onClick={() => bookFounder(e)}>
-    //                 Book Now
-    //               </Button>
-    //             </CardContent>
-    //           </CardActionArea>
-    //         </Card>
-    //       ))}
-    //     </Grid>
-    //   </Grid>
-    // </>
-    <Step7/>
+    <>
+      <Typography variant="h5" color="#009cff" sx={{ fontWeight: 600, mb: 2 }}>
+        Book your mentor for Founder
+      </Typography>
+      <hr />
+      <Grid container sx={{ mt: 2, gap: 1 }}>
+        <Grid item xs={12} md={4} sx={{display:'flex',alignItems:'center', flexDirection:'column'}}>
+          <Typography
+            variant="body1"
+            color="initial"
+            sx={{ fontWeight: 600, mb: 1 }}
+          >
+            Calendar Booking
+          </Typography>
+          <Calendar
+            minDate={new Date()}
+            onChange={changeSelectData}
+            value={selectDate}
+            style={{ maxWidth: "100%" }}
+          />
+          {/* <iframe
+            title="Calendly Scheduling"
+            width="100%"
+            height="800px"
+            src={"https://api.calendly.com/scheduled_events/upcoming"}
+            frameBorder="0"
+          ></iframe> */}
+        </Grid>
+        <Grid item xs={12} md={7.9}>
+          <Typography variant="h6" color="initial" sx={{ fontWeight: 600 }}>
+            List of founder
+          </Typography>
+          {founders.map((e) => (
+            <Card sx={{ my: 1 }} key={e.id}>
+              {/* {console.log(e)} */}
+              <CardActionArea sx={{ display: "flex", justifyContent: "left" }}>
+                <img
+                  src={e?.mentorInfo[0]?.imageRef}
+                  alt="img"
+                  style={{
+                    height: 150,
+                    width: 150,
+                    margin: 15,
+                    borderRadius: "50%",
+                  }}
+                />
+                <CardContent>
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{ fontWeight: 600 }}
+                  >
+                    {e?.mentorInfo[0]?.name}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    color="primary"
+                    sx={{ fontWeight: 600 }}
+                  >
+                    {e?.mentorInfo[0]?.designation}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="initial"
+                    sx={{ fontWeight: 600 }}
+                  >
+                    ₹{e?.price}
+                  </Typography>
+                  <Button variant="contained" onClick={() => bookFounder(e)}>
+                    Book Now
+                  </Button>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          ))}
+        </Grid>
+      </Grid>
+    </>
+    // <Step7/>
   );
 };
 
