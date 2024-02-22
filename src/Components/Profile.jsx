@@ -14,7 +14,7 @@ export default function Profile({handleLogout, user}) {
     const navigate = useNavigate()
   return (
     <Dropdown>
-      <MenuButton variant='plain' endDecorator={<ArrowDropDown />}>{user?.name?.firstName?user.name.firstName+" "+user.name.lastName:user?.username?user?.email:'user'}</MenuButton  >
+      <MenuButton variant='plain' endDecorator={<ArrowDropDown />}>{user?.name?.firstName?user.name.firstName+" "+user.name.lastName:user?.username?user?.email:''}</MenuButton  >
       <Menu sx={{ minWidth: 160, '--ListItemDecorator-size': '24px' }}>
         <MenuItem
           onClick={() => {

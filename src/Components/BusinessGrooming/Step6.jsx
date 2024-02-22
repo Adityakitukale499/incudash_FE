@@ -51,11 +51,13 @@ const Step6 = () => {
   return (
     <Box sx={{ p: 0, mr: 0 }}>
       <Typography variant="body1" color="initial"  sx={{fontWeight:550}}>
-        Step 6 -<span style={{ color: "#009aca" }}> Raise Funding</span>
+        Step 6 -<span style={{ color: "#009aca" }}> 
+        {/* Raise Funding */}
+        Track Progress
+        </span>
       </Typography>
       <Typography variant="body1" color="initial">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum ipsum alias
-        fugit est, iste officia
+      Get access to tools to track your progress and growth in your startup journey.
       </Typography>
       <Box sx={{bgcolor: "#fff",
           borderRadius: 2,
