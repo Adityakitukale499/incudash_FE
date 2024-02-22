@@ -52,13 +52,14 @@ const DashBoard = () => {
         "Expert Validation to make sure your Pitch Deck is ready to be showcased to an Investor.",
       route: "/dashboard/step5",
     },
-    {
-      img: "dashboard/step6.png",
-      title: "Raise Funding",
-      content:
-        "Let us connect your pitch to the investors best suited for you.",
-      route: "/dashboard/step6",
-    },
+    // {
+    //   img: "dashboard/step6.png",
+    //   // title: "Raise Funding",
+    //   title: "Track Progress",
+    //   // content: "Let us connect your pitch to the investors best suited for you.",
+    //   content: "Get access to tools to track your progress and growth in your startup journey.",
+    //   route: "/dashboard/step6",
+    // },
   ]);
   const [open, setOpen] = useState(false);
   const {
@@ -149,7 +150,45 @@ const DashBoard = () => {
                 </Tooltip>
               </Grid>
             ))}
-            <Grid item xs={12} sm={6} md={3} >
+               <Grid item xs={12} sm={6} md={3} >
+                <Card
+                  sx={{ border: 1, borderColor: '#009aca'}}
+                  onClick={() => navigate(stepRoute.step6)}
+                >
+                  <CardActionArea sx={{ textAlign: "start" }}>
+                    <img
+                      src="dashboard/step7.png"
+                      alt="img"
+                      style={{ height: 60, margin: 5 }}
+                    />
+                    <CardContent sx={{ height: 130, overflowX: "scroll" }}>
+                      <Typography variant="body2" component="div"  sx={{fontWeight:550}}>
+                      Track Progress
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        color="text.secondary"
+                        sx={{}}
+                      >
+                       Get access to tools to track your progress and growth in your startup journey.
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions
+                    sx={{
+                      backgroundColor: '#009aca',
+                      color: "#fff",
+                      display: "flex",
+                      justifyContent: "center",
+                      height: 30,
+                    }}
+                    
+                  >
+                    Track Progress
+                  </CardActions>
+                </Card>
+              </Grid>
+            {/* <Grid item xs={12} sm={6} md={3} >
                 <Card
                   sx={{ border: 1, borderColor: '#009aca'}}
                   onClick={() => navigate(stepRoute.step7)}
@@ -186,7 +225,7 @@ const DashBoard = () => {
                     Track Progress
                   </CardActions>
                 </Card>
-              </Grid>
+              </Grid> */}
           </Grid>
         </AccordionDetails>
       </Accordion>
