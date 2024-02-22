@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Button,
   Card,
   CardActionArea,
@@ -20,18 +21,7 @@ const ConnectMentors = () => {
   const { user, setUser } = useContext(userContext);
   useEffect(() => {
     setLoader(true);
-    // getData("founder-groomings")
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     setFounders(response.data);
-    //     setLoader(false);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     setLoader(false);
-    //   });
-    axios
-      .get(`${import.meta.env.VITE_REACT_BASE_URL}/mentor-groomings`)
+    getData("mentor-groomings")
       .then((response) => {
         console.log(response.data);
         setFounders(response.data);
@@ -41,6 +31,17 @@ const ConnectMentors = () => {
         console.log(error);
         setLoader(false);
       });
+    // axios
+    //   .get(`${import.meta.env.VITE_REACT_BASE_URL}/mentor-groomings`)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     setFounders(response.data);
+    //     setLoader(false);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     setLoader(false);
+    //   });
   }, []);
 
   const changeSelectData = (e) => {
@@ -112,30 +113,26 @@ const ConnectMentors = () => {
             <Card sx={{ my: 1 }} key={e.id}>
               {/* {console.log(e)} */}
               <CardActionArea sx={{ display: "flex", justifyContent: "left" }}>
-                <img
-                  src={e?.mentorInfo[0]?.imageRef}
-                  alt="img"
-                  style={{
+               <Avatar src={e?.mentorInfo?.imageRef}
+                  sx={{
                     height: 150,
                     width: 150,
-                    margin: 15,
-                    borderRadius: "50%",
-                  }}
-                />
+                    m:'15px'
+                  }}/>
                 <CardContent>
                   <Typography
                     variant="h6"
                     component="div"
                     sx={{ fontWeight: 600 }}
                   >
-                    {e?.mentorInfo[0]?.name}
+                    {e?.mentorInfo?.name}
                   </Typography>
                   <Typography
                     variant="body1"
                     color="primary"
                     sx={{ fontWeight: 600 }}
                   >
-                    {e?.mentorInfo[0]?.designation}
+                    {e?.mentorInfo?.designation}
                   </Typography>
                   <Typography
                     variant="h6"

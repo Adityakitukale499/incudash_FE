@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Button,
   Card,
   CardActionArea,
@@ -105,11 +106,12 @@ const FoundersGromming = () => {
             <Card sx={{ my: 1 }} key={e.id}>
               {/* {console.log(e)} */}
               <CardActionArea sx={{ display: "flex", justifyContent: "left" }}>
-                <img
-                  src={e?.founderInfo?.imageRef}
-                  alt="img"
-                  style={{ height: 150, width:150, margin: 15, borderRadius: "50%" }}
-                />
+              <Avatar src={e?.founderInfo?.imageRef}
+                  sx={{
+                    height: 150,
+                    width: 150,
+                    m:'15px'
+                  }}/>
                 <CardContent>
                   <Typography
                     variant="h6"
