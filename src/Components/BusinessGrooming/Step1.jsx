@@ -209,11 +209,11 @@ const Step1 = () => {
                         borderColor: "#fe6508",
                         textAlign: "center",
                         border:
-                          stage == e.stageName
+                          stage == e?.stageName
                             ? "1px solid #009aca"
                             : "0px solid grey",
                       }}
-                      onClick={() => setStage(e.stageName)}
+                      onClick={() => setStage(e?.stageName)}
                     >
                       <CardActionArea>
                         <img
@@ -246,7 +246,7 @@ const Step1 = () => {
               <NavigateBtn
                 disable={
                   stage === idea?.startupStage?.stage
-                    ? industry.toString() ===
+                    ? industry?.toString() ===
                       idea?.startupStage?.industry.toString()
                       ? true
                       : false

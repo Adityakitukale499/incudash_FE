@@ -251,13 +251,13 @@ const UsersInformation = () => {
                 key={`usersrow${index}`}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell align="center">{row?.name?.firstName}</TableCell>
+                <TableCell align="center">{row?.name?.firstName?row?.name?.firstName:'-'}</TableCell>
 
-                <TableCell align="center">{row?.name?.lastName}</TableCell>
+                <TableCell align="center">{row?.name?.lastName?row?.name?.lastName:'-'}</TableCell>
 
-                <TableCell align="center">{row?.email}</TableCell>
+                <TableCell align="center">{row?.email?row?.email:'-'}</TableCell>
 
-                <TableCell align="center">{row?.phoneNumber}</TableCell>
+                <TableCell align="center">{row?.phoneNumber?row?.phoneNumber:'-'}</TableCell>
 
                 <TableCell align="center">
                   {row?.createdAt

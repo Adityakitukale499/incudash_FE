@@ -25,7 +25,7 @@ import axios from "axios";
 import FileIcon from "../FileIcon";
 
 const ListItem = styled("li")(({ theme }) => ({
-  margin: theme.spacing(0.5),
+  margin: theme?.spacing(0.5),
 }));
 
 const Step2 = () => {
@@ -323,7 +323,7 @@ const Step2 = () => {
                   >
                     <Box sx={{display:'flex'}}>
               {i + 1}){' '} <FileIcon filename={e.fileName} style={{height:'20px',padding:'1px'}}/> 
-              <span> {e?.fileName.split("/")[1]} </span>
+              <span> {e?.fileName?.split("/")[1]} </span>
             </Box>
                     {/* <Box>
                       {i + 1}){" "}
