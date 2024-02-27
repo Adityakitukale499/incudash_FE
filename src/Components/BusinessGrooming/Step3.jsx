@@ -65,7 +65,7 @@ const Step3 = () => {
   useEffect(() => {
     if (step) {
       const temp = [...sortData, step].sort(
-        (a, b) => new Date(a.timestampFrom) - new Date(b.timestampFrom)
+        (a, b) => new Date(a?.timestampFrom) - new Date(b?.timestampFrom)
       );
       console.log(temp);
       setSortData(temp);
@@ -92,7 +92,7 @@ const Step3 = () => {
   const saveStep3 = () => {
     if (!user) return;
     const temp = [...sortData].sort(
-      (a, b) => new Date(a.timestampFrom) - new Date(b.timestampFrom)
+      (a, b) => new Date(a?.timestampFrom) - new Date(b?.timestampFrom)
     );
 
     const body = {
@@ -103,7 +103,7 @@ const Step3 = () => {
       stepNum: stepNum == 2 ? 3 : idea?.stepNum,
     };
     setLoader(true);
-    putData(`ideas/updateByUserId/${user.id}`, body)
+    putData(`ideas/updateByUserId/${user?.id}`, body)
       .then((data) => {
         // console.log("step3putrequest", data.data);
         setIdea(data?.data);
@@ -130,8 +130,8 @@ const Step3 = () => {
     // console.log(data , fromDate, toDate);
     let filterData = sortData.filter(
       (e) =>
-        new Date(fromDate) <= new Date(e.timestampFrom) &&
-        new Date(toDate) >= new Date(e.timestampFrom)
+        new Date(fromDate) <= new Date(e?.timestampFrom) &&
+        new Date(toDate) >= new Date(e?.timestampFrom)
     );
     console.log("data", filterData);
     setSortData(filterData);

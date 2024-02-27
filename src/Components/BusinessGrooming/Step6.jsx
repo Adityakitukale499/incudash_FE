@@ -22,8 +22,7 @@ const Step6 = () => {
   const raisFundingRef = useRef()
 
   useEffect(()=>{
-    // console.log(idea.raiseFunding.fundingFormattedText);
-    document.getElementById('container').innerHTML=idea?.raiseFunding?.fundingFormattedText
+    if(idea?.raiseFunding?.fundingFormattedText) document.getElementById('container').innerHTML=idea?.raiseFunding?.fundingFormattedText
   },[idea])
 
   const saveStep = () => {

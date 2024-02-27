@@ -253,7 +253,7 @@ const Step4 = () => {
                 filename={e.fileName}
                 style={{ height: "20px", padding: "1px" }}
               />
-              <span> {e?.fileName.split("/")[1]} </span>
+              <span> {e?.fileName?.split("/")[1]} </span>
             </Box>
             <Box>
               <IconButton

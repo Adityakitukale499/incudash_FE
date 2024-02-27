@@ -322,7 +322,7 @@ const Step2 = () => {
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <Box sx={{display:'flex'}}>
-              {i + 1}){' '} <FileIcon filename={e.fileName} style={{height:'20px',padding:'1px'}}/> 
+              {i + 1}){' '} <FileIcon filename={e?.fileName} style={{height:'20px',padding:'1px'}}/> 
               <span> {e?.fileName?.split("/")[1]} </span>
             </Box>
                     {/* <Box>
@@ -333,7 +333,7 @@ const Step2 = () => {
                     <Box>
                       <IconButton
                         // aria-label="download"
-                        onClick={() => handleViwe(e.fileName)}
+                        onClick={() => handleViwe(e?.fileName)}
                         sx={{ mt: 0.5 }}
                       >
                         <PreviewIcon sx={{ height: 20 }} />
