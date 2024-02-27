@@ -50,14 +50,14 @@ function TablePaginationActions(props) {
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
+        {theme?.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
       </IconButton>
       <IconButton
         onClick={handleBackButtonClick}
         disabled={page === 0}
         aria-label="previous page"
       >
-        {theme.direction === "rtl" ? (
+        {theme?.direction === "rtl" ? (
           <KeyboardArrowRight />
         ) : (
           <KeyboardArrowLeft />
@@ -68,7 +68,7 @@ function TablePaginationActions(props) {
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        {theme.direction === "rtl" ? (
+        {theme?.direction === "rtl" ? (
           <KeyboardArrowLeft />
         ) : (
           <KeyboardArrowRight />
@@ -79,7 +79,7 @@ function TablePaginationActions(props) {
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
+        {theme?.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
       </IconButton>
     </Box>
   );
@@ -117,15 +117,15 @@ const UsersInformation = () => {
   };
   const resetPassword = () => {
     handleClose();
-    console.log(selectedUser?.email);
+    console?.log(selectedUser?.email);
     const body = {
       email: selectedUser?.email,
     };
     postData("auth/forgot-password", body)
       .then((res) => {
-        console.log(res.data);
+        console?.log(res.data);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console?.log(e));
   };
   const blockUser = () => {
     handleClose();
@@ -133,11 +133,11 @@ const UsersInformation = () => {
     const body = {
       blocked: true,
     };
-    console.log(selectedUser);
+    console?.log(selectedUser);
 
     putData(`user/update/${selectedUser?.id}`, body)
-      .then((data) => console.log(data))
-      .catch((e) => console.log(e));
+      .then((data) => console?.log(data))
+      .catch((e) => console?.log(e));
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -165,10 +165,10 @@ const UsersInformation = () => {
     }
     const filterData = users.filter(
       (e) =>
-        e.name.firstName.toLowerCase().includes(search.toLowerCase()) ||
-        e.name.lastName.toLowerCase().includes(search.toLowerCase()) ||
-        e.email.toLowerCase().includes(search.toLowerCase()) ||
-        e.phoneNumber.toLowerCase().includes(search.toLowerCase())
+        e?.name?.firstName?.toLowerCase().includes(search.toLowerCase()) ||
+        e?.name?.lastName?.toLowerCase().includes(search.toLowerCase()) ||
+        e?.email?.toLowerCase().includes(search.toLowerCase()) ||
+        e?.phoneNumber?.toLowerCase().includes(search.toLowerCase())
     );
     setFinalUsersList(filterData);
   };
@@ -182,12 +182,12 @@ const UsersInformation = () => {
     // setLoader(true);
     getData("users")
       .then((res) => {
-        // console.log(res.data);
+        // console?.log(res.data);
         setUsers(res.data);
         setFinalUsersList(res.data);
         // setLoader(false);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console?.log(e));
   }, []);
 
   const userTableHeadings = [
@@ -215,9 +215,9 @@ const UsersInformation = () => {
         <input
           type="text"
           style={{ outline: "none", padding: "5px" }}
-          placeholder="search here..."
+          placeholder="search here?..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e?.target.value)}
         />
         <Button variant="contained" onClick={searchUser}>
           search
