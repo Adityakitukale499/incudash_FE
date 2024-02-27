@@ -5,10 +5,9 @@ import DownloadIcon from "@mui/icons-material/Download";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ideaContext, userContext } from "../../contextApi/context";
-import { postData, putData } from "../../servises/apicofig";
+import { putData } from "../../servises/apicofig";
 import { useNavigate } from "react-router-dom";
 import Conformation from "../Confirmation";
-import useDrivePicker from "react-google-drive-picker";
 import CommentsModal from "../CommentsModal";
 import axios from "axios";
 import FileIcon from "../FileIcon";
@@ -17,7 +16,6 @@ const Step4 = () => {
   const {
     idea,
     setIdea,
-    loader,
     setLoader,
     successMgs,
     faildMgs,
@@ -138,7 +136,7 @@ const Step4 = () => {
       },
     };
     setLoader(true);
-    putData(`ideas/updateByUserId/${user.id}`, body)
+    putData(`ideas/updateByUserId/${user?.id}`, body)
       .then((res) => {
         setIdea(res.data);
         // console.log(res.data.financialValuation?.documentCollection);

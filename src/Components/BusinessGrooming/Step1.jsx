@@ -12,7 +12,6 @@ const Step1 = () => {
   const {
     idea,
     setIdea,
-    loader,
     setLoader,
     successMgs,
     faildMgs,

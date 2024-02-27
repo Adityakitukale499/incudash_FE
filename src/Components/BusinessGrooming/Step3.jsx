@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Box, Chip, Typography } from "@mui/material";
 import Button from "@mui/joy/Button";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,6 @@ const Step3 = () => {
   const {
     idea,
     setIdea,
-    loader,
     setLoader,
     successMgs,
     faildMgs,
@@ -146,7 +145,7 @@ const Step3 = () => {
   }) {
     const arr = sortData;
     for (let i = 0; i < arr.length; i++) {
-      if (arr[i].id === editEntry.id) {
+      if (arr[i].id === editEntry?.id) {
         arr[i] = {
           ...arr[i],
           roadmapTitle,
@@ -169,7 +168,7 @@ const Step3 = () => {
   }
   function deleteStep() {
     console.log("deletstep");
-    const arr = sortData.filter((e, i) => e?.id !== deleteConform.current);
+    const arr = sortData.filter((e, i) => e?.id !== deleteConform?.current);
     setUpdate(true);
     // setData(arr);
     setSortData(arr);
@@ -178,7 +177,7 @@ const Step3 = () => {
   function resetDate() {
     setShowChip(false);
     setFromDate(sortData[0]?.timestampFrom);
-    setToDate(sortData[sortData.length - 1]?.timestampFrom);
+    setToDate(sortData[sortData?.length - 1]?.timestampFrom);
   }
   const handleComments = (updatedComments) => {
     // console.log(updatedComments);

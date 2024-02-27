@@ -16,7 +16,6 @@ const Step5 = () => {
   const {
     idea,
     setIdea,
-    loader,
     setLoader,
     successMgs,
     faildMgs,
@@ -158,7 +157,7 @@ const Step5 = () => {
       },
     };
     setLoader(true);
-    putData(`ideas/updateByUserId/${user.id}`, body)
+    putData(`ideas/updateByUserId/${user?.id}`, body)
       .then((d) => {
         setIdea(d.data);
         setLoader(false);

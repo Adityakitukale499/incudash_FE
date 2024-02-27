@@ -10,7 +10,6 @@ const Step6 = () => {
   const {
     idea,
     setIdea,
-    loader,
     setLoader,
     successMgs,
     faildMgs,
@@ -27,10 +26,10 @@ const Step6 = () => {
 
   const saveStep = () => {
     const body = {
-      stepNum: stepNum == 5 ? 6 : idea.stepNum,
+      stepNum: stepNum == 5 ? 6 : idea?.stepNum,
     };
     setLoader(true);
-    putData(`ideas/updateByUserId/${user.id}`, body)
+    putData(`ideas/updateByUserId/${user?.id}`, body)
       .then((d) => {
         // console.log("step4putreqest", data.data);
         setIdea(d.data);
