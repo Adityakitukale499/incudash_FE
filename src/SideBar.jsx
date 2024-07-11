@@ -96,23 +96,23 @@ export default function SideBar() {
   const MenuList = [
     {
       item: "DashBoard",
-      icon: "https://incudash.com/sidebar/dashboard.png",
+      icon: "sidebar/dashboard.png",
     },
     {
       item: "Request a Callback",
-      icon: "https://incudash.com/sidebar/requestACallback.png",
+      icon: "sidebar/requestACallback.png",
     },
     {
       item: "Stratup Support",
-      icon: "https://incudash.com/sidebar/startupSuporter.png",
+      icon: "sidebar/startupSuporter.png",
     },
     {
       item: "Founder's Gromming",
-      icon: "https://incudash.com/sidebar/foundergrooming.png",
+      icon: "sidebar/foundergrooming.png",
     },
     {
       item: "Connect Mentors",
-      icon: "https://incudash.com/sidebar/connectsmentore.png",
+      icon: "sidebar/connectsmentore.png",
     },
   ];
   const {user ,setUser} = useContext(userContext)
@@ -143,7 +143,6 @@ export default function SideBar() {
               ...(open && { display: "none" }),
             }}
           >
-            {/* <img src="https://incudash.com/assets/public/dashboard/images/sidelogo.png" alt="I" style={{height:40}} /> */}
             <MenuIcon />
           </IconButton>
           <Typography noWrap component="div"></Typography>

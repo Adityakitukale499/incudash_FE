@@ -142,9 +142,9 @@ export default function Login() {
               your startup related needs.
             </Typography>
             <img
-              src="https://incudash.com/assets/public/images/signin_banner.jpg"
+              src="https://paircode.io/_assets/img/signup.svg"
               alt=""
-              width={"95%"}
+              width={"60%"}
             />
           </Grid>
           <Grid item xs={12} md={5}>

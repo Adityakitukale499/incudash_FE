@@ -7,8 +7,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ideaContext, signUpContex, userContext } from "../contextApi/context";
 import PasswordStrengthBar from "react-password-strength-bar";
-import { postData } from "../servises/apicofig";
-import Login from "./Login";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -22,7 +20,8 @@ const SignUp = () => {
   const { signUpUserId, setSignUpUserId } = useContext(signUpContex);
   const signupSuccessMgs = () =>
     toast.success(
-      "Confirmation link successfully sent on your mailId please use that link to log-in"
+      // "Confirmation link successfully sent on your mailId please use that link to log-in"
+      "Account Create Successfully"
     );
   const signupFaildMgs = () => toast.warning("Faild to Sign-Up!");
   const {
@@ -58,7 +57,6 @@ const SignUp = () => {
     axios
       .post(`${import.meta.env.VITE_REACT_BASE_URL}/auth/local/register`, body)
       .then(function (response) {
-        console.log("SignUp", response.data.user.id);
         setLoader(false);
         const ideaBody = {
           userId: response.data.user.id,
@@ -75,6 +73,8 @@ const SignUp = () => {
             console.log(e);
             setLoader(false);
           });
+          setTimeout(()=> 
+            navigate("/login"),2000);
         signupSuccessMgs();
       })
       .catch(function (error) {
@@ -142,9 +142,9 @@ const SignUp = () => {
               your startup related needs.
             </Typography>
             <img
-              src="https://incudash.com/assets/public/images/signin_banner.jpg"
+              src="https://paircode.io/_assets/img/signup.svg"
               alt=""
-              width={"95%"}
+              width={"60%"}
             />
           </Grid>
           <Grid item xs={12} md={5}>
